@@ -1,0 +1,25 @@
+on:
+  workflow_dispatch:
+    inputs:
+      versionToPublish:
+        description: 'The version to manually publish, must be a valid git tag i.e. "v7.20.0".'
+        default: 'main'
+name: Manual - PROD - Publish - Specific Version
+jobs:
+  publish_prod:
+    name: Manual - PROD - Publish - Specific Version
+    runs-on: ubuntu-latest
+    steps:
+      - name: Use Node.js
+        uses: actions/setup-node@v1
+        with:
+          node-version: 14.17.2
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+          ref: ${{ github.event.inputs.versionToPublish }}
+      - name: Build Tree
+        run: ./scripts/cicd/build_tree.sh
+      - name: Publish
+        run: ./scripts/cicd/publish.sh
