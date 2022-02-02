@@ -1,14 +1,13 @@
-import "./App.css";
-import Marketplace from "./Marketplace";
-import img from "./demo-icon.svg";
-import { TileProps } from "./interfaces/marketplace";
+import Marketplace from './Marketplace';
+import img from './demo-icon.svg';
+import { TileProps } from './interfaces/marketplace';
 
 const integrations: TileProps[] = [
   {
-    title: "asd",
+    title: 'asd',
     image: img,
-    imageAlt: "slack",
-    docsLinkUrl: "/",
+    imageAlt: 'slack',
+    docsLinkUrl: '/',
   },
 ];
 
