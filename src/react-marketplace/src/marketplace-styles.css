@@ -1,0 +1,58 @@
+.marketplace-wrapper {
+  display: flex;
+  flex: 1;
+  flex-wrap: wrap;
+}
+
+.tile-wrapper {
+  display: flex;
+  flex-direction: column;
+  font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+  background-color: white;
+  box-shadow: 0px 20px 48px rgb(52 72 123 / 10%);
+  min-height: 140px;
+  min-width: 230px;
+  padding: 24px;
+  margin-right: 40px;
+  margin-bottom: 40px;
+  border-radius: 8px;
+}
+
+.tile-title {
+  font-size: 12px;
+  font-weight: 500;
+  color: #333333;
+}
+
+.tile-image {
+  height: 52px;
+  max-width: 100%;
+  object-fit: contain;
+}
+
+.tile-actions-wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: auto;
+}
+
+.tile-actions {
+  font-size: 14px;
+  letter-spacing: 1.25px;
+  text-decoration: none;
+  color: #333333;
+  margin: 0;
+}
+
+.tile-actions:hover {
+  cursor: pointer;
+}
+
+.install {
+  color: #3f51b5;
+}
+
+.uninstall {
+  color: #d32f2f;
+}
