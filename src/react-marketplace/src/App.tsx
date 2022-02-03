@@ -4,7 +4,7 @@ import { TileProps } from './interfaces/marketplace';
 
 const integrations: TileProps[] = [
   {
-    title: 'asd',
+    title: 'Slack',
     image: img,
     imageAlt: 'slack',
     docsLinkUrl: '/',
