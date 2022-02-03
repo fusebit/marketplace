@@ -16,6 +16,6 @@
     "jsx": "react-jsx",
     "noFallthroughCasesInSwitch": true
   },
-  "include": ["src/**/*"],
+  "include": ["src/**/*", "test/App.test.tsx", "test/App.test.tsx", "test/setupTests.ts"],
   "exclude": ["node_modules", "**/node_modules/*", "build"]
 }
