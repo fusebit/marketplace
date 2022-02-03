@@ -7,7 +7,7 @@
 .tile-wrapper {
   display: flex;
   flex-direction: column;
-  font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+  font-family: 'Roboto', 'Helvetica', 'Arial', sans-serif;
   background-color: white;
   box-shadow: 0px 20px 48px rgb(52 72 123 / 10%);
   min-height: 140px;
