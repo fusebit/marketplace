@@ -1,6 +1,6 @@
-import React from "react";
-import useGetTileElements from "./hooks/useGetTileElements";
-import { TileProps } from "./interfaces/marketplace";
+import React from 'react';
+import useGetTileElements from './hooks/useGetTileElements';
+import { TileProps } from './interfaces/marketplace';
 
 const Tile: React.FC<TileProps> = ({
   title,
@@ -53,19 +53,13 @@ const Tile: React.FC<TileProps> = ({
   const mainAction = addClickToComponent(mainActionElement);
 
   return (
-    <div className={`tile-wrapper ${wrapperClass ?? ""}`}>
-      {!disableTitle && (
-        <h4 className={`tile-title ${titleClass ?? ""}`}>{title}</h4>
-      )}
+    <div className={`tile-wrapper ${wrapperClass ?? ''}`}>
+      {!disableTitle && <h4 className={`tile-title ${titleClass ?? ''}`}>{title}</h4>}
       {!disableImage && (
-        <img
-          className={`tile-image ${imageClass ?? ""}`}
-          src={image}
-          alt={imageAlt || title || "integration-img"}
-        />
+        <img className={`tile-image ${imageClass ?? ''}`} src={image} alt={imageAlt || title || 'integration-img'} />
       )}
       {children}
-      <div className={`tile-actions-wrapper ${actionsWrapperClass ?? ""}`}>
+      <div className={`tile-actions-wrapper ${actionsWrapperClass ?? ''}`}>
         {docsElement}
         {mainAction}
       </div>

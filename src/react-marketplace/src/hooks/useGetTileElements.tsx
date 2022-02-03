@@ -5,7 +5,7 @@ interface Props {
   docsLinkInnerText?: string;
   mainActionInstallInnerText?: string;
   mainActionUninstallInnertext?: string;
-  docsLinkTarget?: "_blank" | "_parent" | "_self" | "_top";
+  docsLinkTarget?: '_blank' | '_parent' | '_self' | '_top';
   docsLinkUrl?: string;
   disableDocsLink?: boolean;
   customDocsLinkElement?: JSX.Element;
@@ -34,10 +34,10 @@ const useGetTileElements = ({
       <a
         href={docsLinkUrl}
         rel="noreferrer"
-        target={docsLinkTarget || "_blank"}
-        className={`tile-actions ${docsLinkClass ?? ""}`}
+        target={docsLinkTarget || '_blank'}
+        className={`tile-actions ${docsLinkClass ?? ''}`}
       >
-        {docsLinkInnerText || "LEARN MORE"}
+        {docsLinkInnerText || 'LEARN MORE'}
       </a>
     );
   })();
@@ -47,13 +47,13 @@ const useGetTileElements = ({
       if (mainActionUninstallInnertext) {
         return mainActionUninstallInnertext;
       } else {
-        return "UNINSTALL APP";
+        return 'UNINSTALL APP';
       }
     } else {
       if (mainActionInstallInnerText) {
         return mainActionInstallInnerText;
       } else {
-        return "INSTALL APP";
+        return 'INSTALL APP';
       }
     }
   };
@@ -63,11 +63,7 @@ const useGetTileElements = ({
       return customMainActionElement;
     } else {
       return (
-        <div
-          className={`tile-actions ${isInstalled ? "uninstall" : "install"} ${
-            mainActionClass ?? ""
-          }`}
-        >
+        <div className={`tile-actions ${isInstalled ? 'uninstall' : 'install'} ${mainActionClass ?? ''}`}>
           {installAppInnerText()}
         </div>
       );
