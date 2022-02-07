@@ -1,26 +1,19 @@
 import React from 'react';
+import { Image } from '../interfaces/marketplace';
 import styles from './BaseImage.modules.css';
 
 interface Props {
-  imageClass?: string;
-  image?: string;
-  imageAlt?: string;
-  title?: string;
-  hideImage?: boolean;
+  image?: Image;
 }
 
-const BaseImage: React.FC<Props> = ({ image, imageClass, imageAlt, title, hideImage }) => {
-  if (!hideImage) {
-    return (
-      <img
-        className={`${styles['image']} ${imageClass ?? ''}`}
-        src={image}
-        alt={imageAlt || title || 'integration-img'}
-      />
-    );
-  }
-
-  return null;
+const BaseImage: React.FC<Props> = ({ image }) => {
+  return (
+    <img
+      className={`${styles['image']} ${image?.class ?? ''}`}
+      src={image?.src}
+      alt={image?.alt || 'integration-img'}
+    />
+  );
 };
 
 export default BaseImage;

@@ -2,6 +2,7 @@ import React from 'react';
 import BaseButton from '../BaseButton';
 import BaseButtonsWrapper from '../BaseButtonsWrapper';
 import BaseImage from '../BaseImage';
+import BaseImagesWrapper from '../BaseImagesWrapper';
 import BaseLink from '../BaseLink';
 import BaseTitle from '../BaseTitle';
 import BaseWrapper from '../BaseWrapper';
@@ -9,11 +10,10 @@ import { TileProps } from '../interfaces/marketplace';
 
 const Tile: React.FC<TileProps> = ({
   title,
-  image,
-  imageAlt,
+  images,
   wrapperClass,
   titleClass,
-  imageClass,
+  imagesWrapperClass,
   buttonsWrapperClass,
   buttonClass,
   buttonInstallInnerText,
@@ -26,7 +26,7 @@ const Tile: React.FC<TileProps> = ({
   linkTarget,
   linkUrl,
   hideTitle,
-  hideImage,
+  hideImages,
   onMainActionClick,
   getCustomBody,
 }) => {
@@ -61,9 +61,7 @@ const Tile: React.FC<TileProps> = ({
           buttonInstallInnerText,
           buttonUninstallInnertext,
           buttonsWrapperClass,
-          image,
-          imageAlt,
-          imageClass,
+          images,
           linkClass,
           linkInnerText,
           linkTarget,
@@ -74,7 +72,13 @@ const Tile: React.FC<TileProps> = ({
       ) : (
         <BaseWrapper wrapperClass={wrapperClass}>
           <BaseTitle title={title} titleClass={titleClass} hideTitle={hideTitle} />
-          <BaseImage image={image} imageClass={imageClass} imageAlt={imageAlt} title={title} hideImage={hideImage} />
+          {!hideImages && (
+            <BaseImagesWrapper imagesWrapperClass={imagesWrapperClass}>
+              {images?.map((image) => (
+                <BaseImage key={image.alt} image={image} />
+              ))}
+            </BaseImagesWrapper>
+          )}
           <BaseButtonsWrapper buttonsWrapperClass={buttonsWrapperClass}>
             <BaseLink
               customLinkElement={customLinkElement}

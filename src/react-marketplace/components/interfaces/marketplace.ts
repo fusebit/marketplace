@@ -1,13 +1,18 @@
 import React from 'react';
 
+export interface Image {
+  src: string;
+  alt: string;
+  class?: string;
+}
+
 export interface CustomBodyProps {
   title?: string;
-  image?: string;
+  images?: Image[];
   imageAlt?: string;
   linkUrl?: string;
   wrapperClass?: string;
   titleClass?: string;
-  imageClass?: string;
   buttonsWrapperClass?: string;
   linkClass?: string;
   buttonClass?: string;
@@ -22,7 +27,7 @@ export type TileProps = {
   id: string;
   wrapperClass?: string;
   titleClass?: string;
-  imageClass?: string;
+  imagesWrapperClass?: string;
   buttonsWrapperClass?: string;
   linkClass?: string;
   buttonClass?: string;
@@ -35,11 +40,11 @@ export type TileProps = {
   onMainActionClick?: () => void;
   getCustomBody?: (obj: CustomBodyProps) => React.ReactNode;
 } & ({ title: string; hideTitle?: never } | { title?: never; hideTitle: boolean }) &
-  ({ image: string; hideImage?: never } | { image?: never; hideImage: boolean }) &
-  ({ imageAlt: string; hideImage?: never } | { imageAlt?: never; hideImage: boolean }) &
+  ({ images: Image[]; hideImages?: never } | { images?: never; hideImages: boolean }) &
   ({ linkUrl: string; hideLink?: never } | { linkUrl?: never; hideLink: boolean });
 
 export interface MarketplaceProps {
   integrations: TileProps[];
   wrapperClass?: string;
+  getCustomBody?: (obj: CustomBodyProps) => React.ReactNode;
 }

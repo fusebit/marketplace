@@ -3,7 +3,7 @@ import Tile from '../Tile';
 import styles from './Marketplace.modules.css';
 import { MarketplaceProps } from '../interfaces/marketplace';
 
-const Marketplace: React.FC<MarketplaceProps> = ({ integrations, wrapperClass }) => {
+const Marketplace: React.FC<MarketplaceProps> = ({ integrations, wrapperClass, getCustomBody }) => {
   return (
     <div className={`${styles['wrapper']} ${wrapperClass ?? ''}`}>
       {integrations?.map((integration) => (
