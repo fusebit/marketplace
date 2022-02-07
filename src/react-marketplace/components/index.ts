@@ -5,7 +5,7 @@ import BaseLink from './BaseLink';
 import BaseWrapper from './BaseWrapper';
 import Marketplace from './Marketplace';
 import Tile from './Tile';
-import { TileProps, MarketplaceProps } from './interfaces/marketplace';
+import { TileProps, MarketplaceProps, CustomBodyProps } from './interfaces/marketplace';
 
 export {
   Marketplace,
@@ -17,4 +17,5 @@ export {
   BaseButton,
   TileProps,
   MarketplaceProps,
+  CustomBodyProps,
 };

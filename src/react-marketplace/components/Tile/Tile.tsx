@@ -54,7 +54,23 @@ const Tile: React.FC<TileProps> = ({
   return (
     <>
       {getCustomBody ? (
-        getCustomBody({ handleClick, title })
+        getCustomBody({
+          handleClick,
+          title,
+          buttonClass,
+          buttonInstallInnerText,
+          buttonUninstallInnertext,
+          buttonsWrapperClass,
+          image,
+          imageAlt,
+          imageClass,
+          linkClass,
+          linkInnerText,
+          linkTarget,
+          linkUrl,
+          titleClass,
+          wrapperClass,
+        })
       ) : (
         <BaseWrapper wrapperClass={wrapperClass}>
           <BaseTitle title={title} titleClass={titleClass} hideTitle={hideTitle} />
