@@ -6,7 +6,7 @@ import { MarketplaceProps } from '../interfaces/marketplace';
 const Marketplace: React.FC<MarketplaceProps> = ({ integrations, wrapperClass }) => {
   const integrationsss = [
     {
-      title: 'Slack',
+      title: 'Slacksss',
       hideImage: true,
       linkUrl: '/',
     },
