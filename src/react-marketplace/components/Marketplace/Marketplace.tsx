@@ -1,21 +1,21 @@
 import React from 'react';
 import Tile from '../Tile';
-import './Marketplace.css';
+import styles from './Marketplace.modules.css';
 import { MarketplaceProps } from '../interfaces/marketplace';
 
 const Marketplace: React.FC<MarketplaceProps> = ({ integrations, wrapperClass }) => {
   const integrationsss = [
     {
       title: 'Slack',
-      disableImage: true,
-      docsLinkUrl: '/',
+      hideImage: true,
+      linkUrl: '/',
     },
   ];
 
   return (
-    <div className={`marketplace-wrapper ${wrapperClass ?? ''}`}>
+    <div className={`${styles['wrapper']} ${wrapperClass ?? ''}`}>
       {integrationsss.map((integration) => (
-        <Tile {...integration} />
+        <Tile {...integration} getCustomBody={(integration) => <div>{integration.title}</div>} />
       ))}
     </div>
   );

@@ -1,36 +1,24 @@
-import React from "react";
+import React from 'react';
 
 export type TileProps = {
   wrapperClass?: string;
   titleClass?: string;
   imageClass?: string;
-  actionsWrapperClass?: string;
-  docsLinkClass?: string;
-  mainActionClass?: string;
-  docsLinkInnerText?: string;
-  mainActionInstallInnerText?: string;
-  mainActionUninstallInnertext?: string;
-  docsLinkTarget?: "_blank" | "_parent" | "_self" | "_top";
-  customDocsLinkElement?: JSX.Element;
-  customMainActionElement?: JSX.Element;
+  buttonsWrapperClass?: string;
+  linkClass?: string;
+  buttonClass?: string;
+  linkInnerText?: string;
+  buttonInstallInnerText?: string;
+  buttonUninstallInnertext?: string;
+  linkTarget?: '_blank' | '_parent' | '_self' | '_top';
+  customLinkElement?: JSX.Element;
+  customButtonElement?: JSX.Element;
   onMainActionClick?: () => void;
-  children?: React.ReactNode;
-} & (
-  | { title: string; disableTitle?: never }
-  | { title?: never; disableTitle: boolean }
-) &
-  (
-    | { image: string; disableImage?: never }
-    | { image?: never; disableImage: boolean }
-  ) &
-  (
-    | { imageAlt: string; disableImage?: never }
-    | { imageAlt?: never; disableImage: boolean }
-  ) &
-  (
-    | { docsLinkUrl: string; disableDocsLink?: never }
-    | { docsLinkUrl?: never; disableDocsLink: boolean }
-  );
+  getCustomBody?: (obj: any) => React.ReactNode;
+} & ({ title: string; hideTitle?: never } | { title?: never; hideTitle: boolean }) &
+  ({ image: string; hideImage?: never } | { image?: never; hideImage: boolean }) &
+  ({ imageAlt: string; hideImage?: never } | { imageAlt?: never; hideImage: boolean }) &
+  ({ linkUrl: string; hideLink?: never } | { linkUrl?: never; hideLink: boolean });
 
 export interface MarketplaceProps {
   integrations: TileProps[];

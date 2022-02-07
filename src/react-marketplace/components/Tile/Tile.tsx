@@ -1,6 +1,11 @@
-import React from "react";
-import useGetTileElements from "../hooks/useGetTileElements";
-import { TileProps } from "../interfaces/marketplace";
+import React from 'react';
+import BaseButton from '../BaseButton';
+import BaseButtonsWrapper from '../BaseButtonsWrapper';
+import BaseImage from '../BaseImage';
+import BaseLink from '../BaseLink';
+import BaseTitle from '../BaseTitle';
+import BaseWrapper from '../BaseWrapper';
+import { TileProps } from '../interfaces/marketplace';
 
 const Tile: React.FC<TileProps> = ({
   title,
@@ -9,37 +14,23 @@ const Tile: React.FC<TileProps> = ({
   wrapperClass,
   titleClass,
   imageClass,
-  actionsWrapperClass,
-  docsLinkClass,
-  mainActionClass,
-  docsLinkInnerText,
-  mainActionInstallInnerText,
-  mainActionUninstallInnertext,
-  docsLinkTarget,
-  docsLinkUrl,
-  disableDocsLink,
-  disableTitle,
-  disableImage,
-  customDocsLinkElement,
-  customMainActionElement,
+  buttonsWrapperClass,
+  buttonClass,
+  buttonInstallInnerText,
+  buttonUninstallInnertext,
+  customButtonElement,
+  customLinkElement,
+  hideLink,
+  linkClass,
+  linkInnerText,
+  linkTarget,
+  linkUrl,
+  hideTitle,
+  hideImage,
   onMainActionClick,
-  children,
+  getCustomBody,
 }) => {
   const isInstalled = false;
-
-  const { docsElement, mainActionElement } = useGetTileElements({
-    isInstalled,
-    mainActionUninstallInnertext,
-    mainActionInstallInnerText,
-    mainActionClass,
-    disableDocsLink,
-    docsLinkUrl,
-    docsLinkTarget,
-    docsLinkClass,
-    docsLinkInnerText,
-    customDocsLinkElement,
-    customMainActionElement,
-  });
 
   const handleClick = () => {
     onMainActionClick?.();
@@ -50,26 +41,38 @@ const Tile: React.FC<TileProps> = ({
       onClick: handleClick,
     });
 
-  const mainAction = addClickToComponent(mainActionElement);
+  const BaseButtonWithClick = addClickToComponent(
+    <BaseButton
+      customButtonElement={customButtonElement}
+      isInstalled={isInstalled}
+      buttonClass={buttonClass}
+      buttonInstallInnerText={buttonInstallInnerText}
+      buttonUninstallInnerText={buttonUninstallInnertext}
+    />
+  );
 
   return (
-    <div className={`tile-wrapper ${wrapperClass ?? ""}`}>
-      {!disableTitle && (
-        <h4 className={`tile-title ${titleClass ?? ""}`}>{title}</h4>
+    <>
+      {getCustomBody ? (
+        getCustomBody({ handleClick, title })
+      ) : (
+        <BaseWrapper wrapperClass={wrapperClass}>
+          <BaseTitle title={title} titleClass={titleClass} hideTitle={hideTitle} />
+          <BaseImage image={image} imageClass={imageClass} imageAlt={imageAlt} title={title} hideImage={hideImage} />
+          <BaseButtonsWrapper buttonsWrapperClass={buttonsWrapperClass}>
+            <BaseLink
+              customLinkElement={customLinkElement}
+              linkClass={linkClass}
+              linkInnerText={linkInnerText}
+              linkTarget={linkTarget}
+              linkUrl={linkUrl}
+              hideLink={hideLink}
+            />
+            {BaseButtonWithClick}
+          </BaseButtonsWrapper>
+        </BaseWrapper>
       )}
-      {!disableImage && (
-        <img
-          className={`tile-image ${imageClass ?? ""}`}
-          src={image}
-          alt={imageAlt || title || "integration-img"}
-        />
-      )}
-      {children}
-      <div className={`tile-actions-wrapper ${actionsWrapperClass ?? ""}`}>
-        {docsElement}
-        {mainAction}
-      </div>
-    </div>
+    </>
   );
 };
 

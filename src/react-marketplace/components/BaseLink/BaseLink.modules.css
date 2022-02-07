@@ -1,0 +1,11 @@
+.link {
+  font-size: 14px;
+  letter-spacing: 1.25px;
+  text-decoration: none;
+  color: #333333;
+  margin: 0;
+}
+
+.link:hover {
+  cursor: pointer;
+}
