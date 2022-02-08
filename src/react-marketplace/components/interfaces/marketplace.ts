@@ -46,5 +46,4 @@ export type TileProps = {
 export interface MarketplaceProps {
   integrations: TileProps[];
   wrapperClass?: string;
-  getCustomBody?: (obj: CustomBodyProps) => React.ReactNode;
 }
