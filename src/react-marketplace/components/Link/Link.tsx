@@ -1,5 +1,5 @@
 import React from 'react';
-import styles from './BaseLink.module.css';
+import styles from './Link.module.css';
 
 interface Props {
   hideLink?: boolean;
@@ -10,7 +10,7 @@ interface Props {
   linkInnerText?: string;
 }
 
-const BaseLink: React.FC<Props> = ({ linkClass, linkInnerText, linkTarget, linkUrl, customLinkElement, hideLink }) => {
+const Link: React.FC<Props> = ({ linkClass, linkInnerText, linkTarget, linkUrl, customLinkElement, hideLink }) => {
   if (hideLink) {
     return null;
   }
@@ -31,4 +31,4 @@ const BaseLink: React.FC<Props> = ({ linkClass, linkInnerText, linkTarget, linkU
   );
 };
 
-export default BaseLink;
+export default Link;

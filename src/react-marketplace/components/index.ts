@@ -1,6 +1,6 @@
 import BaseButton from './BaseButton';
 import BaseImage from './Image';
-import BaseLink from './BaseLink';
+import Link from './Link';
 import Card from './Card';
 import Marketplace from './Marketplace';
 import Tile from './Tile';
@@ -12,7 +12,7 @@ export {
   Tile,
   Card,
   Title,
-  BaseLink,
+  Link,
   BaseImage,
   BaseButton,
   TileProps,

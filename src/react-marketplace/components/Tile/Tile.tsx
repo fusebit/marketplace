@@ -2,7 +2,7 @@ import React from 'react';
 import BaseButton from '../BaseButton';
 import Image from '../Image';
 import styles from './Tile.module.css';
-import BaseLink from '../BaseLink';
+import Link from '../Link';
 import Title from '../Title';
 import Card from '../Card';
 import { TileProps } from '../interfaces/marketplace';
@@ -79,7 +79,7 @@ const Tile: React.FC<TileProps> = ({
             </div>
           )}
           <div className={`${styles['buttons-wrapper']} ${buttonsWrapperClass ?? ''}`}>
-            <BaseLink
+            <Link
               customLinkElement={customLinkElement}
               linkClass={linkClass}
               linkInnerText={linkInnerText}
