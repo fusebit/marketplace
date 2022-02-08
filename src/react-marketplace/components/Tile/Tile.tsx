@@ -50,6 +50,18 @@ const Tile: React.FC<TileProps> = ({
     />
   );
 
+  const LinkComponent = (() => {
+    if (hideLink) {
+      return null;
+    }
+
+    if (customLinkElement) {
+      return customLinkElement;
+    } else {
+      return <Link linkClass={linkClass} linkInnerText={linkInnerText} linkTarget={linkTarget} linkUrl={linkUrl} />;
+    }
+  })();
+
   return (
     <>
       {getCustomBody ? (
@@ -79,15 +91,7 @@ const Tile: React.FC<TileProps> = ({
             </div>
           )}
           <div className={`${styles['buttons-wrapper']} ${buttonsWrapperClass ?? ''}`}>
-            {!hideLink && (
-              <Link
-                customLinkElement={customLinkElement}
-                linkClass={linkClass}
-                linkInnerText={linkInnerText}
-                linkTarget={linkTarget}
-                linkUrl={linkUrl}
-              />
-            )}
+            {LinkComponent}
             {BaseButtonWithClick}
           </div>
         </Card>

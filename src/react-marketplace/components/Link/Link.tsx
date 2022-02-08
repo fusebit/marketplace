@@ -2,18 +2,13 @@ import React from 'react';
 import styles from './Link.module.css';
 
 interface Props {
-  customLinkElement?: JSX.Element;
   linkUrl?: string;
   linkTarget?: string;
   linkClass?: string;
   linkInnerText?: string;
 }
 
-const Link: React.FC<Props> = ({ linkClass, linkInnerText, linkTarget, linkUrl, customLinkElement }) => {
-  if (customLinkElement) {
-    return customLinkElement;
-  }
-
+const Link: React.FC<Props> = ({ linkClass, linkInnerText, linkTarget, linkUrl }) => {
   return (
     <a
       href={linkUrl}
