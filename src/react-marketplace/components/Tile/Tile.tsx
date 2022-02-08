@@ -2,7 +2,7 @@ import React from 'react';
 import BaseButton from '../BaseButton';
 import BaseButtonsWrapper from '../BaseButtonsWrapper';
 import BaseImage from '../BaseImage';
-import BaseImagesWrapper from '../BaseImagesWrapper';
+import styles from './Tile.module.css';
 import BaseLink from '../BaseLink';
 import Title from '../Title';
 import Card from '../Card';
@@ -73,11 +73,11 @@ const Tile: React.FC<TileProps> = ({
         <Card cardClass={cardClass}>
           {!hideTitle && <Title title={title} titleClass={titleClass} />}
           {!hideImages && (
-            <BaseImagesWrapper imagesWrapperClass={imagesWrapperClass}>
+            <div className={`${styles['images-wrapper']} ${imagesWrapperClass ?? ''}`}>
               {images?.map((image) => (
                 <BaseImage key={image.alt} image={image} />
               ))}
-            </BaseImagesWrapper>
+            </div>
           )}
           <BaseButtonsWrapper buttonsWrapperClass={buttonsWrapperClass}>
             <BaseLink

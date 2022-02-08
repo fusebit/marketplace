@@ -1,6 +1,5 @@
 import BaseButton from './BaseButton';
 import BaseButtonsWrapper from './BaseButtonsWrapper';
-import BaseImagesWrapper from './BaseImagesWrapper';
 import BaseImage from './BaseImage';
 import BaseLink from './BaseLink';
 import Card from './Card';
@@ -15,7 +14,6 @@ export {
   Card,
   Title,
   BaseLink,
-  BaseImagesWrapper,
   BaseImage,
   BaseButtonsWrapper,
   BaseButton,
