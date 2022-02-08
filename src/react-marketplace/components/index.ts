@@ -1,5 +1,4 @@
 import BaseButton from './BaseButton';
-import BaseButtonsWrapper from './BaseButtonsWrapper';
 import BaseImage from './Image';
 import BaseLink from './BaseLink';
 import Card from './Card';
@@ -15,7 +14,6 @@ export {
   Title,
   BaseLink,
   BaseImage,
-  BaseButtonsWrapper,
   BaseButton,
   TileProps,
   MarketplaceProps,

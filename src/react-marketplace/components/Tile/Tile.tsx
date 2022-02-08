@@ -1,6 +1,5 @@
 import React from 'react';
 import BaseButton from '../BaseButton';
-import BaseButtonsWrapper from '../BaseButtonsWrapper';
 import Image from '../Image';
 import styles from './Tile.module.css';
 import BaseLink from '../BaseLink';
@@ -79,7 +78,7 @@ const Tile: React.FC<TileProps> = ({
               ))}
             </div>
           )}
-          <BaseButtonsWrapper buttonsWrapperClass={buttonsWrapperClass}>
+          <div className={`${styles['buttons-wrapper']} ${buttonsWrapperClass ?? ''}`}>
             <BaseLink
               customLinkElement={customLinkElement}
               linkClass={linkClass}
@@ -89,7 +88,7 @@ const Tile: React.FC<TileProps> = ({
               hideLink={hideLink}
             />
             {BaseButtonWithClick}
-          </BaseButtonsWrapper>
+          </div>
         </Card>
       )}
     </>
