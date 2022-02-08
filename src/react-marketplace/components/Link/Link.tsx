@@ -2,18 +2,17 @@ import React from 'react';
 import styles from './Link.module.css';
 
 interface Props {
-  linkUrl?: string;
-  linkTarget?: string;
+  link?: HTMLAnchorElement;
   linkClass?: string;
   linkInnerText?: string;
 }
 
-const Link: React.FC<Props> = ({ linkClass, linkInnerText, linkTarget, linkUrl }) => {
+const Link: React.FC<Props> = ({ linkClass, linkInnerText, link }) => {
   return (
     <a
-      href={linkUrl}
-      rel="noreferrer"
-      target={linkTarget || '_blank'}
+      href={link?.href}
+      rel={link?.rel}
+      target={link?.target || '_blank'}
       className={`${styles['link']} ${linkClass ?? ''}`}
     >
       {linkInnerText || 'LEARN MORE'}

@@ -22,8 +22,7 @@ const Tile: React.FC<TileProps> = ({
   hideLink,
   linkClass,
   linkInnerText,
-  linkTarget,
-  linkUrl,
+  link,
   hideTitle,
   hideImages,
   onMainActionClick,
@@ -58,7 +57,7 @@ const Tile: React.FC<TileProps> = ({
     if (customLinkElement) {
       return customLinkElement;
     } else {
-      return <Link linkClass={linkClass} linkInnerText={linkInnerText} linkTarget={linkTarget} linkUrl={linkUrl} />;
+      return <Link linkClass={linkClass} linkInnerText={linkInnerText} link={link} />;
     }
   })();
 
@@ -75,8 +74,7 @@ const Tile: React.FC<TileProps> = ({
           images,
           linkClass,
           linkInnerText,
-          linkTarget,
-          linkUrl,
+          link,
           titleClass,
           cardClass,
         })
