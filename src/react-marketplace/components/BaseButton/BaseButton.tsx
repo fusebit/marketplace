@@ -2,45 +2,17 @@ import React from 'react';
 import styles from './BaseButton.module.css';
 
 interface Props {
+  children?: React.ReactNode;
   isInstalled?: boolean;
-  buttonUninstallInnerText?: string;
-  buttonInstallInnerText?: string;
-  customButtonElement?: JSX.Element;
   buttonClass?: string;
 }
 
-const BaseButton: React.FC<Props> = ({
-  isInstalled,
-  buttonUninstallInnerText,
-  buttonInstallInnerText,
-  customButtonElement,
-  buttonClass,
-}) => {
-  const installAppInnerText = () => {
-    if (isInstalled) {
-      if (buttonUninstallInnerText) {
-        return buttonUninstallInnerText;
-      } else {
-        return 'UNINSTALL APP';
-      }
-    } else {
-      if (buttonInstallInnerText) {
-        return buttonInstallInnerText;
-      } else {
-        return 'INSTALL APP';
-      }
-    }
-  };
-
-  if (customButtonElement) {
-    return customButtonElement;
-  }
-
+const BaseButton: React.FC<Props> = ({ children, isInstalled, buttonClass }) => {
   return (
     <div
       className={`${styles['button']} ${isInstalled ? styles['uninstall'] : styles['install']} ${buttonClass ?? ''}`}
     >
-      {installAppInnerText()}
+      {children}
     </div>
   );
 };

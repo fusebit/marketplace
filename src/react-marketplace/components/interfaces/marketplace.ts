@@ -20,7 +20,7 @@ export type TileProps = {
   buttonClass?: string;
   linkInnerText?: string;
   buttonInstallInnerText?: string;
-  buttonUninstallInnertext?: string;
+  buttonUninstallInnerText?: string;
   customLinkElement?: JSX.Element;
   customButtonElement?: JSX.Element;
   onMainActionClick?: () => void;

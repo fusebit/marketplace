@@ -16,7 +16,7 @@ const Tile: React.FC<TileProps> = ({
   buttonsWrapperClass,
   buttonClass,
   buttonInstallInnerText,
-  buttonUninstallInnertext,
+  buttonUninstallInnerText,
   customButtonElement,
   customLinkElement,
   hideLink,
@@ -39,14 +39,30 @@ const Tile: React.FC<TileProps> = ({
       onClick: handleClick,
     });
 
+  const installAppInnerText = (() => {
+    if (isInstalled) {
+      if (buttonUninstallInnerText) {
+        return buttonUninstallInnerText;
+      } else {
+        return 'UNINSTALL APP';
+      }
+    } else {
+      if (buttonInstallInnerText) {
+        return buttonInstallInnerText;
+      } else {
+        return 'INSTALL APP';
+      }
+    }
+  })();
+
   const BaseButtonWithClick = addClickToComponent(
-    <BaseButton
-      customButtonElement={customButtonElement}
-      isInstalled={isInstalled}
-      buttonClass={buttonClass}
-      buttonInstallInnerText={buttonInstallInnerText}
-      buttonUninstallInnerText={buttonUninstallInnertext}
-    />
+    customButtonElement ? (
+      customButtonElement
+    ) : (
+      <BaseButton isInstalled={isInstalled} buttonClass={buttonClass}>
+        {installAppInnerText}
+      </BaseButton>
+    )
   );
 
   const LinkComponent = (() => {
