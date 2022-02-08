@@ -1,6 +1,6 @@
 import React from 'react';
 
-export interface Image {
+export interface ImageProps {
   src: string;
   alt: string;
   class?: string;
@@ -8,7 +8,7 @@ export interface Image {
 
 export interface CustomBodyProps {
   title?: string;
-  images?: Image[];
+  images?: ImageProps[];
   imageAlt?: string;
   linkUrl?: string;
   cardClass?: string;
@@ -40,7 +40,7 @@ export type TileProps = {
   onMainActionClick?: () => void;
   getCustomBody?: (obj: CustomBodyProps) => React.ReactNode;
 } & ({ title: string; hideTitle?: never } | { title?: never; hideTitle: boolean }) &
-  ({ images: Image[]; hideImages?: never } | { images?: never; hideImages: boolean }) &
+  ({ images: ImageProps[]; hideImages?: never } | { images?: never; hideImages: boolean }) &
   ({ linkUrl: string; hideLink?: never } | { linkUrl?: never; hideLink: boolean });
 
 export interface MarketplaceProps {

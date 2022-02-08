@@ -1,7 +1,7 @@
 import React from 'react';
 import BaseButton from '../BaseButton';
 import BaseButtonsWrapper from '../BaseButtonsWrapper';
-import BaseImage from '../BaseImage';
+import Image from '../Image';
 import styles from './Tile.module.css';
 import BaseLink from '../BaseLink';
 import Title from '../Title';
@@ -75,7 +75,7 @@ const Tile: React.FC<TileProps> = ({
           {!hideImages && (
             <div className={`${styles['images-wrapper']} ${imagesWrapperClass ?? ''}`}>
               {images?.map((image) => (
-                <BaseImage key={image.alt} image={image} />
+                <Image key={image.alt} image={image} />
               ))}
             </div>
           )}

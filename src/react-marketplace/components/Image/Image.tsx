@@ -1,12 +1,12 @@
 import React from 'react';
-import { Image } from '../interfaces/marketplace';
-import styles from './BaseImage.module.css';
+import { ImageProps } from '../interfaces/marketplace';
+import styles from './Image.module.css';
 
 interface Props {
-  image?: Image;
+  image?: ImageProps;
 }
 
-const BaseImage: React.FC<Props> = ({ image }) => {
+const Image: React.FC<Props> = ({ image }) => {
   return (
     <img
       className={`${styles['image']} ${image?.class ?? ''}`}
@@ -16,4 +16,4 @@ const BaseImage: React.FC<Props> = ({ image }) => {
   );
 };
 
-export default BaseImage;
+export default Image;
