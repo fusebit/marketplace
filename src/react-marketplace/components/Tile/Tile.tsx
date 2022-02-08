@@ -71,7 +71,7 @@ const Tile: React.FC<TileProps> = ({
         })
       ) : (
         <Card cardClass={cardClass}>
-          <Title title={title} titleClass={titleClass} hideTitle={hideTitle} />
+          {!hideTitle && <Title title={title} titleClass={titleClass} />}
           {!hideImages && (
             <BaseImagesWrapper imagesWrapperClass={imagesWrapperClass}>
               {images?.map((image) => (
