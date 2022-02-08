@@ -11,7 +11,7 @@ export interface CustomBodyProps {
   images?: Image[];
   imageAlt?: string;
   linkUrl?: string;
-  wrapperClass?: string;
+  cardClass?: string;
   titleClass?: string;
   buttonsWrapperClass?: string;
   linkClass?: string;
@@ -25,7 +25,7 @@ export interface CustomBodyProps {
 
 export type TileProps = {
   id: string;
-  wrapperClass?: string;
+  cardClass?: string;
   titleClass?: string;
   imagesWrapperClass?: string;
   buttonsWrapperClass?: string;

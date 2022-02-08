@@ -5,13 +5,13 @@ import BaseImage from '../BaseImage';
 import BaseImagesWrapper from '../BaseImagesWrapper';
 import BaseLink from '../BaseLink';
 import BaseTitle from '../BaseTitle';
-import BaseWrapper from '../BaseWrapper';
+import Card from '../Card';
 import { TileProps } from '../interfaces/marketplace';
 
 const Tile: React.FC<TileProps> = ({
   title,
   images,
-  wrapperClass,
+  cardClass,
   titleClass,
   imagesWrapperClass,
   buttonsWrapperClass,
@@ -67,10 +67,10 @@ const Tile: React.FC<TileProps> = ({
           linkTarget,
           linkUrl,
           titleClass,
-          wrapperClass,
+          cardClass,
         })
       ) : (
-        <BaseWrapper wrapperClass={wrapperClass}>
+        <Card cardClass={cardClass}>
           <BaseTitle title={title} titleClass={titleClass} hideTitle={hideTitle} />
           {!hideImages && (
             <BaseImagesWrapper imagesWrapperClass={imagesWrapperClass}>
@@ -90,7 +90,7 @@ const Tile: React.FC<TileProps> = ({
             />
             {BaseButtonWithClick}
           </BaseButtonsWrapper>
-        </BaseWrapper>
+        </Card>
       )}
     </>
   );
