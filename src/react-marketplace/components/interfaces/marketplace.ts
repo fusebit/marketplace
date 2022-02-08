@@ -21,8 +21,6 @@ export type TileProps = {
   linkInnerText?: string;
   buttonInstallInnerText?: string;
   buttonUninstallInnerText?: string;
-  customLinkElement?: JSX.Element;
-  customButtonElement?: JSX.Element;
   onMainActionClick?: () => void;
   getCustomBody?: (obj: CustomBodyProps) => React.ReactNode;
 } & ({ title: string; hideTitle?: never } | { title?: never; hideTitle: boolean }) &

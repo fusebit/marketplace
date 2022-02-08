@@ -17,8 +17,6 @@ const Tile: React.FC<TileProps> = ({
   buttonClass,
   buttonInstallInnerText,
   buttonUninstallInnerText,
-  customButtonElement,
-  customLinkElement,
   hideLink,
   linkClass,
   linkInnerText,
@@ -34,11 +32,6 @@ const Tile: React.FC<TileProps> = ({
     onMainActionClick?.();
   };
 
-  const addClickToComponent = (component: JSX.Element) =>
-    React.cloneElement(component, {
-      onClick: handleClick,
-    });
-
   const installAppInnerText = (() => {
     if (isInstalled) {
       if (buttonUninstallInnerText) {
@@ -52,28 +45,6 @@ const Tile: React.FC<TileProps> = ({
       } else {
         return 'INSTALL APP';
       }
-    }
-  })();
-
-  const ButtonWithClick = addClickToComponent(
-    customButtonElement ? (
-      customButtonElement
-    ) : (
-      <Button isInstalled={isInstalled} buttonClass={buttonClass}>
-        {installAppInnerText}
-      </Button>
-    )
-  );
-
-  const LinkComponent = (() => {
-    if (hideLink) {
-      return null;
-    }
-
-    if (customLinkElement) {
-      return customLinkElement;
-    } else {
-      return <Link linkClass={linkClass} linkInnerText={linkInnerText} link={link} />;
     }
   })();
 
@@ -94,8 +65,10 @@ const Tile: React.FC<TileProps> = ({
             </div>
           )}
           <div className={`${styles['buttons-wrapper']} ${buttonsWrapperClass ?? ''}`}>
-            {LinkComponent}
-            {ButtonWithClick}
+            {!hideLink && <Link linkClass={linkClass} linkInnerText={linkInnerText} link={link} />}
+            <Button isInstalled={isInstalled} buttonClass={buttonClass}>
+              {installAppInnerText}
+            </Button>
           </div>
         </Card>
       )}
