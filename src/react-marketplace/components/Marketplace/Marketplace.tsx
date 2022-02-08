@@ -1,7 +1,7 @@
 import React from 'react';
 import Tile from '../Tile';
 import styles from './Marketplace.module.css';
-import { MarketplaceProps, TileProps } from '../interfaces/marketplace';
+import { MarketplaceProps } from '../interfaces/marketplace';
 
 const Marketplace: React.FC<MarketplaceProps> = ({ integrations, wrapperClass }) => {
   return (

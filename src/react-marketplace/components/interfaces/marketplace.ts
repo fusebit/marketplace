@@ -12,12 +12,15 @@ export interface CustomBodyProps {
 
 export type TileProps = {
   id: string;
-  cardClass?: string;
-  titleClass?: string;
-  imagesWrapperClass?: string;
-  buttonsWrapperClass?: string;
-  linkClass?: string;
-  buttonClass?: string;
+  classes?: {
+    link?: string;
+    card?: string;
+    title?: string;
+    image?: string;
+    button?: string;
+    imagesWrapper?: string;
+    buttonsWrapper?: string;
+  };
   linkInnerText?: string;
   buttonInstallInnerText?: string;
   buttonUninstallInnerText?: string;

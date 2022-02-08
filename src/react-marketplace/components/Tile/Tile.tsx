@@ -9,16 +9,11 @@ import { TileProps } from '../interfaces/marketplace';
 
 const Tile: React.FC<TileProps> = ({
   title,
+  classes,
   images,
-  cardClass,
-  titleClass,
-  imagesWrapperClass,
-  buttonsWrapperClass,
-  buttonClass,
   buttonInstallInnerText,
   buttonUninstallInnerText,
   hideLink,
-  linkClass,
   linkInnerText,
   link,
   hideTitle,
@@ -55,18 +50,18 @@ const Tile: React.FC<TileProps> = ({
           handleClick,
         })
       ) : (
-        <Card cardClass={cardClass}>
-          {!hideTitle && <Title title={title} titleClass={titleClass} />}
+        <Card cardClass={classes?.card}>
+          {!hideTitle && <Title title={title} titleClass={classes?.title} />}
           {!hideImages && (
-            <div className={`${styles['images-wrapper']} ${imagesWrapperClass ?? ''}`}>
+            <div className={`${styles['images-wrapper']} ${classes?.imagesWrapper ?? ''}`}>
               {images?.map((image) => (
                 <Image key={image.alt} image={image} />
               ))}
             </div>
           )}
-          <div className={`${styles['buttons-wrapper']} ${buttonsWrapperClass ?? ''}`}>
-            {!hideLink && <Link linkClass={linkClass} linkInnerText={linkInnerText} link={link} />}
-            <Button isInstalled={isInstalled} buttonClass={buttonClass}>
+          <div className={`${styles['buttons-wrapper']} ${classes?.buttonsWrapper ?? ''}`}>
+            {!hideLink && <Link linkClass={classes?.link} linkInnerText={linkInnerText} link={link} />}
+            <Button isInstalled={isInstalled} buttonClass={classes?.button}>
               {installAppInnerText}
             </Button>
           </div>
