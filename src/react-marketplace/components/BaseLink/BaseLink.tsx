@@ -1,5 +1,5 @@
 import React from 'react';
-import styles from './BaseLink.modules.css';
+import styles from './BaseLink.module.css';
 
 interface Props {
   hideLink?: boolean;

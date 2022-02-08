@@ -1,6 +1,6 @@
 import React from 'react';
 import { Image } from '../interfaces/marketplace';
-import styles from './BaseImage.modules.css';
+import styles from './BaseImage.module.css';
 
 interface Props {
   image?: Image;

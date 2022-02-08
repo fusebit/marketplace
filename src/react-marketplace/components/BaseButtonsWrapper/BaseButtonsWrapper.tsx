@@ -1,5 +1,5 @@
 import React from 'react';
-import styles from './BaseButtonsWrapper.modules.css';
+import styles from './BaseButtonsWrapper.module.css';
 
 interface Props {
   buttonsWrapperClass?: string;

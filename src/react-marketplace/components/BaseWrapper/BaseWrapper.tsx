@@ -1,5 +1,5 @@
 import React from 'react';
-import styles from './BaseWrapper.modules.css';
+import styles from './BaseWrapper.module.css';
 
 interface Props {
   children?: React.ReactNode;

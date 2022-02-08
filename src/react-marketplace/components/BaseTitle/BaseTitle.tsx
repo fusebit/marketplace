@@ -1,5 +1,5 @@
 import React from 'react';
-import styles from './BaseTitle.modules.css';
+import styles from './BaseTitle.module.css';
 
 interface Props {
   title?: string;

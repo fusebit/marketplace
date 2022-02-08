@@ -1,5 +1,5 @@
 import React from 'react';
-import styles from './BaseButton.modules.css';
+import styles from './BaseButton.module.css';
 
 interface Props {
   isInstalled?: boolean;
