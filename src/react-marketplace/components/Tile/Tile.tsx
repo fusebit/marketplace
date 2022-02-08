@@ -79,14 +79,15 @@ const Tile: React.FC<TileProps> = ({
             </div>
           )}
           <div className={`${styles['buttons-wrapper']} ${buttonsWrapperClass ?? ''}`}>
-            <Link
-              customLinkElement={customLinkElement}
-              linkClass={linkClass}
-              linkInnerText={linkInnerText}
-              linkTarget={linkTarget}
-              linkUrl={linkUrl}
-              hideLink={hideLink}
-            />
+            {!hideLink && (
+              <Link
+                customLinkElement={customLinkElement}
+                linkClass={linkClass}
+                linkInnerText={linkInnerText}
+                linkTarget={linkTarget}
+                linkUrl={linkUrl}
+              />
+            )}
             {BaseButtonWithClick}
           </div>
         </Card>

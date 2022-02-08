@@ -2,7 +2,6 @@ import React from 'react';
 import styles from './Link.module.css';
 
 interface Props {
-  hideLink?: boolean;
   customLinkElement?: JSX.Element;
   linkUrl?: string;
   linkTarget?: string;
@@ -10,11 +9,7 @@ interface Props {
   linkInnerText?: string;
 }
 
-const Link: React.FC<Props> = ({ linkClass, linkInnerText, linkTarget, linkUrl, customLinkElement, hideLink }) => {
-  if (hideLink) {
-    return null;
-  }
-
+const Link: React.FC<Props> = ({ linkClass, linkInnerText, linkTarget, linkUrl, customLinkElement }) => {
   if (customLinkElement) {
     return customLinkElement;
   }
