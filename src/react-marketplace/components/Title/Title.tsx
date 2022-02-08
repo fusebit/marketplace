@@ -1,5 +1,5 @@
 import React from 'react';
-import styles from './BaseTitle.module.css';
+import styles from './Title.module.css';
 
 interface Props {
   title?: string;
@@ -7,7 +7,7 @@ interface Props {
   hideTitle?: boolean;
 }
 
-const BaseTitle: React.FC<Props> = ({ titleClass, hideTitle, title }) => {
+const Title: React.FC<Props> = ({ titleClass, hideTitle, title }) => {
   if (!hideTitle) {
     return <h4 className={`${styles['title']} ${titleClass ?? ''}`}>{title}</h4>;
   }
@@ -15,4 +15,4 @@ const BaseTitle: React.FC<Props> = ({ titleClass, hideTitle, title }) => {
   return null;
 };
 
-export default BaseTitle;
+export default Title;

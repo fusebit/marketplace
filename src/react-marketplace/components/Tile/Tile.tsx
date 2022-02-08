@@ -4,7 +4,7 @@ import BaseButtonsWrapper from '../BaseButtonsWrapper';
 import BaseImage from '../BaseImage';
 import BaseImagesWrapper from '../BaseImagesWrapper';
 import BaseLink from '../BaseLink';
-import BaseTitle from '../BaseTitle';
+import Title from '../Title';
 import Card from '../Card';
 import { TileProps } from '../interfaces/marketplace';
 
@@ -71,7 +71,7 @@ const Tile: React.FC<TileProps> = ({
         })
       ) : (
         <Card cardClass={cardClass}>
-          <BaseTitle title={title} titleClass={titleClass} hideTitle={hideTitle} />
+          <Title title={title} titleClass={titleClass} hideTitle={hideTitle} />
           {!hideImages && (
             <BaseImagesWrapper imagesWrapperClass={imagesWrapperClass}>
               {images?.map((image) => (
