@@ -66,17 +66,6 @@ const Tile: React.FC<TileProps> = ({
       {getCustomBody ? (
         getCustomBody({
           handleClick,
-          title,
-          buttonClass,
-          buttonInstallInnerText,
-          buttonUninstallInnertext,
-          buttonsWrapperClass,
-          images,
-          linkClass,
-          linkInnerText,
-          link,
-          titleClass,
-          cardClass,
         })
       ) : (
         <Card cardClass={cardClass}>

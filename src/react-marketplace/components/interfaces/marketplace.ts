@@ -7,18 +7,6 @@ export interface ImageProps {
 }
 
 export interface CustomBodyProps {
-  title?: string;
-  images?: ImageProps[];
-  imageAlt?: string;
-  link?: HTMLAnchorElement;
-  cardClass?: string;
-  titleClass?: string;
-  buttonsWrapperClass?: string;
-  linkClass?: string;
-  buttonClass?: string;
-  linkInnerText?: string;
-  buttonInstallInnerText?: string;
-  buttonUninstallInnertext?: string;
   handleClick: () => void;
 }
 
