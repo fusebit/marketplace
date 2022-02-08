@@ -1,5 +1,5 @@
 import React from 'react';
-import BaseButton from '../BaseButton';
+import Button from '../Button';
 import Image from '../Image';
 import styles from './Tile.module.css';
 import Link from '../Link';
@@ -55,13 +55,13 @@ const Tile: React.FC<TileProps> = ({
     }
   })();
 
-  const BaseButtonWithClick = addClickToComponent(
+  const ButtonWithClick = addClickToComponent(
     customButtonElement ? (
       customButtonElement
     ) : (
-      <BaseButton isInstalled={isInstalled} buttonClass={buttonClass}>
+      <Button isInstalled={isInstalled} buttonClass={buttonClass}>
         {installAppInnerText}
-      </BaseButton>
+      </Button>
     )
   );
 
@@ -95,7 +95,7 @@ const Tile: React.FC<TileProps> = ({
           )}
           <div className={`${styles['buttons-wrapper']} ${buttonsWrapperClass ?? ''}`}>
             {LinkComponent}
-            {BaseButtonWithClick}
+            {ButtonWithClick}
           </div>
         </Card>
       )}

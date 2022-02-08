@@ -1,5 +1,5 @@
 import React from 'react';
-import styles from './BaseButton.module.css';
+import styles from './Button.module.css';
 
 interface Props {
   children?: React.ReactNode;
@@ -7,7 +7,7 @@ interface Props {
   buttonClass?: string;
 }
 
-const BaseButton: React.FC<Props> = ({ children, isInstalled, buttonClass }) => {
+const Button: React.FC<Props> = ({ children, isInstalled, buttonClass }) => {
   return (
     <div
       className={`${styles['button']} ${isInstalled ? styles['uninstall'] : styles['install']} ${buttonClass ?? ''}`}
@@ -17,4 +17,4 @@ const BaseButton: React.FC<Props> = ({ children, isInstalled, buttonClass }) => 
   );
 };
 
-export default BaseButton;
+export default Button;

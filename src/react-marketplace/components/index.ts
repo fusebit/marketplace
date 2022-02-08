@@ -1,5 +1,5 @@
-import BaseButton from './BaseButton';
-import BaseImage from './Image';
+import Button from './Button';
+import Image from './Image';
 import Link from './Link';
 import Card from './Card';
 import Marketplace from './Marketplace';
@@ -13,8 +13,8 @@ export {
   Card,
   Title,
   Link,
-  BaseImage,
-  BaseButton,
+  Image,
+  Button,
   TileProps,
   MarketplaceProps,
   CustomBodyProps,
