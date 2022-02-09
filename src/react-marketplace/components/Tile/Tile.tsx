@@ -7,12 +7,15 @@ import Title from '../Title';
 import Card from '../Card';
 import { TileProps } from '../interfaces/marketplace';
 
+const DEFAULT_INSTALL_TEXT = 'INSTALL APP';
+const DEFAULT_UNINSTALL_TEXT = 'UNINSTALL APP';
+
 const Tile: React.FC<TileProps> = ({
   title,
   classes,
   images,
-  buttonInstallInnerText,
-  buttonUninstallInnerText,
+  installText,
+  uninstallText,
   hideLink,
   linkInnerText,
   link,
@@ -23,25 +26,11 @@ const Tile: React.FC<TileProps> = ({
 }) => {
   const isInstalled = false;
 
+  const buttonText = isInstalled ? uninstallText || DEFAULT_UNINSTALL_TEXT : installText || DEFAULT_INSTALL_TEXT;
+
   const handleClick = () => {
     onMainActionClick?.();
   };
-
-  const installAppInnerText = (() => {
-    if (isInstalled) {
-      if (buttonUninstallInnerText) {
-        return buttonUninstallInnerText;
-      } else {
-        return 'UNINSTALL APP';
-      }
-    } else {
-      if (buttonInstallInnerText) {
-        return buttonInstallInnerText;
-      } else {
-        return 'INSTALL APP';
-      }
-    }
-  })();
 
   return (
     <>
@@ -62,7 +51,7 @@ const Tile: React.FC<TileProps> = ({
           <div className={`${styles['buttons-wrapper']} ${classes?.buttonsWrapper ?? ''}`}>
             {!hideLink && <Link linkClass={classes?.link} linkInnerText={linkInnerText} link={link} />}
             <Button isInstalled={isInstalled} buttonClass={classes?.button}>
-              {installAppInnerText}
+              {buttonText}
             </Button>
           </div>
         </Card>
