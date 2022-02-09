@@ -1,13 +1,14 @@
 import React from 'react';
+import cn from 'classnames';
 import styles from './Title.module.css';
 
 interface Props {
   title?: string;
-  titleClass?: string;
+  className?: string;
 }
 
-const Title: React.FC<Props> = ({ titleClass, title }) => {
-  return <h4 className={`${styles['title']} ${titleClass ?? ''}`}>{title}</h4>;
+const Title: React.FC<Props> = ({ className, title }) => {
+  return <h4 className={cn(styles.title, className)}>{title}</h4>;
 };
 
 export default Title;

@@ -1,13 +1,14 @@
 import React from 'react';
+import cn from 'classnames';
 import styles from './Card.module.css';
 
 interface Props {
   children?: React.ReactNode;
-  cardClass?: string;
+  className?: string;
 }
 
-const CardWrapper: React.FC<Props> = ({ children, cardClass }) => {
-  return <div className={`${styles['wrapper']} ${cardClass ?? ''}`}>{children}</div>;
+const CardWrapper: React.FC<Props> = ({ children, className }) => {
+  return <div className={cn(styles.wrapper, className)}>{children}</div>;
 };
 
 export default CardWrapper;

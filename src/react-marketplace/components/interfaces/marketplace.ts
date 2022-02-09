@@ -21,16 +21,16 @@ export type TileProps = {
     imagesWrapper?: string;
     buttonsWrapper?: string;
   };
+  hideLink?: boolean;
   linkInnerText?: string;
   installText?: string;
   uninstallText?: string;
   onMainActionClick?: () => void;
   getCustomBody?: (obj: CustomBodyProps) => React.ReactNode;
 } & ({ title: string; hideTitle?: never } | { title?: never; hideTitle: boolean }) &
-  ({ images: ImageProps[]; hideImages?: never } | { images?: never; hideImages: boolean }) &
-  ({ link: HTMLAnchorElement; hideLink?: never } | { link?: never; hideLink: boolean });
+  ({ images: ImageProps[]; hideImages?: never } | { images?: never; hideImages: boolean });
 
 export interface MarketplaceProps {
   integrations: TileProps[];
-  wrapperClass?: string;
+  className?: string;
 }

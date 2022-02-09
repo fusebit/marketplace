@@ -5,6 +5,7 @@ import styles from './Tile.module.css';
 import Link from '../Link';
 import Title from '../Title';
 import Card from '../Card';
+import cn from 'classnames';
 import { TileProps } from '../interfaces/marketplace';
 
 const DEFAULT_INSTALL_TEXT = 'INSTALL APP';
@@ -18,7 +19,6 @@ const Tile: React.FC<TileProps> = ({
   uninstallText,
   hideLink,
   linkInnerText,
-  link,
   hideTitle,
   hideImages,
   onMainActionClick,
@@ -39,18 +39,22 @@ const Tile: React.FC<TileProps> = ({
           handleClick,
         })
       ) : (
-        <Card cardClass={classes?.card}>
-          {!hideTitle && <Title title={title} titleClass={classes?.title} />}
+        <Card className={classes?.card}>
+          {!hideTitle && <Title title={title} className={classes?.title} />}
           {!hideImages && (
-            <div className={`${styles['images-wrapper']} ${classes?.imagesWrapper ?? ''}`}>
+            <div className={cn(styles['images-wrapper'], classes?.imagesWrapper)}>
               {images?.map((image) => (
                 <Image key={image.alt} image={image} />
               ))}
             </div>
           )}
-          <div className={`${styles['buttons-wrapper']} ${classes?.buttonsWrapper ?? ''}`}>
-            {!hideLink && <Link linkClass={classes?.link} linkInnerText={linkInnerText} link={link} />}
-            <Button isInstalled={isInstalled} buttonClass={classes?.button}>
+          <div className={cn(styles['buttons-wrapper'], classes?.buttonsWrapper)}>
+            {!hideLink && (
+              <Link className={classes?.link} rel="noreferrer" target="_blank">
+                {linkInnerText}
+              </Link>
+            )}
+            <Button isInstalled={isInstalled} className={classes?.button}>
               {buttonText}
             </Button>
           </div>
