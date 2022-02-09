@@ -40,11 +40,11 @@ const Tile: React.FC<TileProps> = ({
         })
       ) : (
         <Card className={classes?.card}>
-          {!hideTitle && <Title title={title} className={classes?.title} />}
+          {!hideTitle && <Title className={classes?.title}>{title}</Title>}
           {!hideImages && (
             <div className={cn(styles['images-wrapper'], classes?.imagesWrapper)}>
               {images?.map((image) => (
-                <Image key={image.alt} image={image} />
+                <Image key={image.alt} image={image} className={classes?.image} />
               ))}
             </div>
           )}

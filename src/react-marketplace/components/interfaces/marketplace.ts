@@ -3,7 +3,6 @@ import React from 'react';
 export interface ImageProps {
   src: string;
   alt: string;
-  class?: string;
 }
 
 export interface CustomBodyProps {

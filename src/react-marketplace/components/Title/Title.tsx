@@ -3,12 +3,11 @@ import cn from 'classnames';
 import styles from './Title.module.css';
 
 interface Props {
-  title?: string;
   className?: string;
 }
 
-const Title: React.FC<Props> = ({ className, title }) => {
-  return <h4 className={cn(styles.title, className)}>{title}</h4>;
+const Title: React.FC<Props> = ({ className, children }) => {
+  return <h4 className={cn(styles.title, className)}>{children}</h4>;
 };
 
 export default Title;

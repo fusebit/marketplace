@@ -5,3 +5,7 @@
   width: 0;
   object-fit: contain;
 }
+
+.image:not(:last-child) {
+  margin-right: 20px;
+}
