@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Button from '../Button';
 import Image from '../Image';
 import styles from './Tile.module.css';
@@ -23,13 +23,23 @@ const Tile: React.FC<TileProps> = ({
   hideImages,
   onMainActionClick,
   getCustomBody,
+  getInstallUrl,
+  onCommitSession,
 }) => {
   const isInstalled = false;
+  const params = new URLSearchParams(window.location.search);
+
+  useEffect(() => {
+    console.log('params', params.get('session'));
+  }, []);
 
   const buttonText = isInstalled ? uninstallText || DEFAULT_UNINSTALL_TEXT : installText || DEFAULT_INSTALL_TEXT;
 
-  const handleClick = () => {
+  const handleClick = async () => {
     onMainActionClick?.();
+
+    const installUrl = await getInstallUrl();
+    window.open(installUrl);
   };
 
   return (
@@ -54,7 +64,7 @@ const Tile: React.FC<TileProps> = ({
                 {linkInnerText}
               </Link>
             )}
-            <Button isInstalled={isInstalled} className={classes?.button}>
+            <Button onClick={handleClick} isInstalled={isInstalled} className={classes?.button}>
               {buttonText}
             </Button>
           </div>
