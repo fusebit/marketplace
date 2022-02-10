@@ -1,0 +1,19 @@
+.button {
+  font-size: 14px;
+  letter-spacing: 1.25px;
+  text-decoration: none;
+  color: #333333;
+  margin: 0;
+}
+
+.button:hover {
+  cursor: pointer;
+}
+
+.install {
+  color: #3f51b5;
+}
+
+.uninstall {
+  color: #d32f2f;
+}

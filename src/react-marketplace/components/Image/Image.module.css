@@ -1,0 +1,11 @@
+.image {
+  display: flex;
+  flex: 1 1 0;
+  height: 52px;
+  width: 0;
+  object-fit: contain;
+}
+
+.image:not(:last-child) {
+  margin-right: 20px;
+}

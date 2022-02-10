@@ -1,0 +1,13 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  font-family: 'Roboto', 'Helvetica', 'Arial', sans-serif;
+  background-color: white;
+  box-shadow: 0px 20px 48px rgb(52 72 123 / 10%);
+  min-height: 140px;
+  width: 250px;
+  padding: 24px;
+  margin-right: 40px;
+  margin-bottom: 40px;
+  border-radius: 8px;
+}
