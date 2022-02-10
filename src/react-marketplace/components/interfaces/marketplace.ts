@@ -9,6 +9,10 @@ export interface CustomBodyProps {
   handleClick: () => void;
 }
 
+export interface SessionData {
+  targetUrl: string;
+}
+
 export type TileProps = {
   id: string;
   classes?: {
