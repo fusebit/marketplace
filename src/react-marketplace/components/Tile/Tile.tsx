@@ -25,19 +25,33 @@ const Tile: React.FC<TileProps> = ({
   getCustomBody,
   getInstallUrl,
   onCommitSession,
+  getIsInstalled,
 }) => {
   const isInstalled = false;
   const params = new URLSearchParams(window.location.search);
   const [url, setUrl] = useState('');
 
   useEffect(() => {
-    console.log('params', params.get('session'));
+    const onInit = async () => {
+      console.log(await getIsInstalled?.());
+    };
+
+    onInit();
+
+    if (params.get('session')) {
+      onCommitSession?.(params.get('session'));
+    }
   }, []);
 
   const buttonText = isInstalled ? uninstallText || DEFAULT_UNINSTALL_TEXT : installText || DEFAULT_INSTALL_TEXT;
 
   useEffect(() => {
-    setUrl(getInstallUrl?.() || '');
+    const setInstallUrl = async () => {
+      const installUrl = await getInstallUrl?.();
+      setUrl(installUrl);
+    };
+
+    setInstallUrl();
   }, []);
 
   const handleClick = async () => {

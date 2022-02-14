@@ -6,11 +6,14 @@ interface Props {
   children?: React.ReactNode;
   isInstalled?: boolean;
   className?: string;
+  onClick?: () => void;
 }
 
-const Button: React.FC<Props> = ({ children, isInstalled, className }) => {
+const Button: React.FC<Props> = ({ children, isInstalled, className, onClick }) => {
   return (
-    <div className={cn(styles.button, isInstalled ? styles.uninstall : styles.install, className)}>{children}</div>
+    <div onClick={onClick} className={cn(styles.button, isInstalled ? styles.uninstall : styles.install, className)}>
+      {children}
+    </div>
   );
 };
 
