@@ -27,7 +27,7 @@ export type TileProps = {
   onMainActionClick?: () => void;
   getInstallUrl?: () => Promise<string>;
   getIsInstalled?: () => Promise<boolean>;
-  onCommitSession?: (session: any) => Promise<void>;
+  onCommitSession?: (session: string) => Promise<void>;
   onUninstall?: () => Promise<void>;
   getCustomBody?: (obj: CustomBodyProps) => React.ReactNode;
 } & ({ title: string; hideTitle?: never } | { title?: never; hideTitle: boolean }) &
