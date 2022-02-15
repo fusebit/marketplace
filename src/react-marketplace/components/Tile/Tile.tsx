@@ -52,7 +52,8 @@ const Tile: React.FC<TileProps> = ({
   useEffect(() => {
     const commitSession = async () => {
       const session = params.get('session');
-      if (session) {
+      const id = params.get('integrationId');
+      if (session && integrationId === id) {
         try {
           await onCommitSession?.(session);
           const installationState = await getIsInstalled?.();
