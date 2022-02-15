@@ -9,8 +9,14 @@ export interface CustomBodyProps {
   handleClick: () => void;
 }
 
+export interface InstallStatusResponse {
+  message: string;
+  status: 'success' | 'error';
+  err?: any;
+}
+
 export type TileProps = {
-  id: string;
+  integrationId: string;
   classes?: {
     link?: string;
     card?: string;
@@ -29,6 +35,8 @@ export type TileProps = {
   getIsInstalled?: () => Promise<boolean>;
   onCommitSession?: (session: string) => Promise<void>;
   onUninstall?: () => Promise<void>;
+  onUninstalled?: (res: InstallStatusResponse) => void;
+  onInstalled?: (res: InstallStatusResponse) => void;
   getCustomBody?: (obj: CustomBodyProps) => React.ReactNode;
 } & ({ title: string; hideTitle?: never } | { title?: never; hideTitle: boolean }) &
   ({ images: ImageProps[]; hideImages?: never } | { images?: never; hideImages: boolean });

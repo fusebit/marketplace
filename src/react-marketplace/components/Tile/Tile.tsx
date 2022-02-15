@@ -12,6 +12,7 @@ const DEFAULT_INSTALL_TEXT = 'INSTALL APP';
 const DEFAULT_UNINSTALL_TEXT = 'UNINSTALL APP';
 
 const Tile: React.FC<TileProps> = ({
+  integrationId,
   title,
   classes,
   images,
@@ -26,6 +27,8 @@ const Tile: React.FC<TileProps> = ({
   getInstallUrl,
   onCommitSession,
   onUninstall,
+  onInstalled,
+  onUninstalled,
   getIsInstalled,
 }) => {
   const [isInstalled, setIsInstalled] = useState(false);
@@ -35,8 +38,12 @@ const Tile: React.FC<TileProps> = ({
 
   useEffect(() => {
     const checkInstallState = async () => {
-      const installationState = await getIsInstalled?.();
-      setIsInstalled(!!installationState);
+      try {
+        const installationState = await getIsInstalled?.();
+        setIsInstalled(!!installationState);
+      } catch (err) {
+        console.log(err);
+      }
     };
 
     checkInstallState();
@@ -46,9 +53,21 @@ const Tile: React.FC<TileProps> = ({
     const commitSession = async () => {
       const session = params.get('session');
       if (session) {
-        await onCommitSession?.(session);
-        const installationState = await getIsInstalled?.();
-        setIsInstalled(!!installationState);
+        try {
+          await onCommitSession?.(session);
+          const installationState = await getIsInstalled?.();
+          setIsInstalled(!!installationState);
+          onInstalled?.({
+            message: `Successfully installed ${integrationId}`,
+            status: 'success',
+          });
+        } catch (err) {
+          onInstalled?.({
+            message: `There was an error installing ${integrationId}`,
+            status: 'error',
+            err,
+          });
+        }
       }
     };
 
@@ -57,8 +76,12 @@ const Tile: React.FC<TileProps> = ({
 
   useEffect(() => {
     const setInstallUrl = async () => {
-      const installUrl = await getInstallUrl?.();
-      setUrl(installUrl || '');
+      try {
+        const installUrl = await getInstallUrl?.();
+        setUrl(installUrl || '');
+      } catch (err) {
+        console.log(err);
+      }
     };
 
     setInstallUrl();
@@ -67,9 +90,21 @@ const Tile: React.FC<TileProps> = ({
   const handleClick = async () => {
     onMainActionClick?.();
     if (isInstalled) {
-      await onUninstall?.();
-      const installationState = await getIsInstalled?.();
-      setIsInstalled(!!installationState);
+      try {
+        await onUninstall?.();
+        const installationState = await getIsInstalled?.();
+        setIsInstalled(!!installationState);
+        onInstalled?.({
+          message: `Successfully uninstalled ${integrationId}`,
+          status: 'success',
+        });
+      } catch (err) {
+        onInstalled?.({
+          message: `There was an error uninstalling ${integrationId}`,
+          status: 'error',
+          err,
+        });
+      }
     } else {
       window.open(url);
     }

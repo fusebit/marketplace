@@ -8,7 +8,7 @@ const Marketplace: React.FC<MarketplaceProps> = ({ integrations, className }) =>
   return (
     <div className={cn(styles.wrapper, className)}>
       {integrations?.map((integration) => (
-        <Tile key={integration.id} {...integration} />
+        <Tile key={integration.integrationId} {...integration} />
       ))}
     </div>
   );
