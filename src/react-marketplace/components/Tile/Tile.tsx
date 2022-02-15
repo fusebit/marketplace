@@ -25,34 +25,40 @@ const Tile: React.FC<TileProps> = ({
   getCustomBody,
   getInstallUrl,
   onCommitSession,
+  onUninstall,
   getIsInstalled,
 }) => {
   const [isInstalled, setIsInstalled] = useState(false);
   const params = new URLSearchParams(window.location.search);
   const [url, setUrl] = useState('');
+  const buttonText = isInstalled ? uninstallText || DEFAULT_UNINSTALL_TEXT : installText || DEFAULT_INSTALL_TEXT;
 
   useEffect(() => {
-    const onInit = async () => {
+    const checkInstallState = async () => {
       const installationState = await getIsInstalled?.();
-      setIsInstalled(installationState);
+      setIsInstalled(!!installationState);
+    };
 
+    checkInstallState();
+  }, []);
+
+  useEffect(() => {
+    const commitSession = async () => {
       const session = params.get('session');
       if (session) {
         await onCommitSession?.(session);
         const installationState = await getIsInstalled?.();
-        setIsInstalled(installationState);
+        setIsInstalled(!!installationState);
       }
     };
 
-    onInit();
+    commitSession();
   }, []);
-
-  const buttonText = isInstalled ? uninstallText || DEFAULT_UNINSTALL_TEXT : installText || DEFAULT_INSTALL_TEXT;
 
   useEffect(() => {
     const setInstallUrl = async () => {
       const installUrl = await getInstallUrl?.();
-      setUrl(installUrl);
+      setUrl(installUrl || '');
     };
 
     setInstallUrl();
@@ -60,7 +66,13 @@ const Tile: React.FC<TileProps> = ({
 
   const handleClick = async () => {
     onMainActionClick?.();
-    window.open(url);
+    if (isInstalled) {
+      await onUninstall?.();
+      const installationState = await getIsInstalled?.();
+      setIsInstalled(!!installationState);
+    } else {
+      window.open(url);
+    }
   };
 
   return (
