@@ -7,6 +7,7 @@ export interface ImageProps {
 
 export interface CustomBodyProps {
   handleClick: () => void;
+  loading: boolean;
 }
 
 export interface InstallStatusResponse {
@@ -25,6 +26,7 @@ export type TileProps = {
     button?: string;
     imagesWrapper?: string;
     buttonsWrapper?: string;
+    spinner?: string;
   };
   hideLink?: boolean;
   linkInnerText?: string;
