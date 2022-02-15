@@ -27,20 +27,24 @@ const Tile: React.FC<TileProps> = ({
   onCommitSession,
   getIsInstalled,
 }) => {
-  const isInstalled = false;
+  const [isInstalled, setIsInstalled] = useState(false);
   const params = new URLSearchParams(window.location.search);
   const [url, setUrl] = useState('');
 
   useEffect(() => {
     const onInit = async () => {
-      console.log(await getIsInstalled?.());
+      const installationState = await getIsInstalled?.();
+      setIsInstalled(installationState);
+
+      const session = params.get('session');
+      if (session) {
+        await onCommitSession?.(session);
+        const installationState = await getIsInstalled?.();
+        setIsInstalled(installationState);
+      }
     };
 
     onInit();
-
-    if (params.get('session')) {
-      onCommitSession?.(params.get('session'));
-    }
   }, []);
 
   const buttonText = isInstalled ? uninstallText || DEFAULT_UNINSTALL_TEXT : installText || DEFAULT_INSTALL_TEXT;
