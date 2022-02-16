@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import Button from '../Button';
 import Image from '../Image';
 import styles from './Tile.module.css';
@@ -14,6 +14,7 @@ const DEFAULT_UNINSTALL_TEXT = 'UNINSTALL APP';
 
 const Tile: React.FC<TileProps> = ({
   integrationId,
+  connectorId,
   title,
   classes,
   images,
@@ -32,8 +33,10 @@ const Tile: React.FC<TileProps> = ({
   onUninstalled,
   getIsInstalled,
 }) => {
-  const { handleClick, isInstalled, loading } = useTile({
+  const { handleClick, isInstalled, loading, tileImages } = useTile({
     integrationId,
+    connectorId,
+    images,
     getInstallUrl,
     getIsInstalled,
     onCommitSession,
@@ -57,7 +60,7 @@ const Tile: React.FC<TileProps> = ({
           {!hideTitle && <Title className={classes?.title}>{title}</Title>}
           {!hideImages && (
             <div className={cn(styles['images-wrapper'], classes?.imagesWrapper)}>
-              {images?.map((image) => (
+              {tileImages?.map((image) => (
                 <Image key={image.alt} image={image} className={classes?.image} />
               ))}
             </div>
@@ -80,8 +83,8 @@ const Tile: React.FC<TileProps> = ({
                 <path
                   d="M58.9999 31C58.9999 24.3836 56.6569 17.981 52.3863 12.9274C48.1157 7.87376 42.1935 4.49572 35.6698 3.39223C29.1461 2.28874 22.4424 3.53109 16.7473 6.89899C11.0522 10.2669 6.73378 15.5428 4.5577 21.7911C2.38163 28.0394 2.48851 34.8564 4.85942 41.0334C7.23032 47.2104 11.712 52.3483 17.5099 55.536C23.3078 58.7237 30.0472 59.7553 36.5331 58.4478"
                   stroke="#F83420"
-                  stroke-width="6"
-                  stroke-linecap="round"
+                  strokeWidth="6"
+                  strokeLinecap="round"
                 />
               </svg>
             ) : (

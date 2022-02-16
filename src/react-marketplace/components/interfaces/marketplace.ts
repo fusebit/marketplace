@@ -17,6 +17,7 @@ export interface InstallStatusResponse {
 
 export type TileProps = {
   integrationId: string;
+  connectorId: string;
   classes?: {
     link?: string;
     card?: string;
@@ -40,7 +41,7 @@ export type TileProps = {
   onInstalled?: (res: InstallStatusResponse) => void;
   getCustomBody?: (obj: CustomBodyProps) => React.ReactNode;
 } & ({ title: string; hideTitle?: never } | { title?: never; hideTitle: boolean }) &
-  ({ images: ImageProps[]; hideImages?: never } | { images?: never; hideImages: boolean });
+  ({ images?: ImageProps[]; hideImages?: never } | { images?: never; hideImages?: boolean });
 
 export interface MarketplaceProps {
   integrations: TileProps[];

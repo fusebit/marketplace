@@ -1,8 +1,11 @@
-import { useEffect, useState } from 'react';
-import { InstallStatusResponse } from '../interfaces/marketplace';
+import { useCallback, useEffect, useMemo, useState } from 'react';
+import { feed } from '../../feed/connectorsFeed';
+import { InstallStatusResponse, ImageProps } from '../interfaces/marketplace';
 
 interface Props {
   integrationId: string;
+  connectorId: string;
+  images?: ImageProps[];
   onMainActionClick?: () => void;
   getInstallUrl?: () => Promise<string>;
   getIsInstalled?: () => Promise<boolean>;
@@ -14,6 +17,8 @@ interface Props {
 
 const useTile = ({
   integrationId,
+  connectorId,
+  images,
   onMainActionClick,
   getInstallUrl,
   getIsInstalled,
@@ -28,6 +33,22 @@ const useTile = ({
   const [isCheckingInstallState, setIsCheckingInstallState] = useState(true);
   const [isCommitingSession, setIsCommittingSession] = useState(false);
   const [isUninstalling, setIsUninstalling] = useState(false);
+
+  const tileImages = useMemo(() => {
+    if (images) {
+      return images;
+    }
+
+    // Fetch the feed here, now its hard-coded for testing purposes
+    const matchingEntity = feed.find((entity) => entity.id === connectorId);
+    if (matchingEntity) {
+      const image: ImageProps = {
+        src: `data:image/svg+xml;utf8,${encodeURIComponent(matchingEntity?.largeIcon)}`,
+        alt: matchingEntity.name,
+      };
+      return [image];
+    }
+  }, [connectorId, images]);
 
   useEffect(() => {
     const checkInstallState = async () => {
@@ -114,6 +135,7 @@ const useTile = ({
     isInstalled,
     handleClick,
     loading: isCheckingInstallState || isCommitingSession || isUninstalling,
+    tileImages,
   };
 };
 
