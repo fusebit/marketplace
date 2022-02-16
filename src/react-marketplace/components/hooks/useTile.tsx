@@ -25,21 +25,19 @@ const useTile = ({
   const [isInstalled, setIsInstalled] = useState(false);
   const params = new URLSearchParams(window.location.search);
   const [url, setUrl] = useState('');
-  const [loading, setLoading] = useState(true);
+  const [isCheckingInstallState, setIsCheckingInstallState] = useState(true);
+  const [isCommitingSession, setIsCommittingSession] = useState(false);
+  const [isUninstalling, setIsUninstalling] = useState(false);
 
   useEffect(() => {
     const checkInstallState = async () => {
       try {
         const installationState = await getIsInstalled?.();
         setIsInstalled(!!installationState);
-        const session = params.get('session');
-        const id = params.get('integrationId');
-        if (!session || integrationId !== id) {
-          setLoading(false);
-        }
       } catch (err) {
-        console.log(err);
-        setLoading(false);
+        console.log(`There was a problem getting the instalation state: ${err}`);
+      } finally {
+        setIsCheckingInstallState(false);
       }
     };
 
@@ -51,23 +49,22 @@ const useTile = ({
       const session = params.get('session');
       const id = params.get('integrationId');
       if (session && integrationId === id) {
-        setLoading(true);
+        setIsCommittingSession(true);
         try {
           await onCommitSession?.(session);
           const installationState = await getIsInstalled?.();
           setIsInstalled(!!installationState);
           onInstalled?.({
-            message: `Successfully installed ${integrationId}`,
             status: 'success',
           });
-          setLoading(false);
         } catch (err) {
           onInstalled?.({
-            message: `There was an error installing ${integrationId}`,
             status: 'error',
             err,
           });
-          setLoading(false);
+          console.log(`There was a problem commiting the session: ${err}`);
+        } finally {
+          setIsCommittingSession(false);
         }
       }
     };
@@ -81,7 +78,7 @@ const useTile = ({
         const installUrl = await getInstallUrl?.();
         setUrl(installUrl || '');
       } catch (err) {
-        console.log(err);
+        console.log(`There was a problem fetching the install url: ${err}`);
       }
     };
 
@@ -91,23 +88,22 @@ const useTile = ({
   const handleClick = async () => {
     onMainActionClick?.();
     if (isInstalled) {
-      setLoading(true);
+      setIsUninstalling(true);
       try {
         await onUninstall?.();
         const installationState = await getIsInstalled?.();
         setIsInstalled(!!installationState);
         onUninstalled?.({
-          message: `Successfully uninstalled ${integrationId}`,
           status: 'success',
         });
-        setLoading(false);
       } catch (err) {
         onUninstalled?.({
-          message: `There was an error uninstalling ${integrationId}`,
           status: 'error',
           err,
         });
-        setLoading(false);
+        console.log(`There was a problem uninstalling the integration: ${err}`);
+      } finally {
+        setIsUninstalling(false);
       }
     } else {
       window.open(url);
@@ -117,7 +113,7 @@ const useTile = ({
   return {
     isInstalled,
     handleClick,
-    loading,
+    loading: isCheckingInstallState || isCommitingSession || isUninstalling,
   };
 };
 

@@ -11,7 +11,6 @@ export interface CustomBodyProps {
 }
 
 export interface InstallStatusResponse {
-  message: string;
   status: 'success' | 'error';
   err?: any;
 }
