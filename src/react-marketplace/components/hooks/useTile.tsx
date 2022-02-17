@@ -53,8 +53,6 @@ const useTile = ({
     };
 
     setImages();
-
-    // Fetch the feed here, now its hard-coded for testing purposes
   }, [connectorId, images]);
 
   useEffect(() => {
