@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { InstallStatusResponse, ImageProps, Entity } from '../interfaces/marketplace';
 
 interface Props {
@@ -38,17 +38,17 @@ const useTile = ({
     const setImages = async () => {
       if (images) {
         setTileImages(images);
-      }
-
-      const res = await fetch('https://stage-manage.fusebit.io/feed/connectorsFeed.json');
-      const feed: Entity[] = await res.json();
-      const matchingEntity = feed.find((entity) => entity.id === connectorId);
-      if (matchingEntity) {
-        const image: ImageProps = {
-          src: `data:image/svg+xml;utf8,${encodeURIComponent(matchingEntity?.largeIcon)}`,
-          alt: matchingEntity.name,
-        };
-        setTileImages([image]);
+      } else {
+        const res = await fetch('https://stage-manage.fusebit.io/feed/connectorsFeed.json');
+        const feed: Entity[] = await res.json();
+        const entity = feed.find((entity) => entity.id === connectorId);
+        if (entity) {
+          const image: ImageProps = {
+            src: `data:image/svg+xml;utf8,${encodeURIComponent(entity?.largeIcon)}`,
+            alt: entity.name,
+          };
+          setTileImages([image]);
+        }
       }
     };
 
@@ -61,7 +61,7 @@ const useTile = ({
         const installationState = await getIsInstalled?.();
         setIsInstalled(!!installationState);
       } catch (err) {
-        console.log(`There was a problem getting the instalation state: ${err}`);
+        console.warn(`There was a problem getting the instalation state: ${err}`);
       } finally {
         setIsCheckingInstallState(false);
       }
@@ -88,7 +88,7 @@ const useTile = ({
             status: 'error',
             err,
           });
-          console.log(`There was a problem commiting the session: ${err}`);
+          console.warn(`There was a problem commiting the session: ${err}`);
         } finally {
           setIsCommittingSession(false);
         }
@@ -104,7 +104,7 @@ const useTile = ({
         const installUrl = await getInstallUrl?.();
         setUrl(installUrl || '');
       } catch (err) {
-        console.log(`There was a problem fetching the install url: ${err}`);
+        console.warn(`There was a problem fetching the install url: ${err}`);
       }
     };
 
@@ -127,7 +127,7 @@ const useTile = ({
           status: 'error',
           err,
         });
-        console.log(`There was a problem uninstalling the integration: ${err}`);
+        console.warn(`There was a problem uninstalling the integration: ${err}`);
       } finally {
         setIsUninstalling(false);
       }

@@ -21,8 +21,7 @@ const Tile: React.FC<TileProps> = ({
   installText,
   uninstallText,
   hideLink,
-  linkInnerText,
-  hideTitle,
+  linkText,
   hideImages,
   onMainActionClick,
   getCustomBody,
@@ -57,7 +56,7 @@ const Tile: React.FC<TileProps> = ({
         })
       ) : (
         <Card className={classes?.card}>
-          {!hideTitle && <Title className={classes?.title}>{title}</Title>}
+          {title && <Title className={classes?.title}>{title}</Title>}
           {!hideImages && (
             <div className={cn(styles['images-wrapper'], classes?.imagesWrapper)}>
               {tileImages?.map((image) => (
@@ -68,7 +67,7 @@ const Tile: React.FC<TileProps> = ({
           <div className={cn(styles['buttons-wrapper'], classes?.buttonsWrapper)}>
             {!hideLink && (
               <Link className={classes?.link} rel="noreferrer" target="_blank">
-                {linkInnerText}
+                {linkText}
               </Link>
             )}
             {loading ? (

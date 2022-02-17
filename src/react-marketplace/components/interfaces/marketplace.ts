@@ -24,6 +24,15 @@ export interface InstallStatusResponse {
 export type TileProps = {
   integrationId: string;
   connectorId: string;
+  getInstallUrl: () => Promise<string>;
+  getIsInstalled: () => Promise<boolean>;
+  onCommitSession: (session: string) => Promise<void>;
+  onUninstall: () => Promise<void>;
+  title?: string;
+  images?: ImageProps[];
+  hideImages?: boolean;
+  linkText?: string;
+  hideLink?: boolean;
   classes?: {
     link?: string;
     card?: string;
@@ -34,22 +43,22 @@ export type TileProps = {
     buttonsWrapper?: string;
     spinner?: string;
   };
-  hideLink?: boolean;
-  linkInnerText?: string;
   installText?: string;
   uninstallText?: string;
   onMainActionClick?: () => void;
-  getInstallUrl?: () => Promise<string>;
-  getIsInstalled?: () => Promise<boolean>;
-  onCommitSession?: (session: string) => Promise<void>;
-  onUninstall?: () => Promise<void>;
   onUninstalled?: (res: InstallStatusResponse) => void;
   onInstalled?: (res: InstallStatusResponse) => void;
   getCustomBody?: (obj: CustomBodyProps) => React.ReactNode;
-} & ({ title: string; hideTitle?: never } | { title?: never; hideTitle: boolean }) &
-  ({ images?: ImageProps[]; hideImages?: never } | { images?: never; hideImages?: boolean });
+};
 
-export interface MarketplaceProps {
-  integrations: TileProps[];
+export interface MarketplaceProps
+  extends Omit<
+    TileProps,
+    'title' | 'connectorId' | 'integrationId' | 'getInstallUrl' | 'getIsInstalled' | 'onCommitSession' | 'onUninstall'
+  > {
+  integrations: Pick<
+    TileProps,
+    'title' | 'connectorId' | 'integrationId' | 'getInstallUrl' | 'getIsInstalled' | 'onCommitSession' | 'onUninstall'
+  >[];
   className?: string;
 }
