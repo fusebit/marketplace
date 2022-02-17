@@ -1,5 +1,11 @@
 import React from 'react';
 
+export interface Entity {
+  id: string;
+  largeIcon: string;
+  name: string;
+}
+
 export interface ImageProps {
   src: string;
   alt: string;

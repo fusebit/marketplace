@@ -1,6 +1,5 @@
-import { useCallback, useEffect, useMemo, useState } from 'react';
-import { feed } from '../../feed/connectorsFeed';
-import { InstallStatusResponse, ImageProps } from '../interfaces/marketplace';
+import { useEffect, useMemo, useState } from 'react';
+import { InstallStatusResponse, ImageProps, Entity } from '../interfaces/marketplace';
 
 interface Props {
   integrationId: string;
@@ -33,21 +32,29 @@ const useTile = ({
   const [isCheckingInstallState, setIsCheckingInstallState] = useState(true);
   const [isCommitingSession, setIsCommittingSession] = useState(false);
   const [isUninstalling, setIsUninstalling] = useState(false);
+  const [tileImages, setTileImages] = useState<ImageProps[]>([]);
 
-  const tileImages = useMemo(() => {
-    if (images) {
-      return images;
-    }
+  useEffect(() => {
+    const setImages = async () => {
+      if (images) {
+        setTileImages(images);
+      }
+
+      const res = await fetch('https://stage-manage.fusebit.io/feed/connectorsFeed.json');
+      const feed: Entity[] = await res.json();
+      const matchingEntity = feed.find((entity) => entity.id === connectorId);
+      if (matchingEntity) {
+        const image: ImageProps = {
+          src: `data:image/svg+xml;utf8,${encodeURIComponent(matchingEntity?.largeIcon)}`,
+          alt: matchingEntity.name,
+        };
+        setTileImages([image]);
+      }
+    };
+
+    setImages();
 
     // Fetch the feed here, now its hard-coded for testing purposes
-    const matchingEntity = feed.find((entity) => entity.id === connectorId);
-    if (matchingEntity) {
-      const image: ImageProps = {
-        src: `data:image/svg+xml;utf8,${encodeURIComponent(matchingEntity?.largeIcon)}`,
-        alt: matchingEntity.name,
-      };
-      return [image];
-    }
   }, [connectorId, images]);
 
   useEffect(() => {
