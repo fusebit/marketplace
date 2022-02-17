@@ -16,6 +16,7 @@ const Tile: React.FC<TileProps> = ({
   integrationId,
   connectorId,
   title,
+  hideTitle,
   classes,
   images,
   installText,
@@ -56,7 +57,7 @@ const Tile: React.FC<TileProps> = ({
         })
       ) : (
         <Card className={classes?.card}>
-          {title && <Title className={classes?.title}>{title}</Title>}
+          {!hideTitle && <Title className={classes?.title}>{title}</Title>}
           {!hideImages && (
             <div className={cn(styles['images-wrapper'], classes?.imagesWrapper)}>
               {tileImages?.map((image) => (

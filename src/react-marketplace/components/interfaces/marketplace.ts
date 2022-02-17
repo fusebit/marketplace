@@ -29,6 +29,7 @@ export type TileProps = {
   onCommitSession: (session: string) => Promise<void>;
   onUninstall: () => Promise<void>;
   title?: string;
+  hideTitle?: boolean;
   images?: ImageProps[];
   hideImages?: boolean;
   linkText?: string;
