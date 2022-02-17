@@ -61,7 +61,7 @@ const Tile: React.FC<TileProps> = ({
           {!hideImages && (
             <div className={cn(styles['images-wrapper'], classes?.imagesWrapper)}>
               {tileImages?.map((image) => (
-                <Image key={image.alt} image={image} className={classes?.image} />
+                <Image singleImage={tileImages.length === 1} key={image.alt} image={image} className={classes?.image} />
               ))}
             </div>
           )}
