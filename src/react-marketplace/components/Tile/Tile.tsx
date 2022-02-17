@@ -33,7 +33,7 @@ const Tile: React.FC<TileProps> = ({
   onUninstalled,
   getIsInstalled,
 }) => {
-  const { handleClick, isInstalled, loading, tileImages } = useTile({
+  const { handleClick, isInstalled, loading, tileImages, linkUrl } = useTile({
     integrationId,
     connectorId,
     images,
@@ -67,7 +67,7 @@ const Tile: React.FC<TileProps> = ({
           )}
           <div className={cn(styles['buttons-wrapper'], classes?.buttonsWrapper)}>
             {!hideLink && (
-              <Link className={classes?.link} rel="noreferrer" target="_blank">
+              <Link href={linkUrl} className={classes?.link} rel="noreferrer" target="_blank">
                 {linkText}
               </Link>
             )}

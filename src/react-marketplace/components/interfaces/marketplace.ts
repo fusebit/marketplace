@@ -4,6 +4,9 @@ export interface Entity {
   id: string;
   largeIcon: string;
   name: string;
+  resources: {
+    configureAppDocUrl: string;
+  };
 }
 
 export interface ImageProps {

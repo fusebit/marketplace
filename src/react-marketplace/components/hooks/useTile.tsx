@@ -33,15 +33,31 @@ const useTile = ({
   const [isCommitingSession, setIsCommittingSession] = useState(false);
   const [isUninstalling, setIsUninstalling] = useState(false);
   const [tileImages, setTileImages] = useState<ImageProps[]>([]);
+  const [linkUrl, setLinkUrl] = useState('');
+
+  const getMatchingEntity = async () => {
+    const res = await fetch('https://stage-manage.fusebit.io/feed/connectorsFeed.json');
+    const feed: Entity[] = await res.json();
+    return feed.find((entity) => entity.id === connectorId);
+  };
+
+  useEffect(() => {
+    const setDocsLinkUrl = async () => {
+      const entity = await getMatchingEntity();
+      if (entity) {
+        setLinkUrl(entity.resources.configureAppDocUrl);
+      }
+    };
+
+    setDocsLinkUrl();
+  }, [connectorId]);
 
   useEffect(() => {
     const setImages = async () => {
       if (images) {
         setTileImages(images);
       } else {
-        const res = await fetch('https://stage-manage.fusebit.io/feed/connectorsFeed.json');
-        const feed: Entity[] = await res.json();
-        const entity = feed.find((entity) => entity.id === connectorId);
+        const entity = await getMatchingEntity();
         if (entity) {
           const image: ImageProps = {
             src: `data:image/svg+xml;utf8,${encodeURIComponent(entity?.largeIcon)}`,
@@ -141,6 +157,7 @@ const useTile = ({
     handleClick,
     loading: isCheckingInstallState || isCommitingSession || isUninstalling,
     tileImages,
+    linkUrl,
   };
 };
 
