@@ -74,7 +74,7 @@ const useTile = ({
     const commitSession = async () => {
       const session = params.get('session');
       const id = params.get('integrationId');
-      if (session && integrationId === id) {
+      if (session && integrationId === id && !isInstalled) {
         setIsCommittingSession(true);
         try {
           await onAuthentication?.(integrationId, session);
