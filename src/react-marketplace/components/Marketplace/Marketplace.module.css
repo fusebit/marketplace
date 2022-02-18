@@ -1,5 +1,14 @@
 .wrapper {
+  position: relative;
+  min-height: 100vh;
   display: flex;
   flex: 1;
   flex-wrap: wrap;
+}
+
+.loading-wrapper {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
 }
