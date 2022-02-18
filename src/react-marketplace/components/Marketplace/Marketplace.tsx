@@ -36,37 +36,39 @@ const Marketplace: React.FC<MarketplaceProps> = ({
   });
 
   return (
-    <div className={cn(styles.wrapper, className)}>
-      {isReady ? (
-        trail.map((props, i) => (
-          <animated.div style={props} key={i}>
-            {
-              <Tile
-                key={integrations[i].integrationId}
-                classes={classes}
-                hideImages={hideImages}
-                hideLink={hideLink}
-                images={images}
-                installText={installText}
-                linkText={linkText}
-                onInstalled={onInstalled}
-                onMainActionClick={onMainActionClick}
-                onUninstalled={onUninstalled}
-                uninstallText={uninstallText}
-                getCustomBody={getCustomBody}
-                getInstallUrl={getInstallUrl}
-                onAuthentication={onAuthentication}
-                onUninstall={onUninstall}
-                {...integrations[i]}
-              />
-            }
-          </animated.div>
-        ))
-      ) : (
-        <div className={cn(styles['loading-wrapper'])}>
-          <Spinner className={classes?.spinner} />
-        </div>
-      )}
+    <div className={cn(styles.marketplace)}>
+      <div className={cn(styles.wrapper, className)}>
+        {isReady ? (
+          trail.map((props, i) => (
+            <animated.div style={props} key={i}>
+              {
+                <Tile
+                  key={integrations[i].integrationId}
+                  classes={classes}
+                  hideImages={hideImages}
+                  hideLink={hideLink}
+                  images={images}
+                  installText={installText}
+                  linkText={linkText}
+                  onInstalled={onInstalled}
+                  onMainActionClick={onMainActionClick}
+                  onUninstalled={onUninstalled}
+                  uninstallText={uninstallText}
+                  getCustomBody={getCustomBody}
+                  getInstallUrl={getInstallUrl}
+                  onAuthentication={onAuthentication}
+                  onUninstall={onUninstall}
+                  {...integrations[i]}
+                />
+              }
+            </animated.div>
+          ))
+        ) : (
+          <div className={cn(styles['loading-wrapper'])}>
+            <Spinner className={classes?.spinner} />
+          </div>
+        )}
+      </div>
     </div>
   );
 };
