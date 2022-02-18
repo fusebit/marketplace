@@ -26,11 +26,11 @@ export interface InstallStatusResponse {
 
 export type TileProps = {
   integrationId: string;
-  connectorId: string;
-  getInstallUrl: () => Promise<string>;
-  getIsInstalled: () => Promise<boolean>;
-  onAuthentication: (session: string) => Promise<void>;
-  onUninstall: () => Promise<void>;
+  feedId: string;
+  isInstalled: boolean;
+  getInstallUrl: (integrationId: string) => Promise<string>;
+  onAuthentication: (integrationId: string, session: string) => Promise<void>;
+  onUninstall: (integrationId: string) => Promise<void>;
   title?: string;
   hideTitle?: boolean;
   images?: ImageProps[];
@@ -55,7 +55,7 @@ export type TileProps = {
   getCustomBody?: (obj: CustomBodyProps) => React.ReactNode;
 };
 
-export interface MarketplaceProps extends Omit<TileProps, 'title' | 'connectorId' | 'integrationId'> {
-  integrations: Pick<TileProps, 'title' | 'connectorId' | 'integrationId'>[];
+export interface MarketplaceProps extends Omit<TileProps, 'title' | 'feedId' | 'integrationId' | 'isInstalled'> {
+  integrations: Pick<TileProps, 'title' | 'feedId' | 'integrationId' | 'isInstalled'>[];
   className?: string;
 }

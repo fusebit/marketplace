@@ -3,54 +3,53 @@ import { InstallStatusResponse, ImageProps, Entity } from '../interfaces/marketp
 
 interface Props {
   integrationId: string;
-  connectorId: string;
+  feedId: string;
+  installInitState: boolean;
   images?: ImageProps[];
   onMainActionClick?: () => void;
-  getInstallUrl?: () => Promise<string>;
-  getIsInstalled?: () => Promise<boolean>;
-  onAuthentication?: (session: string) => Promise<void>;
-  onUninstall?: () => Promise<void>;
+  getInstallUrl?: (integrationId: string) => Promise<string>;
+  onAuthentication?: (integrationId: string, session: string) => Promise<void>;
+  onUninstall?: (integrationId: string) => Promise<void>;
   onUninstalled?: (res: InstallStatusResponse) => void;
   onInstalled?: (res: InstallStatusResponse) => void;
 }
 
 const useTile = ({
   integrationId,
-  connectorId,
+  feedId,
+  installInitState,
   images,
   onMainActionClick,
   getInstallUrl,
-  getIsInstalled,
   onAuthentication,
   onInstalled,
   onUninstall,
   onUninstalled,
 }: Props) => {
-  const [isInstalled, setIsInstalled] = useState(false);
+  const [isInstalled, setIsInstalled] = useState(installInitState);
   const params = new URLSearchParams(window.location.search);
   const [url, setUrl] = useState('');
-  const [isCheckingInstallState, setIsCheckingInstallState] = useState(true);
   const [isCommitingSession, setIsCommittingSession] = useState(false);
   const [isUninstalling, setIsUninstalling] = useState(false);
   const [tileImages, setTileImages] = useState<ImageProps[]>([]);
   const [linkUrl, setLinkUrl] = useState('');
 
   const getMatchingEntity = async () => {
-    const res = await fetch('https://stage-manage.fusebit.io/feed/connectorsFeed.json');
+    const res = await fetch('https://stage-manage.fusebit.io/feed/integrationsFeed.json');
     const feed: Entity[] = await res.json();
-    return feed.find((entity) => entity.id === connectorId);
+    return feed.find((entity) => entity.id === feedId);
   };
 
   useEffect(() => {
     const setDocsLinkUrl = async () => {
       const entity = await getMatchingEntity();
       if (entity) {
-        setLinkUrl(entity.resources.configureAppDocUrl);
+        setLinkUrl(entity?.resources?.configureAppDocUrl);
       }
     };
 
     setDocsLinkUrl();
-  }, [connectorId]);
+  }, [feedId]);
 
   useEffect(() => {
     const setImages = async () => {
@@ -69,22 +68,7 @@ const useTile = ({
     };
 
     setImages();
-  }, [connectorId, images]);
-
-  useEffect(() => {
-    const checkInstallState = async () => {
-      try {
-        const installationState = await getIsInstalled?.();
-        setIsInstalled(!!installationState);
-      } catch (err) {
-        console.warn(`There was a problem getting the instalation state: ${err}`);
-      } finally {
-        setIsCheckingInstallState(false);
-      }
-    };
-
-    checkInstallState();
-  }, []);
+  }, [feedId, images]);
 
   useEffect(() => {
     const commitSession = async () => {
@@ -93,9 +77,8 @@ const useTile = ({
       if (session && integrationId === id) {
         setIsCommittingSession(true);
         try {
-          await onAuthentication?.(session);
-          const installationState = await getIsInstalled?.();
-          setIsInstalled(!!installationState);
+          await onAuthentication?.(integrationId, session);
+          setIsInstalled(true);
           onInstalled?.({
             status: 'success',
           });
@@ -117,7 +100,7 @@ const useTile = ({
   useEffect(() => {
     const setInstallUrl = async () => {
       try {
-        const installUrl = await getInstallUrl?.();
+        const installUrl = await getInstallUrl?.(integrationId);
         setUrl(installUrl || '');
       } catch (err) {
         console.warn(`There was a problem fetching the install url: ${err}`);
@@ -132,9 +115,8 @@ const useTile = ({
     if (isInstalled) {
       setIsUninstalling(true);
       try {
-        await onUninstall?.();
-        const installationState = await getIsInstalled?.();
-        setIsInstalled(!!installationState);
+        await onUninstall?.(integrationId);
+        setIsInstalled(false);
         onUninstalled?.({
           status: 'success',
         });
@@ -155,7 +137,7 @@ const useTile = ({
   return {
     isInstalled,
     handleClick,
-    loading: isCheckingInstallState || isCommitingSession || isUninstalling,
+    loading: isCommitingSession || isUninstalling,
     tileImages,
     linkUrl,
   };
