@@ -14,8 +14,12 @@ const Marketplace: React.FC<MarketplaceProps> = ({
   images,
   installText,
   linkText,
-  onInstalled,
+  getInstallUrl,
+  getIsInstalled,
+  onAuthentication,
+  onUninstall,
   onMainActionClick,
+  onInstalled,
   onUninstalled,
   uninstallText,
 }) => {
@@ -35,6 +39,10 @@ const Marketplace: React.FC<MarketplaceProps> = ({
           onUninstalled={onUninstalled}
           uninstallText={uninstallText}
           getCustomBody={getCustomBody}
+          getInstallUrl={getInstallUrl}
+          getIsInstalled={getIsInstalled}
+          onAuthentication={onAuthentication}
+          onUninstall={onUninstall}
           {...integration}
         />
       ))}

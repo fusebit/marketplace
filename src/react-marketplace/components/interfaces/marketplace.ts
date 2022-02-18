@@ -29,7 +29,7 @@ export type TileProps = {
   connectorId: string;
   getInstallUrl: () => Promise<string>;
   getIsInstalled: () => Promise<boolean>;
-  onCommitSession: (session: string) => Promise<void>;
+  onAuthentication: (session: string) => Promise<void>;
   onUninstall: () => Promise<void>;
   title?: string;
   hideTitle?: boolean;
@@ -55,14 +55,7 @@ export type TileProps = {
   getCustomBody?: (obj: CustomBodyProps) => React.ReactNode;
 };
 
-export interface MarketplaceProps
-  extends Omit<
-    TileProps,
-    'title' | 'connectorId' | 'integrationId' | 'getInstallUrl' | 'getIsInstalled' | 'onCommitSession' | 'onUninstall'
-  > {
-  integrations: Pick<
-    TileProps,
-    'title' | 'connectorId' | 'integrationId' | 'getInstallUrl' | 'getIsInstalled' | 'onCommitSession' | 'onUninstall'
-  >[];
+export interface MarketplaceProps extends Omit<TileProps, 'title' | 'connectorId' | 'integrationId'> {
+  integrations: Pick<TileProps, 'title' | 'connectorId' | 'integrationId'>[];
   className?: string;
 }

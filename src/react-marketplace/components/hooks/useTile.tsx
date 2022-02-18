@@ -8,7 +8,7 @@ interface Props {
   onMainActionClick?: () => void;
   getInstallUrl?: () => Promise<string>;
   getIsInstalled?: () => Promise<boolean>;
-  onCommitSession?: (session: string) => Promise<void>;
+  onAuthentication?: (session: string) => Promise<void>;
   onUninstall?: () => Promise<void>;
   onUninstalled?: (res: InstallStatusResponse) => void;
   onInstalled?: (res: InstallStatusResponse) => void;
@@ -21,7 +21,7 @@ const useTile = ({
   onMainActionClick,
   getInstallUrl,
   getIsInstalled,
-  onCommitSession,
+  onAuthentication,
   onInstalled,
   onUninstall,
   onUninstalled,
@@ -93,7 +93,7 @@ const useTile = ({
       if (session && integrationId === id) {
         setIsCommittingSession(true);
         try {
-          await onCommitSession?.(session);
+          await onAuthentication?.(session);
           const installationState = await getIsInstalled?.();
           setIsInstalled(!!installationState);
           onInstalled?.({
