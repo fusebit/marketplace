@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { InstallStatusResponse, ImageProps, Entity } from '../interfaces/marketplace';
+import { integrationsFeed } from '../../integrationsFeed';
 
 interface Props {
   integrationId: string;
@@ -35,8 +36,9 @@ const useTile = ({
   const [linkUrl, setLinkUrl] = useState('');
 
   const getMatchingEntity = async () => {
-    const res = await fetch('https://stage-manage.fusebit.io/feed/integrationsFeed.json');
-    const feed: Entity[] = await res.json();
+    // const res = await fetch('https://stage-manage.fusebit.io/feed/integrationsFeed.json');
+    // const feed: Entity[] = await res.json();
+    const feed = integrationsFeed;
     return feed.find((entity) => entity.id === feedId);
   };
 
@@ -44,7 +46,7 @@ const useTile = ({
     const setDocsLinkUrl = async () => {
       const entity = await getMatchingEntity();
       if (entity) {
-        setLinkUrl(entity?.resources?.configureAppDocUrl);
+        setLinkUrl(entity?.resources?.configureAppDocUrl || '');
       }
     };
 
