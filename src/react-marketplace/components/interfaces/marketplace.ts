@@ -4,8 +4,10 @@ export interface Entity {
   id: string;
   largeIcon: string;
   name: string;
-  resources: {
+  [key: string]: any;
+  resources?: {
     configureAppDocUrl: string;
+    [key: string]: any;
   };
 }
 
@@ -32,6 +34,7 @@ export interface Integration {
 }
 
 export interface TileProps extends Integration {
+  feed: Entity[];
   getInstallUrl: (integrationId: string) => Promise<string>;
   onAuthentication: (integrationId: string, session: string) => Promise<void>;
   onUninstall: (integrationId: string) => Promise<void>;
@@ -58,7 +61,9 @@ export interface TileProps extends Integration {
   getCustomBody?: (obj: CustomBodyProps) => React.ReactNode;
 }
 
-export interface MarketplaceProps extends Omit<TileProps, 'title' | 'feedId' | 'integrationId' | 'isInstalled'> {
+export interface MarketplaceProps
+  extends Omit<TileProps, 'title' | 'feedId' | 'integrationId' | 'isInstalled' | 'feed'> {
   integrations: Integration[];
   className?: string;
+  demo?: boolean;
 }

@@ -15,6 +15,7 @@ const DEFAULT_UNINSTALL_TEXT = 'UNINSTALL APP';
 
 const Tile: React.FC<TileProps> = ({
   integrationId,
+  feed,
   feedId,
   isInstalled: installInitState,
   title,
@@ -36,6 +37,7 @@ const Tile: React.FC<TileProps> = ({
 }) => {
   const { handleClick, isInstalled, loading, tileImages, linkUrl } = useTile({
     integrationId,
+    feed,
     feedId,
     images,
     getInstallUrl,

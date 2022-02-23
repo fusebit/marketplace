@@ -5,6 +5,7 @@ import { integrationsFeed } from '../../integrationsFeed';
 interface Props {
   integrationId: string;
   feedId: string;
+  feed: Entity[];
   installInitState: boolean;
   images?: ImageProps[];
   onMainActionClick?: () => void;
@@ -17,6 +18,7 @@ interface Props {
 
 const useTile = ({
   integrationId,
+  feed,
   feedId,
   installInitState,
   images,
@@ -38,7 +40,6 @@ const useTile = ({
   const getMatchingEntity = async () => {
     // const res = await fetch('https://stage-manage.fusebit.io/feed/integrationsFeed.json');
     // const feed: Entity[] = await res.json();
-    const feed = integrationsFeed;
     return feed.find((entity) => entity.id === feedId);
   };
 

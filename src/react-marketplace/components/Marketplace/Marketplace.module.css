@@ -16,3 +16,21 @@
   top: 50%;
   transform: translate(-50%, -50%);
 }
+
+.demo-card {
+  height: 100px;
+  min-height: 100%;
+  background-color: #f2f2f2;
+}
+
+.demo-img {
+  filter: grayscale(100%);
+}
+
+.demo-button {
+  color: #959595;
+}
+
+.demo-button:hover {
+  cursor: default;
+}
