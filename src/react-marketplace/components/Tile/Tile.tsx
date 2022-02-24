@@ -16,6 +16,7 @@ const DEFAULT_UNINSTALL_TEXT = 'UNINSTALL APP';
 const Tile: React.FC<TileProps> = ({
   integrationId,
   feedId,
+  feed,
   isInstalled: installInitState,
   title,
   hideTitle,
@@ -37,6 +38,7 @@ const Tile: React.FC<TileProps> = ({
   const { handleClick, isInstalled, loading, tileImages, linkUrl } = useTile({
     integrationId,
     feedId,
+    feed,
     images,
     getInstallUrl,
     installInitState,
@@ -54,7 +56,7 @@ const Tile: React.FC<TileProps> = ({
       {getCustomBody ? (
         getCustomBody({
           handleClick,
-          loading,
+          isLoading: loading,
         })
       ) : (
         <Card className={classes?.card}>

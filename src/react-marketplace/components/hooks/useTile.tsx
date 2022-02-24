@@ -1,10 +1,10 @@
 import { useEffect, useState } from 'react';
 import { InstallStatusResponse, ImageProps, Entity } from '../interfaces/marketplace';
-import { integrationsFeed } from '../../integrationsFeed';
 
 interface Props {
   integrationId: string;
   feedId: string;
+  feed: Entity[];
   installInitState: boolean;
   images?: ImageProps[];
   onMainActionClick?: () => void;
@@ -18,6 +18,7 @@ interface Props {
 const useTile = ({
   integrationId,
   feedId,
+  feed,
   installInitState,
   images,
   onMainActionClick,
@@ -36,9 +37,6 @@ const useTile = ({
   const [linkUrl, setLinkUrl] = useState('');
 
   const getMatchingEntity = async () => {
-    // const res = await fetch('https://stage-manage.fusebit.io/feed/integrationsFeed.json');
-    // const feed: Entity[] = await res.json();
-    const feed = integrationsFeed;
     return feed.find((entity) => entity.id === feedId);
   };
 

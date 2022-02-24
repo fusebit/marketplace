@@ -16,7 +16,7 @@ export interface ImageProps {
 
 export interface CustomBodyProps {
   handleClick: () => void;
-  loading: boolean;
+  isLoading: boolean;
 }
 
 export interface InstallStatusResponse {
@@ -32,6 +32,7 @@ export interface Integration {
 }
 
 export interface TileProps extends Integration {
+  feed: Entity[];
   getInstallUrl: (integrationId: string) => Promise<string>;
   onAuthentication: (integrationId: string, session: string) => Promise<void>;
   onUninstall: (integrationId: string) => Promise<void>;
