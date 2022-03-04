@@ -18,7 +18,7 @@ export interface ImageProps {
 
 export interface CustomBodyProps {
   handleClick: () => void;
-  loading: boolean;
+  isLoading: boolean;
 }
 
 export interface InstallStatusResponse {

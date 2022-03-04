@@ -1,8 +1,8 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Tile from '../Tile';
 import cn from 'classnames';
 import styles from './Marketplace.module.css';
-import { MarketplaceProps } from '../interfaces/marketplace';
+import { Entity, MarketplaceProps } from '../interfaces/marketplace';
 import Spinner from '../Spinner';
 import { integrationsFeed } from '../../integrationsFeed';
 
@@ -25,7 +25,18 @@ const Marketplace: React.FC<MarketplaceProps> = ({
   uninstallText,
   demo,
 }) => {
+  const [feed, setFeed] = useState<Entity[]>([]);
   const isReady = integrations.length > 0;
+
+  useEffect(() => {
+    const getFeed = async () => {
+      const res = await fetch('https://stage-manage.fusebit.io/feed/integrationsFeed.json');
+      const feed: Entity[] = await res.json();
+      setFeed(feed);
+    };
+
+    getFeed();
+  }, []);
 
   return (
     <div className={cn(styles.marketplace)}>
@@ -34,7 +45,7 @@ const Marketplace: React.FC<MarketplaceProps> = ({
           integrations.map((integration) => (
             <Tile
               key={integration.integrationId}
-              feed={integrationsFeed}
+              feed={feed}
               classes={classes}
               hideImages={hideImages}
               hideLink={hideLink}

@@ -1,5 +1,5 @@
 .single-image {
-  height: 52px;
+  max-height: 52px;
   width: fit-content;
   object-fit: contain;
   max-width: 100%;
@@ -8,7 +8,7 @@
 .multi-image {
   display: flex;
   flex: 1 1 0;
-  height: 52px;
+  max-height: 52px;
   width: 0;
   object-fit: contain;
 }

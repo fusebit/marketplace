@@ -17,6 +17,7 @@ const Tile: React.FC<TileProps> = ({
   integrationId,
   feed,
   feedId,
+  feed,
   isInstalled: installInitState,
   title,
   hideTitle,
@@ -39,6 +40,7 @@ const Tile: React.FC<TileProps> = ({
     integrationId,
     feed,
     feedId,
+    feed,
     images,
     getInstallUrl,
     installInitState,
@@ -56,7 +58,7 @@ const Tile: React.FC<TileProps> = ({
       {getCustomBody ? (
         getCustomBody({
           handleClick,
-          loading,
+          isLoading: loading,
         })
       ) : (
         <Card className={classes?.card}>
