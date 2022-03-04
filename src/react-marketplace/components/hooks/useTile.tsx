@@ -13,6 +13,7 @@ interface Props {
   onUninstall?: (integrationId: string) => Promise<void>;
   onUninstalled?: (res: InstallStatusResponse) => void;
   onInstalled?: (res: InstallStatusResponse) => void;
+  isDisabled?: boolean;
 }
 
 const useTile = ({
@@ -27,6 +28,7 @@ const useTile = ({
   onInstalled,
   onUninstall,
   onUninstalled,
+  isDisabled,
 }: Props) => {
   const params = new URLSearchParams(window.location.search);
   const [isInstalled, setIsInstalled] = useState(installInitState);
@@ -60,8 +62,10 @@ const useTile = ({
       }
     };
 
-    commitSession();
-  }, []);
+    if(!isDisabled) {
+      commitSession();
+    }
+  }, [isDisabled]);
 
   useEffect(() => {
     const setInstallUrl = async () => {
@@ -73,30 +77,34 @@ const useTile = ({
       }
     };
 
-    setInstallUrl();
-  }, []);
+    if(!isDisabled) {
+      setInstallUrl();
+    }
+  }, [isDisabled]);
 
   const handleClick = async () => {
-    onMainActionClick?.();
-    if (isInstalled) {
-      setIsUninstalling(true);
-      try {
-        await onUninstall?.(integrationId);
-        setIsInstalled(false);
-        onUninstalled?.({
-          status: 'success',
-        });
-      } catch (err) {
-        onUninstalled?.({
-          status: 'error',
-          err,
-        });
-        console.warn(`There was a problem uninstalling the integration: ${err}`);
-      } finally {
-        setIsUninstalling(false);
+    if(!isDisabled) {
+      onMainActionClick?.();
+      if (isInstalled) {
+        setIsUninstalling(true);
+        try {
+          await onUninstall?.(integrationId);
+          setIsInstalled(false);
+          onUninstalled?.({
+            status: 'success',
+          });
+        } catch (err) {
+          onUninstalled?.({
+            status: 'error',
+            err,
+          });
+          console.warn(`There was a problem uninstalling the integration: ${err}`);
+        } finally {
+          setIsUninstalling(false);
+        }
+      } else {
+        window.open(url);
       }
-    } else {
-      window.open(url);
     }
   };
 

@@ -59,6 +59,7 @@ export interface TileProps extends Integration {
   onUninstalled?: (res: InstallStatusResponse) => void;
   onInstalled?: (res: InstallStatusResponse) => void;
   getCustomBody?: (obj: CustomBodyProps) => React.ReactNode;
+  isDisabled?: boolean;
 }
 
 export interface MarketplaceProps

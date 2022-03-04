@@ -15,7 +15,6 @@ const DEFAULT_UNINSTALL_TEXT = 'UNINSTALL APP';
 
 const Tile: React.FC<TileProps> = ({
   integrationId,
-  feed,
   feedId,
   feed,
   isInstalled: installInitState,
@@ -35,12 +34,12 @@ const Tile: React.FC<TileProps> = ({
   onUninstall,
   onInstalled,
   onUninstalled,
+  isDisabled
 }) => {
   const { handleClick, isInstalled, loading, tileImages, linkUrl } = useTile({
     integrationId,
     feed,
     feedId,
-    feed,
     images,
     getInstallUrl,
     installInitState,
@@ -49,6 +48,7 @@ const Tile: React.FC<TileProps> = ({
     onMainActionClick,
     onUninstall,
     onUninstalled,
+    isDisabled,
   });
 
   const buttonText = isInstalled ? uninstallText || DEFAULT_UNINSTALL_TEXT : installText || DEFAULT_INSTALL_TEXT;
@@ -61,16 +61,16 @@ const Tile: React.FC<TileProps> = ({
           isLoading: loading,
         })
       ) : (
-        <Card className={classes?.card}>
+        <Card className={cn(classes?.card, { [styles['demo-card']]: isDisabled })}>
           {!hideTitle && <Title className={classes?.title}>{title}</Title>}
           {!hideImages && (
             <div className={cn(styles['images-wrapper'], classes?.imagesWrapper)}>
               {tileImages?.map((image) => (
-                <Image singleImage={tileImages.length === 1} key={image.alt} image={image} className={classes?.image} />
+                <Image title={feedId || ''} singleImage={tileImages.length === 1} key={image.alt} image={image} className={cn(classes?.image, { [styles['demo-img']]: isDisabled })} />
               ))}
             </div>
           )}
-          <div className={cn(styles['buttons-wrapper'], classes?.buttonsWrapper)}>
+          <div className={cn(styles['buttons-wrapper'], classes?.buttonsWrapper, { [styles['demo-button']]: isDisabled })}>
             {!hideLink && (
               <Link href={linkUrl} className={classes?.link} rel="noreferrer" target="_blank">
                 {linkText}
@@ -79,7 +79,7 @@ const Tile: React.FC<TileProps> = ({
             {loading ? (
               <Spinner className={classes?.spinner} />
             ) : (
-              <Button onClick={handleClick} isInstalled={isInstalled} className={classes?.button}>
+              <Button onClick={handleClick} isInstalled={isInstalled} className={cn(classes?.button, {[styles['demo-button']]: isDisabled, [styles['demo-button--disabled']]: isDisabled})}>
                 {buttonText}
               </Button>
             )}

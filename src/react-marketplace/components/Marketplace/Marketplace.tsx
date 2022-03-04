@@ -1,10 +1,9 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import Tile from '../Tile';
 import cn from 'classnames';
 import styles from './Marketplace.module.css';
 import { Entity, MarketplaceProps } from '../interfaces/marketplace';
 import Spinner from '../Spinner';
-import { integrationsFeed } from '../../integrationsFeed';
 
 const Marketplace: React.FC<MarketplaceProps> = ({
   integrations,
@@ -37,6 +36,11 @@ const Marketplace: React.FC<MarketplaceProps> = ({
 
     getFeed();
   }, []);
+
+  const uninstalledIntegrations = useMemo(
+    () => feed.filter((entity) => !integrations.find((i) => i.feedId === entity.id)),
+    [integrations, feed]
+  );
 
   return (
     <div className={cn(styles.marketplace)}>
@@ -71,10 +75,11 @@ const Marketplace: React.FC<MarketplaceProps> = ({
       </div>
       {demo && isReady && (
         <div className={cn(styles.wrapper, className)}>
-          {integrationsFeed.map((entity) => {
+          {uninstalledIntegrations.map((entity) => {
             return (
               <Tile
-                feed={integrationsFeed}
+                key={entity.id}
+                feed={feed}
                 getInstallUrl={getInstallUrl}
                 onAuthentication={onAuthentication}
                 onUninstall={onUninstall}
@@ -82,12 +87,7 @@ const Marketplace: React.FC<MarketplaceProps> = ({
                 integrationId={entity.id}
                 feedId={entity.id}
                 hideTitle
-                classes={{
-                  card: cn(styles['demo-card']),
-                  image: cn(styles['demo-img']),
-                  link: cn(styles['demo-button']),
-                  button: cn(styles['demo-button']),
-                }}
+                isDisabled
               />
             );
           })}

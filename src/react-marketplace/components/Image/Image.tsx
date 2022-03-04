@@ -7,11 +7,13 @@ interface Props {
   image?: ImageProps;
   className?: string;
   singleImage: boolean;
+  title: string;
 }
 
-const Image: React.FC<Props> = ({ image, className, singleImage }) => {
+const Image: React.FC<Props> = ({ image, className, singleImage, title }) => {
   return (
     <img
+      title={title}
       className={cn(singleImage ? styles['single-image'] : styles['multi-image'], className)}
       src={image?.src}
       alt={image?.alt || 'integration-img'}
