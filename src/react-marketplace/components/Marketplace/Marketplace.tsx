@@ -22,30 +22,34 @@ const Marketplace: React.FC<MarketplaceProps> = ({
   onInstalled,
   onUninstalled,
   uninstallText,
+  isLoadingIntegrations,
   demo,
 }) => {
   const [feed, setFeed] = useState<Entity[]>([]);
-  const isReady = integrations.length > 0;
+  const [isLoadingFeed, setIsLoadingFeed] = useState(false);
+  const isLoading = isLoadingFeed || isLoadingIntegrations;
 
   useEffect(() => {
+    setIsLoadingFeed(true)
     const getFeed = async () => {
       const res = await fetch('https://stage-manage.fusebit.io/feed/integrationsFeed.json');
       setFeed(await res.json());
+      setIsLoadingFeed(false)
     };
 
     getFeed();
   }, []);
 
   const uninstalledIntegrations = useMemo(
-    () => feed.filter(entity => !integrations.find(i => i.feedId === entity.id)),
+    () => feed.filter((entity) => !integrations.find((i) => i.feedId === entity.id)),
     [integrations, feed]
   );
 
   return (
     <div className={cn(styles.marketplace)}>
       <div className={cn(styles.wrapper, className)}>
-        {isReady ? (
-          integrations.map(integration => (
+        {!isLoading ? (
+          integrations.map((integration) => (
             <Tile
               key={integration.integrationId}
               feed={feed}
@@ -72,9 +76,9 @@ const Marketplace: React.FC<MarketplaceProps> = ({
           </div>
         )}
       </div>
-      {demo && isReady && (
+      {demo && !isLoading && (
         <div className={cn(styles.wrapper, className)}>
-          {uninstalledIntegrations.map(entity => (
+          {uninstalledIntegrations.map((entity) => (
             <Tile
               key={entity.id}
               feed={feed}
