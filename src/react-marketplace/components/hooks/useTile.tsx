@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { InstallStatusResponse, ImageProps, Entity } from '../interfaces/marketplace';
 
 interface Props {
@@ -28,47 +28,13 @@ const useTile = ({
   onUninstall,
   onUninstalled,
 }: Props) => {
-  const [isInstalled, setIsInstalled] = useState(installInitState);
   const params = new URLSearchParams(window.location.search);
+  const [isInstalled, setIsInstalled] = useState(installInitState);
   const [url, setUrl] = useState('');
   const [isCommitingSession, setIsCommittingSession] = useState(false);
   const [isUninstalling, setIsUninstalling] = useState(false);
-  const [tileImages, setTileImages] = useState<ImageProps[]>([]);
-  const [linkUrl, setLinkUrl] = useState('');
 
-  const getMatchingEntity = async () => {
-    return feed.find((entity) => entity.id === feedId);
-  };
-
-  useEffect(() => {
-    const setDocsLinkUrl = async () => {
-      const entity = await getMatchingEntity();
-      if (entity) {
-        setLinkUrl(entity?.resources?.configureAppDocUrl || '');
-      }
-    };
-
-    setDocsLinkUrl();
-  }, [feedId]);
-
-  useEffect(() => {
-    const setImages = async () => {
-      if (images) {
-        setTileImages(images);
-      } else {
-        const entity = await getMatchingEntity();
-        if (entity) {
-          const image: ImageProps = {
-            src: `data:image/svg+xml;utf8,${encodeURIComponent(entity?.largeIcon)}`,
-            alt: entity.name,
-          };
-          setTileImages([image]);
-        }
-      }
-    };
-
-    setImages();
-  }, [feedId, images]);
+  const entity = useMemo(() => feed.find((entity) => entity.id === feedId), [feed]);
 
   useEffect(() => {
     const commitSession = async () => {
@@ -134,12 +100,17 @@ const useTile = ({
     }
   };
 
+  const tileImages = images || [{
+    src: `data:image/svg+xml;utf8,${encodeURIComponent(entity?.largeIcon || '')}`,
+    alt: entity?.name || '',
+  }] 
+
   return {
     isInstalled,
     handleClick,
     loading: isCommitingSession || isUninstalling,
     tileImages,
-    linkUrl,
+    linkUrl: entity?.resources?.configureAppDocUrl || '',
   };
 };
 
