@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import { useEffect, useMemo, useState } from 'react';
 import { InstallStatusResponse, ImageProps, Entity } from '../interfaces/marketplace';
 
@@ -30,15 +31,16 @@ const useTile = ({
   onUninstalled,
   isDisabled,
 }: Props) => {
-  const params = new URLSearchParams(window.location.search);
   const [isInstalled, setIsInstalled] = useState(installInitState);
   const [url, setUrl] = useState('');
   const [isCommitingSession, setIsCommittingSession] = useState(false);
   const [isUninstalling, setIsUninstalling] = useState(false);
 
-  const entity = useMemo(() => feed.find((entity) => entity.id === feedId), [feed]);
+  const entity = useMemo(() => feed.find(e => e.id === feedId), [feed, feedId]);
 
   useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+
     const commitSession = async () => {
       const session = params.get('session');
       const id = params.get('integrationId');
@@ -62,10 +64,10 @@ const useTile = ({
       }
     };
 
-    if(!isDisabled) {
+    if (!isDisabled) {
       commitSession();
     }
-  }, [isDisabled]);
+  }, [integrationId, isDisabled, isInstalled, onAuthentication, onInstalled]);
 
   useEffect(() => {
     const setInstallUrl = async () => {
@@ -77,13 +79,13 @@ const useTile = ({
       }
     };
 
-    if(!isDisabled) {
+    if (!isDisabled) {
       setInstallUrl();
     }
-  }, [isDisabled]);
+  }, [getInstallUrl, integrationId, isDisabled]);
 
   const handleClick = async () => {
-    if(!isDisabled) {
+    if (!isDisabled) {
       onMainActionClick?.();
       if (isInstalled) {
         setIsUninstalling(true);
@@ -108,10 +110,12 @@ const useTile = ({
     }
   };
 
-  const tileImages = images || [{
-    src: `data:image/svg+xml;utf8,${encodeURIComponent(entity?.largeIcon || '')}`,
-    alt: entity?.name || '',
-  }] 
+  const tileImages = images || [
+    {
+      src: `data:image/svg+xml;utf8,${encodeURIComponent(entity?.largeIcon || '')}`,
+      alt: entity?.name || '',
+    },
+  ];
 
   return {
     isInstalled,
