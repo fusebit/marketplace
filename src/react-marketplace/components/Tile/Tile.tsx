@@ -17,7 +17,7 @@ const Tile: React.FC<TileProps> = ({
   integrationId,
   feedId,
   feed,
-  isInstalled: installInitState,
+  isInstalled,
   title,
   hideTitle,
   classes,
@@ -36,13 +36,13 @@ const Tile: React.FC<TileProps> = ({
   onUninstalled,
   isDisabled,
 }) => {
-  const { handleClick, isInstalled, loading, tileImages, linkUrl } = useTile({
+  const { handleClick, loading, tileImages, linkUrl } = useTile({
     integrationId,
     feed,
     feedId,
     images,
     getInstallUrl,
-    installInitState,
+    isInstalled,
     onAuthentication,
     onInstalled,
     onMainActionClick,

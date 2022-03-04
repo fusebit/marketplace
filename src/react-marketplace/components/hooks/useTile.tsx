@@ -6,7 +6,7 @@ interface Props {
   integrationId: string;
   feedId: string;
   feed: Entity[];
-  installInitState: boolean;
+  isInstalled: boolean;
   images?: ImageProps[];
   onMainActionClick?: () => void;
   getInstallUrl?: (integrationId: string) => Promise<string>;
@@ -21,7 +21,7 @@ const useTile = ({
   integrationId,
   feedId,
   feed,
-  installInitState,
+  isInstalled,
   images,
   onMainActionClick,
   getInstallUrl,
@@ -31,7 +31,6 @@ const useTile = ({
   onUninstalled,
   isDisabled,
 }: Props) => {
-  const [isInstalled, setIsInstalled] = useState(installInitState);
   const [url, setUrl] = useState('');
   const [isCommitingSession, setIsCommittingSession] = useState(false);
   const [isUninstalling, setIsUninstalling] = useState(false);
@@ -48,7 +47,6 @@ const useTile = ({
         setIsCommittingSession(true);
         try {
           await onAuthentication?.(integrationId, session);
-          setIsInstalled(true);
           onInstalled?.({
             status: 'success',
           });
@@ -91,7 +89,6 @@ const useTile = ({
         setIsUninstalling(true);
         try {
           await onUninstall?.(integrationId);
-          setIsInstalled(false);
           onUninstalled?.({
             status: 'success',
           });
@@ -118,7 +115,6 @@ const useTile = ({
   ];
 
   return {
-    isInstalled,
     handleClick,
     loading: isCommitingSession || isUninstalling,
     tileImages,
