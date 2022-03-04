@@ -38,36 +38,6 @@ const useTile = ({
   const entity = useMemo(() => feed.find(e => e.id === feedId), [feed, feedId]);
 
   useEffect(() => {
-    const params = new URLSearchParams(window.location.search);
-
-    const commitSession = async () => {
-      const session = params.get('session');
-      const id = params.get('integrationId');
-      if (session && integrationId === id && !isInstalled) {
-        setIsCommittingSession(true);
-        try {
-          await onAuthentication?.(integrationId, session);
-          onInstalled?.({
-            status: 'success',
-          });
-        } catch (err) {
-          onInstalled?.({
-            status: 'error',
-            err,
-          });
-          console.warn(`There was a problem commiting the session: ${err}`);
-        } finally {
-          setIsCommittingSession(false);
-        }
-      }
-    };
-
-    if (!isDisabled) {
-      commitSession();
-    }
-  }, [integrationId, isDisabled, isInstalled, onAuthentication, onInstalled]);
-
-  useEffect(() => {
     const setInstallUrl = async () => {
       try {
         const installUrl = await getInstallUrl?.(integrationId);
@@ -102,7 +72,7 @@ const useTile = ({
           setIsUninstalling(false);
         }
       } else {
-        window.open(url);
+        window.open(url, '_self');
       }
     }
   };
