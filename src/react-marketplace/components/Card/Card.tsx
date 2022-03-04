@@ -7,8 +7,8 @@ interface Props {
   className?: string;
 }
 
-const CardWrapper: React.FC<Props> = ({ children, className }) => {
-  return <div className={cn(styles.wrapper, className)}>{children}</div>;
-};
+const CardWrapper: React.FC<Props> = ({ children, className }) => (
+  <div className={cn(styles.wrapper, className)}>{children}</div>
+);
 
 export default CardWrapper;

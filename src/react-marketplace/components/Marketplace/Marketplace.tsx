@@ -1,6 +1,6 @@
 import React, { useEffect, useMemo, useState } from 'react';
-import Tile from '../Tile';
 import cn from 'classnames';
+import Tile from '../Tile';
 import styles from './Marketplace.module.css';
 import { Entity, MarketplaceProps } from '../interfaces/marketplace';
 import Spinner from '../Spinner';
@@ -30,15 +30,14 @@ const Marketplace: React.FC<MarketplaceProps> = ({
   useEffect(() => {
     const getFeed = async () => {
       const res = await fetch('https://stage-manage.fusebit.io/feed/integrationsFeed.json');
-      const feed: Entity[] = await res.json();
-      setFeed(feed);
+      setFeed(await res.json());
     };
 
     getFeed();
   }, []);
 
   const uninstalledIntegrations = useMemo(
-    () => feed.filter((entity) => !integrations.find((i) => i.feedId === entity.id)),
+    () => feed.filter(entity => !integrations.find(i => i.feedId === entity.id)),
     [integrations, feed]
   );
 
@@ -46,7 +45,7 @@ const Marketplace: React.FC<MarketplaceProps> = ({
     <div className={cn(styles.marketplace)}>
       <div className={cn(styles.wrapper, className)}>
         {isReady ? (
-          integrations.map((integration) => (
+          integrations.map(integration => (
             <Tile
               key={integration.integrationId}
               feed={feed}
@@ -75,22 +74,20 @@ const Marketplace: React.FC<MarketplaceProps> = ({
       </div>
       {demo && isReady && (
         <div className={cn(styles.wrapper, className)}>
-          {uninstalledIntegrations.map((entity) => {
-            return (
-              <Tile
-                key={entity.id}
-                feed={feed}
-                getInstallUrl={getInstallUrl}
-                onAuthentication={onAuthentication}
-                onUninstall={onUninstall}
-                isInstalled={false}
-                integrationId={entity.id}
-                feedId={entity.id}
-                hideTitle
-                isDisabled
-              />
-            );
-          })}
+          {uninstalledIntegrations.map(entity => (
+            <Tile
+              key={entity.id}
+              feed={feed}
+              getInstallUrl={getInstallUrl}
+              onAuthentication={onAuthentication}
+              onUninstall={onUninstall}
+              isInstalled={false}
+              integrationId={entity.id}
+              feedId={entity.id}
+              hideTitle
+              isDisabled
+            />
+          ))}
         </div>
       )}
     </div>

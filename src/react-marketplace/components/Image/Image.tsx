@@ -1,6 +1,6 @@
 import React from 'react';
-import { ImageProps } from '../interfaces/marketplace';
 import cn from 'classnames';
+import { ImageProps } from '../interfaces/marketplace';
 import styles from './Image.module.css';
 
 interface Props {
@@ -10,15 +10,13 @@ interface Props {
   title: string;
 }
 
-const Image: React.FC<Props> = ({ image, className, singleImage, title }) => {
-  return (
-    <img
-      title={title}
-      className={cn(singleImage ? styles['single-image'] : styles['multi-image'], className)}
-      src={image?.src}
-      alt={image?.alt || 'integration-img'}
-    />
-  );
-};
+const Image: React.FC<Props> = ({ image, className, singleImage, title }) => (
+  <img
+    title={title}
+    className={cn(singleImage ? styles['single-image'] : styles['multi-image'], className)}
+    src={image?.src}
+    alt={image?.alt || 'integration-img'}
+  />
+);
 
 export default Image;

@@ -1,4 +1,5 @@
 import React from 'react';
+import cn from 'classnames';
 import Button from '../Button';
 import Image from '../Image';
 import styles from './Tile.module.css';
@@ -6,7 +7,6 @@ import Link from '../Link';
 import Title from '../Title';
 import Card from '../Card';
 import Spinner from '../Spinner';
-import cn from 'classnames';
 import { TileProps } from '../interfaces/marketplace';
 import useTile from '../hooks/useTile';
 
@@ -34,7 +34,7 @@ const Tile: React.FC<TileProps> = ({
   onUninstall,
   onInstalled,
   onUninstalled,
-  isDisabled
+  isDisabled,
 }) => {
   const { handleClick, isInstalled, loading, tileImages, linkUrl } = useTile({
     integrationId,
@@ -65,21 +65,34 @@ const Tile: React.FC<TileProps> = ({
           {!hideTitle && <Title className={classes?.title}>{title}</Title>}
           {!hideImages && (
             <div className={cn(styles['images-wrapper'], classes?.imagesWrapper)}>
-              {tileImages?.map((image) => (
-                <Image title={feedId || ''} singleImage={tileImages.length === 1} key={image.alt} image={image} className={cn(classes?.image, { [styles['demo-img']]: isDisabled })} />
+              {tileImages?.map(image => (
+                <Image
+                  title={feedId || ''}
+                  singleImage={tileImages.length === 1}
+                  key={image.alt}
+                  image={image}
+                  className={cn(classes?.image, { [styles['demo-img']]: isDisabled })}
+                />
               ))}
             </div>
           )}
-          <div className={cn(styles['buttons-wrapper'], classes?.buttonsWrapper, { [styles['demo-button']]: isDisabled })}>
+          <div
+            className={cn(styles['buttons-wrapper'], classes?.buttonsWrapper, { [styles['demo-button']]: isDisabled })}>
             {!hideLink && (
-              <Link href={linkUrl} className={classes?.link} rel="noreferrer" target="_blank">
+              <Link href={linkUrl} className={classes?.link} rel='noreferrer' target='_blank'>
                 {linkText}
               </Link>
             )}
             {loading ? (
               <Spinner className={classes?.spinner} />
             ) : (
-              <Button onClick={handleClick} isInstalled={isInstalled} className={cn(classes?.button, {[styles['demo-button']]: isDisabled, [styles['demo-button--disabled']]: isDisabled})}>
+              <Button
+                onClick={handleClick}
+                isInstalled={isInstalled}
+                className={cn(classes?.button, {
+                  [styles['demo-button']]: isDisabled,
+                  [styles['demo-button--disabled']]: isDisabled,
+                })}>
                 {buttonText}
               </Button>
             )}

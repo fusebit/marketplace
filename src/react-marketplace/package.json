@@ -19,7 +19,17 @@
     "@types/react": "^17.0.39",
     "rollup": "^2.67.0",
     "rollup-plugin-dts": "^4.1.0",
-    "rollup-plugin-postcss": "^4.0.2"
+    "rollup-plugin-postcss": "^4.0.2",
+    "eslint-config-prettier": "^7.1.0",
+    "eslint-plugin-import": "^2.22.1",
+    "eslint-plugin-json": "^2.1.2",
+    "eslint-plugin-jsx-a11y": "^6.4.1",
+    "eslint-plugin-prettier": "^3.3.0",
+    "eslint-plugin-react": "^7.22.0",
+    "eslint-plugin-react-hooks": "^4.2.0",
+    "eslint-config-airbnb-typescript": "^12.0.0",
+    "prettier-eslint": "^12.0.0",
+    "@typescript-eslint/eslint-plugin": "^4.11.1"
   },
   "dependencies": {
     "classnames": "^2.3.1"
