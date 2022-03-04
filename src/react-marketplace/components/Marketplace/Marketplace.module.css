@@ -1,16 +1,14 @@
 .wrapper {
-  position: relative;
-  margin-left: auto;
-  margin-top: 40px;
-  margin-bottom: 40px;
-  display: flex;
-  flex: 1;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+
+.wrapper-disabled {
+  margin-top: 48px;
 }
 
 .loading-wrapper {
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
+  display: flex;
+  justify-content: center;
 }

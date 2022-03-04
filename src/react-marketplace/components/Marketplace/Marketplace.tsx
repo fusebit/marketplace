@@ -30,11 +30,11 @@ const Marketplace: React.FC<MarketplaceProps> = ({
   const isLoading = isLoadingFeed || isLoadingIntegrations;
 
   useEffect(() => {
-    setIsLoadingFeed(true)
+    setIsLoadingFeed(true);
     const getFeed = async () => {
       const res = await fetch('https://stage-manage.fusebit.io/feed/integrationsFeed.json');
       setFeed(await res.json());
-      setIsLoadingFeed(false)
+      setIsLoadingFeed(false);
     };
 
     getFeed();
@@ -45,39 +45,41 @@ const Marketplace: React.FC<MarketplaceProps> = ({
     [integrations, feed]
   );
 
-  return (
-    <div className={cn(styles.marketplace)}>
-      <div className={cn(styles.wrapper, className)}>
-        {!isLoading ? (
-          integrations.map((integration) => (
-            <Tile
-              key={integration.integrationId}
-              feed={feed}
-              classes={classes}
-              hideImages={hideImages}
-              hideLink={hideLink}
-              images={images}
-              installText={installText}
-              linkText={linkText}
-              onInstalled={onInstalled}
-              onMainActionClick={onMainActionClick}
-              onUninstalled={onUninstalled}
-              uninstallText={uninstallText}
-              getCustomBody={getCustomBody}
-              getInstallUrl={getInstallUrl}
-              onAuthentication={onAuthentication}
-              onUninstall={onUninstall}
-              {...integration}
-            />
-          ))
-        ) : (
-          <div className={cn(styles['loading-wrapper'])}>
-            <Spinner className={classes?.spinner} />
-          </div>
-        )}
+  if (isLoading) {
+    return (
+      <div className={cn(styles['loading-wrapper'])}>
+        <Spinner className={classes?.spinner} />
       </div>
-      {demo && !isLoading && (
-        <div className={cn(styles.wrapper, className)}>
+    );
+  }
+
+  return (
+    <div className={cn(styles.marketplace, className)}>
+      <div className={cn(styles.wrapper)}>
+        {integrations.map((integration) => (
+          <Tile
+            key={integration.integrationId}
+            feed={feed}
+            classes={classes}
+            hideImages={hideImages}
+            hideLink={hideLink}
+            images={images}
+            installText={installText}
+            linkText={linkText}
+            onInstalled={onInstalled}
+            onMainActionClick={onMainActionClick}
+            onUninstalled={onUninstalled}
+            uninstallText={uninstallText}
+            getCustomBody={getCustomBody}
+            getInstallUrl={getInstallUrl}
+            onAuthentication={onAuthentication}
+            onUninstall={onUninstall}
+            {...integration}
+          />
+        ))}
+      </div>
+      {demo && (
+        <div className={cn(styles.wrapper, styles['wrapper-disabled'])}>
           {uninstalledIntegrations.map((entity) => (
             <Tile
               key={entity.id}

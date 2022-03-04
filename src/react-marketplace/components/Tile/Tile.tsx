@@ -61,7 +61,7 @@ const Tile: React.FC<TileProps> = ({
           isLoading: loading,
         })
       ) : (
-        <Card className={cn(classes?.card, { [styles['demo-card']]: isDisabled })}>
+        <Card className={cn(classes?.card, styles['wrapper'], { [styles['demo-card']]: isDisabled })}>
           {!hideTitle && <Title className={classes?.title}>{title}</Title>}
           {!hideImages && (
             <div className={cn(styles['images-wrapper'], classes?.imagesWrapper)}>
@@ -72,6 +72,7 @@ const Tile: React.FC<TileProps> = ({
                   key={image.alt}
                   image={image}
                   className={cn(classes?.image, { [styles['demo-img']]: isDisabled })}
+                  height={52}
                 />
               ))}
             </div>

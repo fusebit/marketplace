@@ -1,8 +1,8 @@
 .single-image {
   max-height: 52px;
-  width: fit-content;
   object-fit: contain;
   max-width: 100%;
+  margin: 8px 0px 15px;
 }
 
 .multi-image {
