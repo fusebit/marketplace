@@ -10,10 +10,8 @@ interface Props {
   images?: ImageProps[];
   onMainActionClick?: () => void;
   getInstallUrl?: (integrationId: string) => Promise<string>;
-  onAuthentication?: (integrationId: string, session: string) => Promise<void>;
   onUninstall?: (integrationId: string) => Promise<void>;
   onUninstalled?: (res: InstallStatusResponse) => void;
-  onInstalled?: (res: InstallStatusResponse) => void;
   isDisabled?: boolean;
 }
 
@@ -25,47 +23,14 @@ const useTile = ({
   images,
   onMainActionClick,
   getInstallUrl,
-  onAuthentication,
-  onInstalled,
   onUninstall,
   onUninstalled,
   isDisabled,
 }: Props) => {
   const [url, setUrl] = useState('');
-  const [isCommitingSession, setIsCommittingSession] = useState(false);
   const [isUninstalling, setIsUninstalling] = useState(false);
 
-  const entity = useMemo(() => feed.find(e => e.id === feedId), [feed, feedId]);
-
-  useEffect(() => {
-    const params = new URLSearchParams(window.location.search);
-
-    const commitSession = async () => {
-      const session = params.get('session');
-      const id = params.get('integrationId');
-      if (session && integrationId === id && !isInstalled) {
-        setIsCommittingSession(true);
-        try {
-          await onAuthentication?.(integrationId, session);
-          onInstalled?.({
-            status: 'success',
-          });
-        } catch (err) {
-          onInstalled?.({
-            status: 'error',
-            err,
-          });
-          console.warn(`There was a problem commiting the session: ${err}`);
-        } finally {
-          setIsCommittingSession(false);
-        }
-      }
-    };
-
-    if (!isDisabled) {
-      commitSession();
-    }
-  }, [integrationId, isDisabled, isInstalled, onAuthentication, onInstalled]);
+  const entity = useMemo(() => feed.find((e) => e.id === feedId), [feed, feedId]);
 
   useEffect(() => {
     const setInstallUrl = async () => {
@@ -116,7 +81,7 @@ const useTile = ({
 
   return {
     handleClick,
-    loading: isCommitingSession || isUninstalling,
+    loading: isUninstalling,
     tileImages,
     linkUrl: entity?.resources?.configureAppDocUrl || '',
   };

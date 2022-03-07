@@ -37,7 +37,6 @@ export interface Integration {
 export interface TileProps extends Integration {
   feed: Entity[];
   getInstallUrl: (integrationId: string) => Promise<string>;
-  onAuthentication: (integrationId: string, session: string) => Promise<void>;
   onUninstall: (integrationId: string) => Promise<void>;
   hideTitle?: boolean;
   images?: ImageProps[];
@@ -58,7 +57,6 @@ export interface TileProps extends Integration {
   uninstallText?: string;
   onMainActionClick?: () => void;
   onUninstalled?: (res: InstallStatusResponse) => void;
-  onInstalled?: (res: InstallStatusResponse) => void;
   getCustomBody?: (obj: CustomBodyProps) => React.ReactNode;
   isDisabled?: boolean;
 }

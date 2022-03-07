@@ -30,9 +30,7 @@ const Tile: React.FC<TileProps> = ({
   onMainActionClick,
   getCustomBody,
   getInstallUrl,
-  onAuthentication,
   onUninstall,
-  onInstalled,
   onUninstalled,
   isDisabled,
 }) => {
@@ -43,8 +41,6 @@ const Tile: React.FC<TileProps> = ({
     images,
     getInstallUrl,
     isInstalled,
-    onAuthentication,
-    onInstalled,
     onMainActionClick,
     onUninstall,
     onUninstalled,
@@ -65,7 +61,7 @@ const Tile: React.FC<TileProps> = ({
           {!hideTitle && <Title className={classes?.title}>{title}</Title>}
           {!hideImages && (
             <div className={cn(styles['images-wrapper'], classes?.imagesWrapper)}>
-              {tileImages?.map(image => (
+              {tileImages?.map((image) => (
                 <Image
                   title={feedId || ''}
                   singleImage={tileImages.length === 1}
@@ -78,9 +74,10 @@ const Tile: React.FC<TileProps> = ({
             </div>
           )}
           <div
-            className={cn(styles['buttons-wrapper'], classes?.buttonsWrapper, { [styles['demo-button']]: isDisabled })}>
+            className={cn(styles['buttons-wrapper'], classes?.buttonsWrapper, { [styles['demo-button']]: isDisabled })}
+          >
             {!hideLink && (
-              <Link href={linkUrl} className={classes?.link} rel='noreferrer' target='_blank'>
+              <Link href={linkUrl} className={classes?.link} rel="noreferrer" target="_blank">
                 {linkText}
               </Link>
             )}
@@ -93,7 +90,8 @@ const Tile: React.FC<TileProps> = ({
                 className={cn(classes?.button, {
                   [styles['demo-button']]: isDisabled,
                   [styles['demo-button--disabled']]: isDisabled,
-                })}>
+                })}
+              >
                 {buttonText}
               </Button>
             )}
