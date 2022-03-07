@@ -37,11 +37,10 @@ const Marketplace: React.FC<MarketplaceProps> = ({
       try {
         const res = await fetch(feedUrl || PRODUCTION_FEED_URL);
         setFeed(await res.json());
-        setIsLoadingFeed(false);
       } catch (error) {
         console.warn('There was an error fetching the feed.');
       } finally {
-        setIsLoadingIntegrations(false);
+        setIsLoadingFeed(false);
       }
     };
 
@@ -49,7 +48,7 @@ const Marketplace: React.FC<MarketplaceProps> = ({
   }, []);
 
   useEffect(() => {
-    setIsLoadingFeed(true);
+    setIsLoadingIntegrations(true);
     const get = async () => {
       try {
         const res = await getIntegrations();
