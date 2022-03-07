@@ -9,7 +9,7 @@ interface Props {
   isInstalled: boolean;
   images?: ImageProps[];
   onMainActionClick?: () => void;
-  getInstallUrl?: (integrationId: string) => Promise<string>;
+  getInstallUrl: (integrationId: string) => Promise<string>;
   onUninstall?: (integrationId: string) => Promise<void>;
   onUninstalled?: (res: InstallStatusResponse) => void;
   isDisabled?: boolean;
@@ -35,8 +35,8 @@ const useTile = ({
   useEffect(() => {
     const setInstallUrl = async () => {
       try {
-        const installUrl = await getInstallUrl?.(integrationId);
-        setUrl(installUrl || '');
+        const installUrl = await getInstallUrl(integrationId);
+        setUrl(installUrl);
       } catch (err) {
         console.warn(`There was a problem fetching the install url: ${err}`);
       }
