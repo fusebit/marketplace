@@ -63,8 +63,8 @@ export interface TileProps extends Integration {
 
 export interface MarketplaceProps
   extends Omit<TileProps, 'title' | 'feedId' | 'integrationId' | 'isInstalled' | 'feed'> {
-  integrations: Integration[];
-  isLoadingIntegrations?: boolean;
+  getIntegrations: () => Integration[] | Promise<Integration[]>;
   className?: string;
-  demo?: boolean;
+  isDemo?: boolean;
+  feedUrl?: string;
 }
