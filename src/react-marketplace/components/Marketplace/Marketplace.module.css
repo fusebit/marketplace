@@ -1,5 +1,14 @@
 .wrapper {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+
+.wrapper-disabled {
+  margin-top: 48px;
+}
+
+.loading-wrapper {
   display: flex;
-  flex: 1;
-  flex-wrap: wrap;
+  justify-content: center;
 }

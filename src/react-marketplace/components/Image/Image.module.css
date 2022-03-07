@@ -1,11 +1,18 @@
-.image {
+.single-image {
+  max-height: 52px;
+  object-fit: contain;
+  max-width: 100%;
+  margin: 8px 0px 15px;
+}
+
+.multi-image {
   display: flex;
   flex: 1 1 0;
-  height: 52px;
+  max-height: 52px;
   width: 0;
   object-fit: contain;
 }
 
-.image:not(:last-child) {
+.multi-image:not(:last-child) {
   margin-right: 20px;
 }

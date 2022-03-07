@@ -6,8 +6,6 @@ interface Props {
   className?: string;
 }
 
-const Title: React.FC<Props> = ({ className, children }) => {
-  return <h4 className={cn(styles.title, className)}>{children}</h4>;
-};
+const Title: React.FC<Props> = ({ className, children }) => <h4 className={cn(styles.title, className)}>{children}</h4>;
 
 export default Title;

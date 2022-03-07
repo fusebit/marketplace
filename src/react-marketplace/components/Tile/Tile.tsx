@@ -1,62 +1,100 @@
 import React from 'react';
+import cn from 'classnames';
 import Button from '../Button';
 import Image from '../Image';
 import styles from './Tile.module.css';
 import Link from '../Link';
 import Title from '../Title';
 import Card from '../Card';
-import cn from 'classnames';
+import Spinner from '../Spinner';
 import { TileProps } from '../interfaces/marketplace';
+import useTile from '../hooks/useTile';
 
 const DEFAULT_INSTALL_TEXT = 'INSTALL APP';
 const DEFAULT_UNINSTALL_TEXT = 'UNINSTALL APP';
 
 const Tile: React.FC<TileProps> = ({
+  integrationId,
+  feedId,
+  feed,
+  isInstalled,
   title,
+  hideTitle,
   classes,
   images,
   installText,
   uninstallText,
   hideLink,
-  linkInnerText,
-  hideTitle,
+  linkText,
   hideImages,
   onMainActionClick,
   getCustomBody,
+  getInstallUrl,
+  onUninstall,
+  onUninstalled,
+  isDisabled,
 }) => {
-  const isInstalled = false;
+  const { handleClick, loading, tileImages, linkUrl } = useTile({
+    integrationId,
+    feed,
+    feedId,
+    images,
+    getInstallUrl,
+    isInstalled,
+    onMainActionClick,
+    onUninstall,
+    onUninstalled,
+    isDisabled,
+  });
 
   const buttonText = isInstalled ? uninstallText || DEFAULT_UNINSTALL_TEXT : installText || DEFAULT_INSTALL_TEXT;
-
-  const handleClick = () => {
-    onMainActionClick?.();
-  };
 
   return (
     <>
       {getCustomBody ? (
         getCustomBody({
           handleClick,
+          isLoading: loading,
         })
       ) : (
-        <Card className={classes?.card}>
+        <Card className={cn(classes?.card, styles['wrapper'], { [styles['demo-card']]: isDisabled })}>
           {!hideTitle && <Title className={classes?.title}>{title}</Title>}
           {!hideImages && (
             <div className={cn(styles['images-wrapper'], classes?.imagesWrapper)}>
-              {images?.map((image) => (
-                <Image key={image.alt} image={image} className={classes?.image} />
+              {tileImages?.map((image) => (
+                <Image
+                  title={feedId || ''}
+                  singleImage={tileImages.length === 1}
+                  key={image.alt}
+                  image={image}
+                  className={cn(classes?.image, { [styles['demo-img']]: isDisabled })}
+                  height={52}
+                />
               ))}
             </div>
           )}
-          <div className={cn(styles['buttons-wrapper'], classes?.buttonsWrapper)}>
+          <div
+            className={cn(styles['buttons-wrapper'], classes?.buttonsWrapper, { [styles['demo-button']]: isDisabled })}
+          >
             {!hideLink && (
-              <Link className={classes?.link} rel="noreferrer" target="_blank">
-                {linkInnerText}
+              <Link href={linkUrl} className={classes?.link} rel="noreferrer" target="_blank">
+                {linkText}
               </Link>
             )}
-            <Button isInstalled={isInstalled} className={classes?.button}>
-              {buttonText}
-            </Button>
+            {loading ? (
+              <Spinner className={classes?.spinner} />
+            ) : (
+              <Button
+                onClick={handleClick}
+                isInstalled={isInstalled}
+                className={cn(classes?.button, {
+                  [styles['demo-button']]: isDisabled,
+                  [styles['demo-button--disabled']]: isDisabled,
+                })}
+              >
+                {buttonText}
+              </Button>
+            )}
           </div>
         </Card>
       )}

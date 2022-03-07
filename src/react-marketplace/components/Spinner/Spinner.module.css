@@ -1,0 +1,15 @@
+@keyframes loading {
+  from {
+    transform: rotate(0);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.spinner {
+  height: 20px;
+  width: 20px;
+  margin-right: 20px;
+  animation: loading 1s linear infinite;
+}

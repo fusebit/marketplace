@@ -6,12 +6,10 @@ interface Props extends React.AnchorHTMLAttributes<HTMLAnchorElement> {
   className?: string;
 }
 
-const Link: React.FC<Props> = ({ className, children, ...props }) => {
-  return (
-    <a {...props} className={cn(styles.link, className)}>
-      {children || 'LEARN MORE'}
-    </a>
-  );
-};
+const Link: React.FC<Props> = ({ className, children, ...props }) => (
+  <a {...props} className={cn(styles.link, className)}>
+    {children || 'LEARN MORE'}
+  </a>
+);
 
 export default Link;

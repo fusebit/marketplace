@@ -1,11 +1,48 @@
+.wrapper {
+  height: 160px;
+  justify-content: space-between;
+}
+
 .images-wrapper {
-  display: flex;
-  align-items: center;
+  flex: 1;
 }
 
 .buttons-wrapper {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-top: auto;
+  line-height: 23px;
+}
+
+@keyframes loading {
+  from {
+    transform: rotate(0);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.spinner {
+  height: 20px;
+  width: 20px;
+  margin-right: 20px;
+  animation: loading 1s linear infinite;
+}
+
+.demo-card {
+  background-color: #f2f2f2 !important;
+  box-shadow: none !important;
+}
+
+.demo-img {
+  filter: grayscale(100%);
+}
+
+.demo-button {
+  color: #959595;
+}
+
+.demo-button--disabled {
+  cursor: not-allowed !important;
 }
