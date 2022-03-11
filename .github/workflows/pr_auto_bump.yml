@@ -27,6 +27,8 @@ jobs:
       - name: Bump git tag
         run: ./scripts/cicd/tag_artifacts.sh
       - name: Publish All
+        env:
+          SECRET_NPM_TOKEN: ${{secrets.NPM_PUBLISH_TOKEN}}
         run: ./scripts/cicd/publish.sh
 
   bump_minor:
@@ -52,6 +54,8 @@ jobs:
       - name: Bump git tag
         run: ./scripts/cicd/tag_artifacts.sh
       - name: Publish All
+        env:
+          SECRET_NPM_TOKEN: ${{secrets.NPM_PUBLISH_TOKEN}}
         run: ./scripts/cicd/publish.sh
 
   bump_major:
@@ -77,25 +81,6 @@ jobs:
       - name: Bump git tag
         run: ./scripts/cicd/tag_artifacts.sh
       - name: Publish All
+        env:
+          SECRET_NPM_TOKEN: ${{secrets.NPM_PUBLISH_TOKEN}}
         run: ./scripts/cicd/publish.sh
-
-  bump_none:
-    concurrency: 'bump'
-    if: contains(github.event.pull_request.labels.*.name, 'semver:none') && github.event.pull_request.merged == true
-    name: bump_none
-    runs-on: ubuntu-latest
-    steps:
-      - name: Use Node.js
-        uses: actions/setup-node@v1
-        with:
-          node-version: 14.17.2
-      - name: Checkout
-        uses: actions/checkout@v2
-        with:
-          fetch-depth: 0
-      - name: Install toolchain
-        run: npm install -g zx
-      - name: Build Tree
-        run: ./scripts/cicd/build_tree.sh
-      - name: Publish Catalog - Stage
-        run: ./scripts/cicd/publish_catalog.sh

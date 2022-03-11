@@ -22,4 +22,6 @@ jobs:
       - name: Build Tree
         run: ./scripts/cicd/build_tree.sh
       - name: Publish
+        env:
+          SECRET_NPM_TOKEN: ${{secrets.NPM_PUBLISH_TOKEN}}
         run: ./scripts/cicd/publish.sh
