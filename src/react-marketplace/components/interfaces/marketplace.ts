@@ -41,7 +41,7 @@ export interface TileProps extends Integration {
   hideTitle?: boolean;
   images?: ImageProps[];
   hideImages?: boolean;
-  linkText?: string;
+  docsText?: string;
   hideDocs?: boolean;
   classes?: {
     link?: string;
