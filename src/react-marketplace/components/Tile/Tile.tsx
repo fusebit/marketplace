@@ -21,7 +21,7 @@ const Tile: React.FC<TileProps> = ({
   title,
   hideTitle,
   classes,
-  images,
+  getTileImages,
   installText,
   uninstallText,
   hideDocs,
@@ -34,11 +34,10 @@ const Tile: React.FC<TileProps> = ({
   onUninstalled,
   isDisabled,
 }) => {
-  const { handleClick, loading, tileImages, linkUrl } = useTile({
+  const { handleClick, loading, image, linkUrl } = useTile({
     integrationId,
     feed,
     feedId,
-    images,
     getInstallUrl,
     isInstalled,
     onInstallClick,
@@ -61,16 +60,15 @@ const Tile: React.FC<TileProps> = ({
           {!hideTitle && <Title className={classes?.title}>{title}</Title>}
           {!hideImages && (
             <div className={cn(styles['images-wrapper'], classes?.imagesWrapper)}>
-              {tileImages?.map((image) => (
+              {getTileImages?.(integrationId, feedId) || (
                 <Image
                   title={feedId || ''}
-                  singleImage={tileImages.length === 1}
                   key={image.alt}
                   image={image}
                   className={cn(classes?.image, { [styles['demo-img']]: isDisabled })}
                   height={52}
                 />
-              ))}
+              )}
             </div>
           )}
           <div

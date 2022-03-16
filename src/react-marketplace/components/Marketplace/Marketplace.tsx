@@ -14,7 +14,7 @@ const Marketplace: React.FC<MarketplaceProps> = ({
   getCustomBody,
   hideImages,
   hideDocs,
-  images,
+  getTileImages,
   installText,
   docsText,
   getInstallUrl,
@@ -86,7 +86,7 @@ const Marketplace: React.FC<MarketplaceProps> = ({
             classes={classes}
             hideImages={hideImages}
             hideDocs={hideDocs}
-            images={images}
+            getTileImages={getTileImages}
             installText={installText}
             docsText={docsText}
             onInstallClick={onInstallClick}

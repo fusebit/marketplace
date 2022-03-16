@@ -7,7 +7,6 @@ interface Props {
   feedId: string;
   feed: Entity[];
   isInstalled: boolean;
-  images?: ImageProps[];
   onInstallClick?: (integrationId: string) => void;
   getInstallUrl: (integrationId: string) => Promise<string>;
   onUninstallClick?: (integrationId: string) => Promise<void>;
@@ -20,7 +19,6 @@ const useTile = ({
   feedId,
   feed,
   isInstalled,
-  images,
   onInstallClick,
   getInstallUrl,
   onUninstallClick,
@@ -72,17 +70,15 @@ const useTile = ({
     }
   };
 
-  const tileImages = images || [
-    {
-      src: `data:image/svg+xml;utf8,${encodeURIComponent(entity?.largeIcon || '')}`,
-      alt: entity?.name || '',
-    },
-  ];
+  const image = {
+    src: `data:image/svg+xml;utf8,${encodeURIComponent(entity?.largeIcon || '')}`,
+    alt: entity?.name || '',
+  };
 
   return {
     handleClick,
     loading: isUninstalling,
-    tileImages,
+    image,
     linkUrl: entity?.resources?.configureAppDocUrl || '',
   };
 };

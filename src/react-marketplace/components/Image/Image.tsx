@@ -6,15 +6,14 @@ import styles from './Image.module.css';
 interface Props {
   image?: ImageProps;
   className?: string;
-  singleImage: boolean;
   title: string;
   height?: number;
 }
 
-const Image: React.FC<Props> = ({ image, className, singleImage, title, height }) => (
+const Image: React.FC<Props> = ({ image, className, title, height }) => (
   <img
     title={title}
-    className={cn(singleImage ? styles['single-image'] : styles['multi-image'], className)}
+    className={cn(styles['single-image'], className)}
     src={image?.src}
     alt={image?.alt || 'integration-img'}
     height={height}

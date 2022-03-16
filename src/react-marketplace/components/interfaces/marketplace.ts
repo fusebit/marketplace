@@ -40,7 +40,7 @@ export interface TileProps extends Integration {
   onUninstallClick: (integrationId: string) => Promise<void>;
   onInstallClick?: (integrationId: string) => void;
   hideTitle?: boolean;
-  images?: ImageProps[];
+  getTileImages?: (integrationId: string, feedId: string) => JSX.Element | void;
   hideImages?: boolean;
   docsText?: string;
   hideDocs?: boolean;
