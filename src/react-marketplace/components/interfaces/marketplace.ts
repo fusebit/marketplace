@@ -43,7 +43,7 @@ export interface TileProps extends Integration {
   getTileImages?: (integrationId: string, feedId: string) => JSX.Element | void;
   hideImages?: boolean;
   docsText?: string;
-  hideDocs?: boolean;
+  hideLearnMore?: boolean;
   classes?: {
     link?: string;
     card?: string;

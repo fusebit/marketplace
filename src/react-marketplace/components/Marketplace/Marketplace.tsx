@@ -13,7 +13,7 @@ const Marketplace: React.FC<MarketplaceProps> = ({
   classes,
   getCustomBody,
   hideImages,
-  hideDocs,
+  hideLearnMore,
   getTileImages,
   installText,
   docsText,
@@ -85,7 +85,7 @@ const Marketplace: React.FC<MarketplaceProps> = ({
             feed={feed}
             classes={classes}
             hideImages={hideImages}
-            hideDocs={hideDocs}
+            hideLearnMore={hideLearnMore}
             getTileImages={getTileImages}
             installText={installText}
             docsText={docsText}
