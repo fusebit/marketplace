@@ -25,7 +25,7 @@ const Tile: React.FC<TileProps> = ({
   installText,
   uninstallText,
   hideLearnMore,
-  docsText,
+  learnMoreText,
   hideImages,
   onInstallClick,
   getCustomBody,
@@ -76,7 +76,7 @@ const Tile: React.FC<TileProps> = ({
           >
             {!hideLearnMore && (
               <Link href={linkUrl} className={classes?.link} rel="noreferrer" target="_blank">
-                {docsText}
+                {learnMoreText}
               </Link>
             )}
             {loading ? (
