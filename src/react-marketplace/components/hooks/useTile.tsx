@@ -8,7 +8,7 @@ interface Props {
   feed: Entity[];
   isInstalled: boolean;
   images?: ImageProps[];
-  onMainActionClick?: () => void;
+  onInstallClick?: (integrationId: string) => void;
   getInstallUrl: (integrationId: string) => Promise<string>;
   onUninstallClick?: (integrationId: string) => Promise<void>;
   onUninstalled?: (res: InstallStatusResponse) => void;
@@ -21,7 +21,7 @@ const useTile = ({
   feed,
   isInstalled,
   images,
-  onMainActionClick,
+  onInstallClick,
   getInstallUrl,
   onUninstallClick,
   onUninstalled,
@@ -49,7 +49,6 @@ const useTile = ({
 
   const handleClick = async () => {
     if (!isDisabled) {
-      onMainActionClick?.();
       if (isInstalled) {
         setIsUninstalling(true);
         try {
@@ -67,6 +66,7 @@ const useTile = ({
           setIsUninstalling(false);
         }
       } else {
+        onInstallClick?.(integrationId);
         window.open(url, '_self');
       }
     }
