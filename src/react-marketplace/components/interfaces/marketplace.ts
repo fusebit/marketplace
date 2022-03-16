@@ -42,7 +42,7 @@ export interface TileProps extends Integration {
   images?: ImageProps[];
   hideImages?: boolean;
   linkText?: string;
-  hideLink?: boolean;
+  hideDocs?: boolean;
   classes?: {
     link?: string;
     card?: string;

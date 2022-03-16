@@ -24,7 +24,7 @@ const Tile: React.FC<TileProps> = ({
   images,
   installText,
   uninstallText,
-  hideLink,
+  hideDocs,
   linkText,
   hideImages,
   onMainActionClick,
@@ -76,7 +76,7 @@ const Tile: React.FC<TileProps> = ({
           <div
             className={cn(styles['buttons-wrapper'], classes?.buttonsWrapper, { [styles['demo-button']]: isDisabled })}
           >
-            {!hideLink && (
+            {!hideDocs && (
               <Link href={linkUrl} className={classes?.link} rel="noreferrer" target="_blank">
                 {linkText}
               </Link>
