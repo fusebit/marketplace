@@ -64,8 +64,11 @@ const useTile = ({
           setIsUninstalling(false);
         }
       } else {
-        onInstallClick?.(integrationId);
-        window.open(url, '_self');
+        if (onInstallClick) {
+          onInstallClick?.(url);
+        } else {
+          window.open(url, '_self');
+        }
       }
     }
   };
