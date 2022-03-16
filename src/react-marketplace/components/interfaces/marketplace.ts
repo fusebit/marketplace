@@ -37,7 +37,7 @@ export interface Integration {
 export interface TileProps extends Integration {
   feed: Entity[];
   getInstallUrl: (integrationId: string) => Promise<string>;
-  onUninstall: (integrationId: string) => Promise<void>;
+  onUninstallClick: (integrationId: string) => Promise<void>;
   hideTitle?: boolean;
   images?: ImageProps[];
   hideImages?: boolean;

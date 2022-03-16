@@ -30,7 +30,7 @@ const Tile: React.FC<TileProps> = ({
   onMainActionClick,
   getCustomBody,
   getInstallUrl,
-  onUninstall,
+  onUninstallClick,
   onUninstalled,
   isDisabled,
 }) => {
@@ -42,7 +42,7 @@ const Tile: React.FC<TileProps> = ({
     getInstallUrl,
     isInstalled,
     onMainActionClick,
-    onUninstall,
+    onUninstallClick,
     onUninstalled,
     isDisabled,
   });

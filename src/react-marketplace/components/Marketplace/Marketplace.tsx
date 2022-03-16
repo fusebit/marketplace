@@ -18,7 +18,7 @@ const Marketplace: React.FC<MarketplaceProps> = ({
   installText,
   docsText,
   getInstallUrl,
-  onUninstall,
+  onUninstallClick,
   onMainActionClick,
   onUninstalled,
   uninstallText,
@@ -94,7 +94,7 @@ const Marketplace: React.FC<MarketplaceProps> = ({
             uninstallText={uninstallText}
             getCustomBody={getCustomBody}
             getInstallUrl={getInstallUrl}
-            onUninstall={onUninstall}
+            onUninstallClick={onUninstallClick}
             {...integration}
           />
         ))}
@@ -106,7 +106,7 @@ const Marketplace: React.FC<MarketplaceProps> = ({
               key={entity.id}
               feed={feed}
               getInstallUrl={getInstallUrl}
-              onUninstall={onUninstall}
+              onUninstallClick={onUninstallClick}
               isInstalled={false}
               integrationId={entity.id}
               feedId={entity.id}

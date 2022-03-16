@@ -10,7 +10,7 @@ interface Props {
   images?: ImageProps[];
   onMainActionClick?: () => void;
   getInstallUrl: (integrationId: string) => Promise<string>;
-  onUninstall?: (integrationId: string) => Promise<void>;
+  onUninstallClick?: (integrationId: string) => Promise<void>;
   onUninstalled?: (res: InstallStatusResponse) => void;
   isDisabled?: boolean;
 }
@@ -23,7 +23,7 @@ const useTile = ({
   images,
   onMainActionClick,
   getInstallUrl,
-  onUninstall,
+  onUninstallClick,
   onUninstalled,
   isDisabled,
 }: Props) => {
@@ -53,7 +53,7 @@ const useTile = ({
       if (isInstalled) {
         setIsUninstalling(true);
         try {
-          await onUninstall?.(integrationId);
+          await onUninstallClick?.(integrationId);
           onUninstalled?.({
             status: 'success',
           });
