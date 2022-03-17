@@ -107,6 +107,7 @@ const Marketplace: React.FC<MarketplaceProps> = ({
               feed={feed}
               getInstallUrl={getInstallUrl}
               onUninstallClick={onUninstallClick}
+              getTileImages={getTileImages}
               isInstalled={false}
               integrationId={entity.id}
               feedId={entity.id}
