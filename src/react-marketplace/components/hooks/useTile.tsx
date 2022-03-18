@@ -7,10 +7,9 @@ interface Props {
   feedId: string;
   feed: Entity[];
   isInstalled: boolean;
-  images?: ImageProps[];
-  onMainActionClick?: () => void;
+  onInstallClick?: (integrationId: string) => void;
   getInstallUrl: (integrationId: string) => Promise<string>;
-  onUninstall?: (integrationId: string) => Promise<void>;
+  onUninstallClick?: (integrationId: string) => Promise<void>;
   onUninstalled?: (res: InstallStatusResponse) => void;
   isDisabled?: boolean;
 }
@@ -20,10 +19,9 @@ const useTile = ({
   feedId,
   feed,
   isInstalled,
-  images,
-  onMainActionClick,
+  onInstallClick,
   getInstallUrl,
-  onUninstall,
+  onUninstallClick,
   onUninstalled,
   isDisabled,
 }: Props) => {
@@ -49,11 +47,10 @@ const useTile = ({
 
   const handleClick = async () => {
     if (!isDisabled) {
-      onMainActionClick?.();
       if (isInstalled) {
         setIsUninstalling(true);
         try {
-          await onUninstall?.(integrationId);
+          await onUninstallClick?.(integrationId);
           onUninstalled?.({
             status: 'success',
           });
@@ -67,22 +64,24 @@ const useTile = ({
           setIsUninstalling(false);
         }
       } else {
-        window.open(url, '_self');
+        if (onInstallClick) {
+          onInstallClick?.(url);
+        } else {
+          window.open(url, '_self');
+        }
       }
     }
   };
 
-  const tileImages = images || [
-    {
-      src: `data:image/svg+xml;utf8,${encodeURIComponent(entity?.largeIcon || '')}`,
-      alt: entity?.name || '',
-    },
-  ];
+  const image = {
+    src: `data:image/svg+xml;utf8,${encodeURIComponent(entity?.largeIcon || '')}`,
+    alt: entity?.name || '',
+  };
 
   return {
     handleClick,
     loading: isUninstalling,
-    tileImages,
+    image,
     linkUrl: entity?.resources?.configureAppDocUrl || '',
   };
 };

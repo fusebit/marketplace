@@ -21,28 +21,27 @@ const Tile: React.FC<TileProps> = ({
   title,
   hideTitle,
   classes,
-  images,
+  getTileImages,
   installText,
   uninstallText,
-  hideLink,
-  linkText,
+  hideLearnMore,
+  learnMoreText,
   hideImages,
-  onMainActionClick,
+  onInstallClick,
   getCustomBody,
   getInstallUrl,
-  onUninstall,
+  onUninstallClick,
   onUninstalled,
   isDisabled,
 }) => {
-  const { handleClick, loading, tileImages, linkUrl } = useTile({
+  const { handleClick, loading, image, linkUrl } = useTile({
     integrationId,
     feed,
     feedId,
-    images,
     getInstallUrl,
     isInstalled,
-    onMainActionClick,
-    onUninstall,
+    onInstallClick,
+    onUninstallClick,
     onUninstalled,
     isDisabled,
   });
@@ -61,24 +60,23 @@ const Tile: React.FC<TileProps> = ({
           {!hideTitle && <Title className={classes?.title}>{title}</Title>}
           {!hideImages && (
             <div className={cn(styles['images-wrapper'], classes?.imagesWrapper)}>
-              {tileImages?.map((image) => (
+              {getTileImages?.(integrationId, feedId) || (
                 <Image
                   title={feedId || ''}
-                  singleImage={tileImages.length === 1}
                   key={image.alt}
                   image={image}
                   className={cn(classes?.image, { [styles['demo-img']]: isDisabled })}
                   height={52}
                 />
-              ))}
+              )}
             </div>
           )}
           <div
             className={cn(styles['buttons-wrapper'], classes?.buttonsWrapper, { [styles['demo-button']]: isDisabled })}
           >
-            {!hideLink && (
+            {!hideLearnMore && (
               <Link href={linkUrl} className={classes?.link} rel="noreferrer" target="_blank">
-                {linkText}
+                {learnMoreText}
               </Link>
             )}
             {loading ? (

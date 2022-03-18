@@ -13,13 +13,13 @@ const Marketplace: React.FC<MarketplaceProps> = ({
   classes,
   getCustomBody,
   hideImages,
-  hideLink,
-  images,
+  hideLearnMore,
+  getTileImages,
   installText,
-  linkText,
+  learnMoreText,
   getInstallUrl,
-  onUninstall,
-  onMainActionClick,
+  onUninstallClick,
+  onInstallClick,
   onUninstalled,
   uninstallText,
   isDemo,
@@ -85,16 +85,16 @@ const Marketplace: React.FC<MarketplaceProps> = ({
             feed={feed}
             classes={classes}
             hideImages={hideImages}
-            hideLink={hideLink}
-            images={images}
+            hideLearnMore={hideLearnMore}
+            getTileImages={getTileImages}
             installText={installText}
-            linkText={linkText}
-            onMainActionClick={onMainActionClick}
+            learnMoreText={learnMoreText}
+            onInstallClick={onInstallClick}
             onUninstalled={onUninstalled}
             uninstallText={uninstallText}
             getCustomBody={getCustomBody}
             getInstallUrl={getInstallUrl}
-            onUninstall={onUninstall}
+            onUninstallClick={onUninstallClick}
             {...integration}
           />
         ))}
@@ -106,7 +106,8 @@ const Marketplace: React.FC<MarketplaceProps> = ({
               key={entity.id}
               feed={feed}
               getInstallUrl={getInstallUrl}
-              onUninstall={onUninstall}
+              onUninstallClick={onUninstallClick}
+              getTileImages={getTileImages}
               isInstalled={false}
               integrationId={entity.id}
               feedId={entity.id}
