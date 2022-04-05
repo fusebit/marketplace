@@ -1,15 +1,14 @@
 ## About
 
-Our Marketplace enables you to easily make your integrations available to users of your application through our beautiful React components that integrate directly with Fusebit.
+The Fusebit Marketplace enables you to easily make your integrations available to users of your application through our beautiful React components that integrate directly with Fusebit.
 
-The Marketplace Component will automatically generate a tile for each integration you pass to it in a gallery style page. For each integration in the gallery, it will check to see if the tenant has already installed the integration and reflect the state accordingly. 
+The `FusebitMarketplace` component will create a tile for each integration that you pass to it in an automatically generated gallery style page. For each integration tile in this gallery, it will check directly with Fusebit to see if the tenant has already installed the integration and reflect the state accordingly. 
 
 ## ✨** Features**
 
 * Standardized UI Components with built-in Fusebit Integration Logic
-* Handles Installation & OAuth Process from the Marketplace
-* Updates Integration Tile for each tenant based on their Installation Status 
-
+* Handles Installation & OAuth Process from within the Marketplace
+* Displays Installation Status of each Integration per Tenant
 
 ## 📦** Install**
 
@@ -23,13 +22,15 @@ npm i @fusebit/react-marketplace
 ## 🔨** Usage**
 
 ```javascript
-import { Marketplace as FusebitMarketplace } from '@fusebit/react-marketplace';
+import { Marketplace as FusebitMarketplace } from "@fusebit/react-marketplace";
 
-<FusebitMarketplace
-  onUninstall={props.onUninstall}
-  getInstallUrl={props.getInstallUrl}
-  getIntegrations={() => props.userData?.list || []}
-/>
+return (
+  <FusebitMarketplace
+    onUninstall={props.onUninstall}
+    getInstallUrl={props.getInstallUrl}
+    getIntegrations={() => props.userData?.list || []}
+  />
+);
 ```
 
 
