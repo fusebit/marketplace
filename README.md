@@ -1,6 +1,6 @@
 ## ℹ︎ About
 
-The Fusebit Marketplace enables you to easily make your Integrations available to users of your application through our beautiful React components that integrate directly with Fusebit.
+The Fusebit Marketplace enables you to easily make all your Integrations available to users of your application through our beautiful React components that integrate directly with Fusebit.
 
 The `FusebitMarketplace` component will create a tile for each Integration that you pass to it in an automatically generated gallery style page. For each Integration tile in this gallery, it will check directly with Fusebit to see if the tenant has already installed the integration and reflect the state accordingly. 
 
@@ -39,3 +39,4 @@ return (
 See the Marketplace in action with the [Fusebit Sample App](https://github.com/fusebit/demo-task-app). More Specifically, you can take a look at:
 - [Frontend Component](https://github.com/fusebit/demo-task-app/blob/main/src/client/components/Marketplace.tsx)
 - [Backend API Calls](https://github.com/fusebit/demo-task-app/tree/main/src/server/api)
+
