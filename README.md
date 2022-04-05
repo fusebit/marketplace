@@ -36,8 +36,6 @@ return (
 
 ## 👀** Example: Fusebit Sample App**
 
-See the Marketplace in action with the [Fusebit Sample App](https://github.com/fusebit/demo-task-app)
-
-More Specifically, you can take a look at:
+See the Marketplace in action with the [Fusebit Sample App](https://github.com/fusebit/demo-task-app). More Specifically, you can take a look at:
 - [Frontend Component](https://github.com/fusebit/demo-task-app/blob/main/src/client/components/Marketplace.tsx)
 - [Backend API Calls](https://github.com/fusebit/demo-task-app/tree/main/src/server/api)
