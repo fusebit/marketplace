@@ -2,7 +2,7 @@
 
 The Fusebit Marketplace enables you to easily make all your Integrations available to users of your application through our beautiful React components that integrate directly with Fusebit.
 
-The `FusebitMarketplace` component will create a tile for each Integration that you pass to it in an automatically generated gallery style page. For each Integration tile in this gallery, it will check directly with Fusebit to see if the tenant has already installed the integration and reflect the state accordingly. 
+The `FusebitMarketplace` component will create a tile for each Integration that you pass to it in an automatically generated gallery style page. Each Integration tile in this gallery will check directly with Fusebit to see if the tenant has already installed the Integration and reflect the state accordingly.
 
 ## ✨ Features
 
