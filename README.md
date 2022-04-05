@@ -26,7 +26,7 @@ import { Marketplace as FusebitMarketplace } from "@fusebit/react-marketplace";
 
 return (
   <FusebitMarketplace
-    onUninstall={props.onUninstall}
+    onUninstallClick={props.onUninstall}
     getInstallUrl={props.getInstallUrl}
     getIntegrations={() => props.userData?.list || []}
   />
