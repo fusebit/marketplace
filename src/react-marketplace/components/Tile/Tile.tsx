@@ -9,6 +9,8 @@ import Card from '../Card';
 import Spinner from '../Spinner';
 import { TileProps } from '../interfaces/marketplace';
 import useTile from '../hooks/useTile';
+import Subtitle from '../Subtitle';
+import Description from '../Description';
 
 const DEFAULT_INSTALL_TEXT = 'INSTALL APP';
 const DEFAULT_UNINSTALL_TEXT = 'UNINSTALL APP';
@@ -20,6 +22,8 @@ const Tile: React.FC<TileProps> = ({
   isInstalled,
   title,
   hideTitle,
+  hideSubtitle,
+  hideDescription,
   classes,
   getTileImages,
   installText,
@@ -57,42 +61,54 @@ const Tile: React.FC<TileProps> = ({
         })
       ) : (
         <Card className={cn(classes?.card, styles['wrapper'], { [styles['demo-card']]: isDisabled })}>
-          {!hideTitle && <Title className={classes?.title}>{title}</Title>}
-          {!hideImages && (
-            <div className={cn(styles['images-wrapper'], classes?.imagesWrapper)}>
-              {getTileImages?.(integrationId, feedId) || (
-                <Image
-                  title={feedId || ''}
-                  key={image.alt}
-                  image={image}
-                  className={cn(classes?.image, { [styles['demo-img']]: isDisabled })}
-                  height={52}
-                />
+          <div className={cn(styles['top-wrapper'])}>
+            {!hideImages && (
+              <div className={cn(styles['images-wrapper'], classes?.imagesWrapper)}>
+                {getTileImages?.(integrationId, feedId) || (
+                  <Image
+                    title={feedId || ''}
+                    key={image.alt}
+                    image={image}
+                    className={cn(classes?.image, { [styles['demo-img']]: isDisabled })}
+                    height={52}
+                  />
+                )}
+              </div>
+            )}
+            {!hideTitle && <Title className={classes?.title}>{title}</Title>}
+            {!hideSubtitle && <Subtitle className={classes?.subtitle}>{title}</Subtitle>}
+          </div>
+          <div className={cn(styles['bottom-wrapper'])}>
+            {!hideDescription && (
+              <Description className={classes?.description}>
+                Lorem ipsum dolor sit amet consecte tur adipiscing elit, sed do eiusmod tempor.
+              </Description>
+            )}
+            <div
+              className={cn(styles['buttons-wrapper'], classes?.buttonsWrapper, {
+                [styles['demo-button']]: isDisabled,
+              })}
+            >
+              {loading ? (
+                <Spinner className={classes?.spinner} />
+              ) : (
+                <Button
+                  onClick={handleClick}
+                  isInstalled={isInstalled}
+                  className={cn(classes?.button, {
+                    [styles['demo-button']]: isDisabled,
+                    [styles['demo-button--disabled']]: isDisabled,
+                  })}
+                >
+                  {buttonText}
+                </Button>
+              )}
+              {!hideLearnMore && (
+                <Link href={linkUrl} className={classes?.link} rel="noreferrer" target="_blank">
+                  {learnMoreText}
+                </Link>
               )}
             </div>
-          )}
-          <div
-            className={cn(styles['buttons-wrapper'], classes?.buttonsWrapper, { [styles['demo-button']]: isDisabled })}
-          >
-            {!hideLearnMore && (
-              <Link href={linkUrl} className={classes?.link} rel="noreferrer" target="_blank">
-                {learnMoreText}
-              </Link>
-            )}
-            {loading ? (
-              <Spinner className={classes?.spinner} />
-            ) : (
-              <Button
-                onClick={handleClick}
-                isInstalled={isInstalled}
-                className={cn(classes?.button, {
-                  [styles['demo-button']]: isDisabled,
-                  [styles['demo-button--disabled']]: isDisabled,
-                })}
-              >
-                {buttonText}
-              </Button>
-            )}
           </div>
         </Card>
       )}
