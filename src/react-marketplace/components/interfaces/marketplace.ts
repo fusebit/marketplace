@@ -5,6 +5,10 @@ export interface Entity {
   id: string;
   largeIcon: string;
   name: string;
+  description: string;
+  tags: {
+    catalog: string;
+  };
   [key: string]: any;
   resources?: {
     configureAppDocUrl: string;

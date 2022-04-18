@@ -38,7 +38,7 @@ const Tile: React.FC<TileProps> = ({
   onUninstalled,
   isDisabled,
 }) => {
-  const { handleClick, loading, image, linkUrl } = useTile({
+  const { handleClick, loading, image, linkUrl, subtitle, description } = useTile({
     integrationId,
     feed,
     feedId,
@@ -76,14 +76,10 @@ const Tile: React.FC<TileProps> = ({
               </div>
             )}
             {!hideTitle && <Title className={classes?.title}>{title}</Title>}
-            {!hideSubtitle && <Subtitle className={classes?.subtitle}>{title}</Subtitle>}
+            {!hideSubtitle && <Subtitle className={classes?.subtitle}>{subtitle}</Subtitle>}
           </div>
           <div className={cn(styles['bottom-wrapper'])}>
-            {!hideDescription && (
-              <Description className={classes?.description}>
-                Lorem ipsum dolor sit amet consecte tur adipiscing elit, sed do eiusmod tempor.
-              </Description>
-            )}
+            {!hideDescription && <Description className={classes?.description}>{description}</Description>}
             <div
               className={cn(styles['buttons-wrapper'], classes?.buttonsWrapper, {
                 [styles['demo-button']]: isDisabled,
