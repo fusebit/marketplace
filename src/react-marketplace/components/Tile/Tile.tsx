@@ -61,7 +61,7 @@ const Tile: React.FC<TileProps> = ({
         })
       ) : (
         <Card className={cn(classes?.card, styles['wrapper'], { [styles['demo-card']]: isDisabled })}>
-          <div className={cn(styles['top-wrapper'])}>
+          <div className={cn(styles['top-wrapper'], { [styles['demo-top-wrapper']]: isDisabled })}>
             {!hideImages && (
               <div className={cn(styles['images-wrapper'], classes?.imagesWrapper)}>
                 {getTileImages?.(integrationId, feedId) || (
@@ -78,13 +78,9 @@ const Tile: React.FC<TileProps> = ({
             {!hideTitle && <Title className={classes?.title}>{title}</Title>}
             {!hideSubtitle && <Subtitle className={classes?.subtitle}>{subtitle}</Subtitle>}
           </div>
-          <div className={cn(styles['bottom-wrapper'])}>
+          <div className={cn(styles['bottom-wrapper'], { [styles['demo-card']]: isDisabled })}>
             {!hideDescription && <Description className={classes?.description}>{description}</Description>}
-            <div
-              className={cn(styles['buttons-wrapper'], classes?.buttonsWrapper, {
-                [styles['demo-button']]: isDisabled,
-              })}
-            >
+            <div className={cn(styles['buttons-wrapper'], classes?.buttonsWrapper)}>
               {loading ? (
                 <Spinner className={classes?.spinner} />
               ) : (
@@ -100,7 +96,14 @@ const Tile: React.FC<TileProps> = ({
                 </Button>
               )}
               {!hideLearnMore && (
-                <Link href={linkUrl} className={classes?.link} rel="noreferrer" target="_blank">
+                <Link
+                  href={linkUrl}
+                  className={cn(classes?.link, {
+                    [styles['demo-link']]: isDisabled,
+                  })}
+                  rel="noreferrer"
+                  target="_blank"
+                >
                   {learnMoreText}
                 </Link>
               )}

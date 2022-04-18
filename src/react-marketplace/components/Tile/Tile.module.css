@@ -9,6 +9,9 @@
 }
 
 .bottom-wrapper {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
   padding: 24px;
   background: white;
 }
@@ -21,6 +24,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  margin-top: auto;
   line-height: 23px;
 }
 
@@ -45,14 +49,23 @@
   box-shadow: none !important;
 }
 
+.demo-top-wrapper {
+  background-color: #e2e2e2;
+}
+
 .demo-img {
   filter: grayscale(100%);
 }
 
 .demo-button {
-  color: #959595;
+  background: #959595;
 }
 
 .demo-button--disabled {
   cursor: not-allowed !important;
+}
+
+.demo-link {
+  color: #959595 !important;
+  border-color: #959595 !important;
 }
