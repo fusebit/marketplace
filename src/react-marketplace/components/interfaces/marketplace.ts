@@ -53,6 +53,8 @@ export interface TileProps extends Integration {
   classes?: {
     link?: string;
     card?: string;
+    topContent?: string;
+    bottomContent?: string;
     title?: string;
     subtitle?: string;
     description?: string;

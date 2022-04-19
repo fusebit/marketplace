@@ -61,7 +61,7 @@ const Tile: React.FC<TileProps> = ({
         })
       ) : (
         <Card className={cn(classes?.card, styles['wrapper'], { [styles['demo-card']]: isDisabled })}>
-          <div className={cn(styles['top-wrapper'], { [styles['demo-top-wrapper']]: isDisabled })}>
+          <div className={cn(styles['top-content'], classes?.topContent, { [styles['demo-top-content']]: isDisabled })}>
             {!hideImages && (
               <div className={cn(styles['images-wrapper'], classes?.imagesWrapper)}>
                 {getTileImages?.(integrationId, feedId) || (
@@ -78,7 +78,7 @@ const Tile: React.FC<TileProps> = ({
             {!hideTitle && <Title className={classes?.title}>{title}</Title>}
             {!hideSubtitle && <Subtitle className={classes?.subtitle}>{subtitle}</Subtitle>}
           </div>
-          <div className={cn(styles['bottom-wrapper'], { [styles['demo-card']]: isDisabled })}>
+          <div className={cn(styles['bottom-content'], classes?.bottomContent, { [styles['demo-card']]: isDisabled })}>
             {!hideDescription && <Description className={classes?.description}>{description}</Description>}
             <div className={cn(styles['buttons-wrapper'], classes?.buttonsWrapper)}>
               {loading ? (
