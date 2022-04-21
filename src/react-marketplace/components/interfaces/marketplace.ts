@@ -36,6 +36,8 @@ export interface Integration {
   feedId: string;
   isInstalled: boolean;
   title?: string;
+  subtitle?: string;
+  description?: string;
 }
 
 export interface TileProps extends Integration {

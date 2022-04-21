@@ -21,6 +21,8 @@ const Tile: React.FC<TileProps> = ({
   feed,
   isInstalled,
   title,
+  description,
+  subtitle,
   hideTitle,
   hideSubtitle,
   hideDescription,
@@ -38,7 +40,7 @@ const Tile: React.FC<TileProps> = ({
   onUninstalled,
   isDisabled,
 }) => {
-  const { handleClick, loading, image, linkUrl, subtitle, description } = useTile({
+  const { handleClick, loading, image, linkUrl, subtitle: feedSubtitle, description: feedDescription } = useTile({
     integrationId,
     feed,
     feedId,
@@ -76,10 +78,10 @@ const Tile: React.FC<TileProps> = ({
               </div>
             )}
             {!hideTitle && <Title className={classes?.title}>{title}</Title>}
-            {!hideSubtitle && <Subtitle className={classes?.subtitle}>{subtitle}</Subtitle>}
+            {!hideSubtitle && <Subtitle className={classes?.subtitle}>{subtitle || feedSubtitle}</Subtitle>}
           </div>
           <div className={cn(styles['bottom-content'], classes?.bottomContent, { [styles['demo-card']]: isDisabled })}>
-            {!hideDescription && <Description className={classes?.description}>{description}</Description>}
+            {!hideDescription && <Description className={classes?.description}>{description || feedDescription}</Description>}
             <div className={cn(styles['buttons-wrapper'], classes?.buttonsWrapper)}>
               {loading ? (
                 <Spinner className={classes?.spinner} />
