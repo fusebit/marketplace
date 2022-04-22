@@ -34,10 +34,11 @@ const useTile = ({
     const tags = entity?.tags.catalog;
     const desc = entity?.description;
 
-    const firstCatalogTag = tags?.split(',')?.[0];
+    const parsedTags = tags?.replaceAll(',', ', ');
     const descriptionParagraph = desc?.split('[')?.[0];
+    console.log(descriptionParagraph);
 
-    return { subtitle: firstCatalogTag, description: descriptionParagraph };
+    return { subtitle: parsedTags, description: descriptionParagraph };
   }, [entity]);
 
   useEffect(() => {

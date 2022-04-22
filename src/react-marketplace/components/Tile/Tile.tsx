@@ -21,8 +21,8 @@ const Tile: React.FC<TileProps> = ({
   feed,
   isInstalled,
   title,
-  description,
-  subtitle,
+  customDescription,
+  customSubtitle,
   hideTitle,
   hideSubtitle,
   hideDescription,
@@ -78,11 +78,11 @@ const Tile: React.FC<TileProps> = ({
               </div>
             )}
             {!hideTitle && <Title className={classes?.title}>{title}</Title>}
-            {!hideSubtitle && <Subtitle className={classes?.subtitle}>{subtitle || feedSubtitle}</Subtitle>}
+            {!hideSubtitle && <Subtitle className={classes?.subtitle}>{customSubtitle || feedSubtitle}</Subtitle>}
           </div>
           <div className={cn(styles['bottom-content'], classes?.bottomContent, { [styles['demo-card']]: isDisabled })}>
             {!hideDescription && (
-              <Description className={classes?.description}>{description || feedDescription}</Description>
+              <Description className={classes?.description}>{customDescription || feedDescription}</Description>
             )}
             <div className={cn(styles['buttons-wrapper'], classes?.buttonsWrapper)}>
               {loading ? (

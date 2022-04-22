@@ -117,6 +117,8 @@ const Marketplace: React.FC<MarketplaceProps> = ({
               isInstalled={false}
               integrationId={entity.id}
               feedId={entity.id}
+              hideDescription={hideDescription}
+              hideSubtitle={hideSubtitle}
               hideTitle
               isDisabled
             />

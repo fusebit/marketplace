@@ -36,8 +36,8 @@ export interface Integration {
   feedId: string;
   isInstalled: boolean;
   title?: string;
-  subtitle?: string;
-  description?: string;
+  customSubtitle?: string;
+  customDescription?: string;
 }
 
 export interface TileProps extends Integration {
@@ -74,7 +74,10 @@ export interface TileProps extends Integration {
 }
 
 export interface MarketplaceProps
-  extends Omit<TileProps, 'title' | 'feedId' | 'integrationId' | 'isInstalled' | 'feed'> {
+  extends Omit<
+    TileProps,
+    'title' | 'customSubtitle' | 'customDescription' | 'feedId' | 'integrationId' | 'isInstalled' | 'feed'
+  > {
   getIntegrations: () => Integration[] | Promise<Integration[]>;
   className?: string;
   isDemo?: boolean;
