@@ -85,20 +85,16 @@ const Tile: React.FC<TileProps> = ({
               <Description className={classes?.description}>{customDescription || feedDescription}</Description>
             )}
             <div className={cn(styles['buttons-wrapper'], classes?.buttonsWrapper)}>
-              {loading ? (
-                <Spinner className={classes?.spinner} />
-              ) : (
-                <Button
-                  onClick={handleClick}
-                  isInstalled={isInstalled}
-                  className={cn(classes?.button, {
-                    [styles['demo-button']]: isDisabled,
-                    [styles['demo-button--disabled']]: isDisabled,
-                  })}
-                >
-                  {buttonText}
-                </Button>
-              )}
+              <Button
+                onClick={handleClick}
+                isInstalled={isInstalled}
+                className={cn(classes?.button, {
+                  [styles['demo-button']]: isDisabled,
+                  [styles['demo-button--disabled']]: isDisabled,
+                })}
+              >
+                {loading ? <Spinner className={classes?.spinner} /> : buttonText}
+              </Button>
               {!hideLearnMore && (
                 <Link
                   href={linkUrl}
