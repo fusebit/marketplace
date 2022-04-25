@@ -74,7 +74,7 @@ const Marketplace: React.FC<MarketplaceProps> = ({
   if (isLoading) {
     return (
       <div className={cn(styles['loading-wrapper'])}>
-        <Spinner className={classes?.spinner} />
+        <Spinner color="#F83420" className={classes?.spinner} />
       </div>
     );
   }
