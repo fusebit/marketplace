@@ -36,7 +36,6 @@ const useTile = ({
 
     const parsedTags = tags?.replaceAll(',', ', ');
     const descriptionParagraph = desc?.split('[')?.[0];
-    console.log(descriptionParagraph);
 
     return { subtitle: parsedTags, description: descriptionParagraph };
   }, [entity]);
