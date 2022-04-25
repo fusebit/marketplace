@@ -14,6 +14,9 @@ const Marketplace: React.FC<MarketplaceProps> = ({
   getCustomBody,
   hideImages,
   hideLearnMore,
+  hideDescription,
+  hideSubtitle,
+  hideTitle,
   getTileImages,
   installText,
   learnMoreText,
@@ -86,6 +89,9 @@ const Marketplace: React.FC<MarketplaceProps> = ({
             classes={classes}
             hideImages={hideImages}
             hideLearnMore={hideLearnMore}
+            hideDescription={hideDescription}
+            hideSubtitle={hideSubtitle}
+            hideTitle={hideTitle}
             getTileImages={getTileImages}
             installText={installText}
             learnMoreText={learnMoreText}
@@ -111,6 +117,8 @@ const Marketplace: React.FC<MarketplaceProps> = ({
               isInstalled={false}
               integrationId={entity.id}
               feedId={entity.id}
+              hideDescription={hideDescription}
+              hideSubtitle={hideSubtitle}
               hideTitle
               isDisabled
             />

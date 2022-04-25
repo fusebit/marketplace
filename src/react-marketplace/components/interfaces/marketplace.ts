@@ -5,6 +5,10 @@ export interface Entity {
   id: string;
   largeIcon: string;
   name: string;
+  description: string;
+  tags: {
+    catalog: string;
+  };
   [key: string]: any;
   resources?: {
     configureAppDocUrl: string;
@@ -32,6 +36,8 @@ export interface Integration {
   feedId: string;
   isInstalled: boolean;
   title?: string;
+  customSubtitle?: string;
+  customDescription?: string;
 }
 
 export interface TileProps extends Integration {
@@ -40,6 +46,8 @@ export interface TileProps extends Integration {
   onUninstallClick: (integrationId: string) => Promise<void>;
   onInstallClick?: (url: string) => void;
   hideTitle?: boolean;
+  hideSubtitle?: boolean;
+  hideDescription?: boolean;
   getTileImages?: (integrationId: string, feedId: string) => JSX.Element | void;
   hideImages?: boolean;
   learnMoreText?: string;
@@ -47,7 +55,11 @@ export interface TileProps extends Integration {
   classes?: {
     link?: string;
     card?: string;
+    topContent?: string;
+    bottomContent?: string;
     title?: string;
+    subtitle?: string;
+    description?: string;
     image?: string;
     button?: string;
     imagesWrapper?: string;
@@ -62,7 +74,10 @@ export interface TileProps extends Integration {
 }
 
 export interface MarketplaceProps
-  extends Omit<TileProps, 'title' | 'feedId' | 'integrationId' | 'isInstalled' | 'feed'> {
+  extends Omit<
+    TileProps,
+    'title' | 'customSubtitle' | 'customDescription' | 'feedId' | 'integrationId' | 'isInstalled' | 'feed'
+  > {
   getIntegrations: () => Integration[] | Promise<Integration[]>;
   className?: string;
   isDemo?: boolean;

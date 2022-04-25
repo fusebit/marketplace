@@ -1,6 +1,19 @@
 .wrapper {
-  height: 160px;
+  height: 100%;
   justify-content: space-between;
+}
+
+.top-content {
+  padding: 24px;
+  background: rgba(215, 229, 255, 0.4);
+}
+
+.bottom-content {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  padding: 24px;
+  background: white;
 }
 
 .images-wrapper {
@@ -11,6 +24,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  margin-top: auto;
   line-height: 23px;
 }
 
@@ -35,14 +49,23 @@
   box-shadow: none !important;
 }
 
+.demo-top-content {
+  background-color: #e2e2e2;
+}
+
 .demo-img {
   filter: grayscale(100%);
 }
 
 .demo-button {
-  color: #959595;
+  background: #959595;
 }
 
 .demo-button--disabled {
   cursor: not-allowed !important;
+}
+
+.demo-link {
+  color: #959595 !important;
+  border-color: #959595 !important;
 }

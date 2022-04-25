@@ -30,6 +30,16 @@ const useTile = ({
 
   const entity = useMemo(() => feed.find((e) => e.id === feedId), [feed, feedId]);
 
+  const { subtitle, description } = useMemo(() => {
+    const tags = entity?.tags.catalog;
+    const desc = entity?.description;
+
+    const parsedTags = tags?.replaceAll(',', ', ');
+    const descriptionParagraph = desc?.split('[')?.[0];
+
+    return { subtitle: parsedTags, description: descriptionParagraph };
+  }, [entity]);
+
   useEffect(() => {
     const setInstallUrl = async () => {
       try {
@@ -83,6 +93,8 @@ const useTile = ({
     loading: isUninstalling,
     image,
     linkUrl: entity?.resources?.configureAppDocUrl || '',
+    subtitle,
+    description,
   };
 };
 

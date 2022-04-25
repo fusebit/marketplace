@@ -1,9 +1,15 @@
 .link {
-  font-size: 14px;
-  letter-spacing: 1.25px;
+  width: 90px;
+  padding: 6px 16px;
+  font-size: 12px;
+  line-height: 20px;
+  text-transform: uppercase;
   text-decoration: none;
-  color: #333333;
+  text-align: center;
   margin: 0;
+  color: #387ef2;
+  border: 1px solid #387ef2;
+  border-radius: 4px;
 }
 
 .link:hover {
