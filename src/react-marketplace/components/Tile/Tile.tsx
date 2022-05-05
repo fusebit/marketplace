@@ -77,7 +77,7 @@ const Tile: React.FC<TileProps> = ({
                 )}
               </div>
             )}
-            {!hideTitle && <Title className={classes?.title}>{title}</Title>}
+            {!hideTitle && <Title className={classes?.title}>{title || integrationId}</Title>}
             {!hideSubtitle && <Subtitle className={classes?.subtitle}>{customSubtitle || feedSubtitle}</Subtitle>}
           </div>
           <div className={cn(styles['bottom-content'], classes?.bottomContent, { [styles['demo-card']]: isDisabled })}>
