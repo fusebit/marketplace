@@ -77,7 +77,7 @@ const useTile = ({
         if (onInstallClick) {
           onInstallClick?.(url);
         } else {
-          window.open(url, '_self');
+          window.open(url, '_parent');
         }
       }
     }
