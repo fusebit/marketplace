@@ -33,6 +33,58 @@ return (
 );
 ```
 
+### Integrate the Fusebit Marketplace component into an HTML file using javascript
+
+```html
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title></title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="">
+        <script src="https://unpkg.com/react@17.0.2/umd/react.development.js"></script>
+        <script src="https://unpkg.com/react-dom@17.0.2/umd/react-dom.development.js"></script>
+        <script src="https://unpkg.com/@fusebit/react-marketplace@2.5.0/dist/cjs/index.js"></script>
+    </head>
+    <body>
+        <div id="app"></div>
+        <script>
+            const getIntegrations = async () => {
+                const url = "/api/test-tenant/integrations";
+                const res = await fetch(url || "");
+                const integrations = await res.json();
+                return integrations;
+            };
+
+            const getInstallUrl = async (integration) => {
+                const url = `/api/${integration}/test-tenant/installUrl`;
+                const res = await fetch(url || "");
+                const install = await res.json();
+                return install.targetUrl;
+            };
+
+            const onUninstallClick = async (integration) => {
+                const url = `/api/${integration}/test-tenant/install`;
+                const res = await fetch(url || "", { method: "DELETE" });
+            };
+
+            const props = {
+                onUninstallClick: onUninstallClick,
+                getInstallUrl: getInstallUrl,
+                getIntegrations: getIntegrations,
+            }
+
+            ReactDOM.render(
+                React.createElement(Fusebit.Marketplace, props), document.getElementById("app")  
+            );
+        </script>
+    </body>
+</html>
+```
+
 
 ## 👀 Example: Fusebit Sample App
 
