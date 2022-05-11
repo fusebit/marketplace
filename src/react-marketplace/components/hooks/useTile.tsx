@@ -18,7 +18,7 @@ const useTile = ({
   integrationId,
   feedId,
   feed,
-  isInstalled,
+  isInstalled: initialInstallStatus,
   onInstallClick,
   getInstallUrl,
   onUninstallClick,
@@ -26,6 +26,7 @@ const useTile = ({
   isDisabled,
 }: Props) => {
   const [url, setUrl] = useState('');
+  const [isInstalled, setIsInstalled] = useState(initialInstallStatus);
   const [isUninstalling, setIsUninstalling] = useState(false);
 
   const entity = useMemo(() => feed.find((e) => e.id === feedId), [feed, feedId]);
@@ -61,6 +62,7 @@ const useTile = ({
         setIsUninstalling(true);
         try {
           await onUninstallClick?.(integrationId);
+          setIsInstalled(false);
           onUninstalled?.({
             status: 'success',
           });
@@ -90,11 +92,12 @@ const useTile = ({
 
   return {
     handleClick,
-    loading: isUninstalling,
+    loading: isUninstalling || url === '',
     image,
     linkUrl: entity?.resources?.configureAppDocUrl || '',
     subtitle,
     description,
+    isInstalled,
   };
 };
 
