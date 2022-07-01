@@ -101,7 +101,7 @@ const Tile: React.FC<TileProps> = ({
                   [styles['demo-button--disabled']]: isDisabled,
                 })}
               >
-                {loading ? <Spinner className={classes?.spinner} /> : buttonText}
+                {loading && !isDisabled ? <Spinner className={classes?.spinner} /> : buttonText}
               </Button>
               {!hideLearnMore && (
                 <Link
