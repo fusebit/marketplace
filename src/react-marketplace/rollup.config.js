@@ -17,6 +17,9 @@ export default [
         format: 'iife',
         name: 'Fusebit',
         sourcemap: true,
+        globals: {
+          react: 'React',
+        },
       },
       {
         file: packageJson.module,
@@ -31,6 +34,7 @@ export default [
       commonjs(),
       replace({
         'process.env.NODE_ENV': JSON.stringify('production'),
+        preventAssignment: true,
       }),
       typescript({ tsconfig: '../../tsconfig.json' }),
       postcss({ modules: true }),
