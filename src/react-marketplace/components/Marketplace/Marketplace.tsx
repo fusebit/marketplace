@@ -80,8 +80,8 @@ const Marketplace: React.FC<MarketplaceProps> = ({
   }
 
   return (
-    <div className={cn(styles.marketplace, className)}>
-      <div className={cn(styles.wrapper)}>
+    <div>
+      <div className={cn(styles.wrapper, className)}>
         {integrations.map((integration) => (
           <Tile
             key={integration.integrationId}
@@ -106,7 +106,7 @@ const Marketplace: React.FC<MarketplaceProps> = ({
         ))}
       </div>
       {isDemo && (
-        <div className={cn(styles.wrapper, styles['wrapper-disabled'])}>
+        <div className={cn(styles.wrapper, styles['wrapper-disabled'], className)}>
           {uninstalledIntegrations.map((entity) => (
             <Tile
               key={entity.id}
